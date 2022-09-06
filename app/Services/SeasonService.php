@@ -1,0 +1,35 @@
+<?php
+namespace App\Services;
+
+
+use App\Models\Season;
+
+class SeasonService
+{
+    const PREFIX = 'seasons';
+
+    public static function downloadSeasons()
+    {
+        $pubgConnector = new PubgConnector();
+        $data = $pubgConnector->connect(self::PREFIX)->getData();
+
+        foreach ($data->data as $seasonApi) {
+            $explodedId = explode('.', $seasonApi->id);
+            $explodedSector = explode('-', $explodedId[3]);
+            if ($explodedSector[0] == 'pc' && !Season::where('api_id', $seasonApi->id)->first()) {
+                $seasonNumber = $explodedSector[array_key_last($explodedSector)];
+
+                $season = new Season();
+                $season->number = $seasonNumber;
+                $season->api_id = $seasonApi->id;
+                $season->name = 'Sezon '. $seasonNumber;
+                $season->type = $seasonApi->type;
+                $season->isCurrentSeason = $seasonApi->attributes->isCurrentSeason;
+                $season->isOffseason = $seasonApi->attributes->isOffseason;
+                $season->save();
+            }
+        }
+
+        return $data->data;
+    }
+}
