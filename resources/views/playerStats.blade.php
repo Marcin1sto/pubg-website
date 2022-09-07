@@ -17,7 +17,7 @@
             </div>
             <div class="overflow-x-auto relative mt-[25px]">
                 <table class="w-full text-sm text-left text-white font-bold">
-                    <thead class="text-xs text-gray-100 uppercase bg-gray-800">
+                    <thead class="text-xs text-gray-100 uppercase bg-gray-800 border-b border-gray-700">
                     <tr>
                         <th scope="col" class="py-3 px-6">
                             Place

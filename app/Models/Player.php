@@ -35,4 +35,16 @@ class Player extends Model
 
         return $this->hasMany(PlayerSeasonStatistic::class, 'player_id', 'id')->where('season_id', $season->id);
     }
+
+    /**
+     * Player Matches Relationship
+     *
+     * @return HasMany
+     */
+    public function actualMatches(): HasMany
+    {
+        $season = Season::where('isCurrentSeason', true)->first();
+
+        return $this->hasMany(PlayerMatchStatistic::class, 'player_id', 'id')->where('season_id', $season->id);
+    }
 }

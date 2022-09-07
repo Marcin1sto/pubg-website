@@ -19,6 +19,15 @@ class SeasonService
             if ($explodedSector[0] == 'pc' && !Season::where('api_id', $seasonApi->id)->first()) {
                 $seasonNumber = $explodedSector[array_key_last($explodedSector)];
 
+                if ($seasonApi->attributes->isCurrentSeason) {
+                    $actualSeason = Season::where('isCurrentSeason', true)->first();
+
+                    if ($actualSeason->number != $seasonNumber) {
+                        $actualSeason->isCurrentSeason = false;
+                        $actualSeason->save();
+                    }
+                }
+
                 $season = new Season();
                 $season->number = $seasonNumber;
                 $season->api_id = $seasonApi->id;
