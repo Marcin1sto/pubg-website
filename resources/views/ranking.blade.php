@@ -52,7 +52,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?php $position = 3 ?>
+                    <?php $position = 4 ?>
                     @foreach($ranking as $key => $playerRank)
                         <tr class="border-b bg-gray-800 border-gray-700">
                             <td class="py-4 px-6">
