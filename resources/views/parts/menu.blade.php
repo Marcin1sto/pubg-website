@@ -1,7 +1,7 @@
 <div class="w-full bg-gray-800 text-white h-[90px] flex items-center">
     <div class="w-full grid grid-cols-2">
         <div class="logo flex items-center justify-start">
-            <h1 class="px-5 font-medium text-3xl">PUBG POLSKA <span class="font-bold italic text-2xl">Community</span></h1>
+            <h1 class="px-5 font-medium text-3xl">PUBG <span class="font-bold italic text-2xl">POLSKA</span></h1>
         </div>
         <div class="menu px-6 flex justify-end items-center">
             <a href="/" class="px-5">Home</a>
