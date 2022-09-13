@@ -22,7 +22,7 @@ class SeasonService
                 if ($seasonApi->attributes->isCurrentSeason) {
                     $actualSeason = Season::where('isCurrentSeason', true)->first();
 
-                    if ($actualSeason->number != $seasonNumber) {
+                    if ($actualSeason && $actualSeason->number != $seasonNumber) {
                         $actualSeason->isCurrentSeason = false;
                         $actualSeason->save();
                     }
