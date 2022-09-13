@@ -11,73 +11,79 @@
         </div>
     </div>
 
-    <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
-            <li class="mr-2 text-white" role="presentation">
-                <button class="inline-block p-4 rounded-t-lg border-b-2 text-white" id="tpp-tab" data-tabs-target="#tpp" type="button" role="tab" aria-controls="tpp" aria-selected="false">TPP</button>
-            </li>
-            <li class="mr-2" role="presentation">
-                <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 hover:text-gray-300" id="fpp-tab" data-tabs-target="#fpp" type="button" role="tab" aria-controls="fpp" aria-selected="false">FPP</button>
-            </li>
-        </ul>
-    </div>
+    @if($season->isNotEmpty())
+        <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
+                <li class="mr-2 text-white" role="presentation">
+                    <button class="inline-block p-4 rounded-t-lg border-b-2 text-white" id="tpp-tab" data-tabs-target="#tpp" type="button" role="tab" aria-controls="tpp" aria-selected="false">TPP</button>
+                </li>
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 hover:text-gray-300" id="fpp-tab" data-tabs-target="#fpp" type="button" role="tab" aria-controls="fpp" aria-selected="false">FPP</button>
+                </li>
+            </ul>
+        </div>
 
-    <div id="myTabContent">
-        <div class="hidden p-4  rounded-lg bg-gray-800" id="tpp" role="tabpanel" aria-labelledby="tpp-tab">
-            <div class="grid grid-cols-3 gap-2">
-                <div class="rounded rounded-t-lg border-2 border-sky-500">
-                    <div class="overflow-x-auto relative shadow-md">
-                        <div class="flex justify-center items-center">
-                            <p class="p-2 font-bold">SOLO TPP</p>
+        <div id="myTabContent">
+            <div class="hidden p-4  rounded-lg bg-gray-800" id="tpp" role="tabpanel" aria-labelledby="tpp-tab">
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="rounded rounded-t-lg border-2 border-sky-500">
+                        <div class="overflow-x-auto relative shadow-md">
+                            <div class="flex justify-center items-center">
+                                <p class="p-2 font-bold">SOLO TPP</p>
+                            </div>
+                            @include('parts.stats.seasonStatsTable', ['details' => $season['solo'], 'type' => 'solo'])
                         </div>
-                        @include('parts.stats.seasonStatsTable', ['details' => $season['solo'], 'type' => 'solo'])
+                    </div>
+                    <div class="rounded border-2 border-sky-500">
+                        <div class="overflow-x-auto relative shadow-md">
+                            <div class="flex justify-center items-center">
+                                <p class="p-2 font-bold">DUO TPP</p>
+                            </div>
+                            @include('parts.stats.seasonStatsTable', ['details' => $season['duo'], 'type' => 'duo'])
+                        </div>
+                    </div>
+                    <div class="rounded border-2 border-sky-500">
+                        <div class="overflow-x-auto relative shadow-md">
+                            <div class="flex justify-center items-center">
+                                <p class="p-2 font-bold">SQUAD TPP</p>
+                            </div>
+                            @include('parts.stats.seasonStatsTable', ['details' => $season['squad'], 'type' => 'squad'])
+                        </div>
                     </div>
                 </div>
-                <div class="rounded border-2 border-sky-500">
-                    <div class="overflow-x-auto relative shadow-md">
-                        <div class="flex justify-center items-center">
-                            <p class="p-2 font-bold">DUO TPP</p>
+            </div>
+            <div class="hidden p-4 rounded-lg bg-gray-800" id="fpp" role="tabpanel" aria-labelledby="fpp-tab">
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="rounded rounded-t-lg border-2 border-sky-500">
+                        <div class="overflow-x-auto relative shadow-md">
+                            <div class="flex justify-center items-center">
+                                <p class="p-2 font-bold">SOLO FPP</p>
+                            </div>
+                            @include('parts.stats.seasonStatsTable', ['details' => $season['solo-fpp'], 'type' => 'solo-fpp'])
                         </div>
-                        @include('parts.stats.seasonStatsTable', ['details' => $season['duo'], 'type' => 'duo'])
                     </div>
-                </div>
-                <div class="rounded border-2 border-sky-500">
-                    <div class="overflow-x-auto relative shadow-md">
-                        <div class="flex justify-center items-center">
-                            <p class="p-2 font-bold">SQUAD TPP</p>
+                    <div class="rounded border-2 border-sky-500">
+                        <div class="overflow-x-auto relative shadow-md">
+                            <div class="flex justify-center items-center">
+                                <p class="p-2 font-bold">DUO FPP</p>
+                            </div>
+                            @include('parts.stats.seasonStatsTable', ['details' => $season['duo-fpp'], 'type' => 'duo-fpp'])
                         </div>
-                        @include('parts.stats.seasonStatsTable', ['details' => $season['squad'], 'type' => 'squad'])
+                    </div>
+                    <div class="rounded border-2 border-sky-500">
+                        <div class="overflow-x-auto relative shadow-md">
+                            <div class="flex justify-center items-center">
+                                <p class="p-2 font-bold">SQUAD FPP</p>
+                            </div>
+                            @include('parts.stats.seasonStatsTable', ['details' => $season['squad-fpp'], 'type' => 'squad-fpp'])
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="hidden p-4 rounded-lg bg-gray-800" id="fpp" role="tabpanel" aria-labelledby="fpp-tab">
-            <div class="grid grid-cols-3 gap-2">
-                <div class="rounded rounded-t-lg border-2 border-sky-500">
-                    <div class="overflow-x-auto relative shadow-md">
-                        <div class="flex justify-center items-center">
-                            <p class="p-2 font-bold">SOLO FPP</p>
-                        </div>
-                        @include('parts.stats.seasonStatsTable', ['details' => $season['solo-fpp'], 'type' => 'solo-fpp'])
-                    </div>
-                </div>
-                <div class="rounded border-2 border-sky-500">
-                    <div class="overflow-x-auto relative shadow-md">
-                        <div class="flex justify-center items-center">
-                            <p class="p-2 font-bold">DUO FPP</p>
-                        </div>
-                        @include('parts.stats.seasonStatsTable', ['details' => $season['duo-fpp'], 'type' => 'duo-fpp'])
-                    </div>
-                </div>
-                <div class="rounded border-2 border-sky-500">
-                    <div class="overflow-x-auto relative shadow-md">
-                        <div class="flex justify-center items-center">
-                            <p class="p-2 font-bold">SQUAD FPP</p>
-                        </div>
-                        @include('parts.stats.seasonStatsTable', ['details' => $season['squad-fpp'], 'type' => 'squad-fpp'])
-                    </div>
-                </div>
-            </div>
+    @else
+        <div class="w-1/2 flex justify-start">
+            <h1 class="text-white font-bold text-xl">No Player Season Stats. Press Button to download.</h1>
         </div>
-    </div>
+    @endif
 </div>

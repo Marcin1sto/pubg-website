@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="container mx-auto h-screen">
-        <div class="text-white flex justify-center ">
-            @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])
-        </div>
-
+            <div class="text-white flex justify-center ">
+                @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])
+            </div>
         <div class="mt-10" style="margin-bottom: 50px;">
             <div class="grid grid-cols-2">
                 <div class="flex items-center">
