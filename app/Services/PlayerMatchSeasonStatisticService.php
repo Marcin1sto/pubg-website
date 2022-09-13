@@ -13,7 +13,7 @@ class PlayerMatchSeasonStatisticService
      * @param string|null $seasonNumber
      * @return array
      */
-    public static function downloadAllPlayerSeasonStatistic(Player $player, ?string $seasonNumber): array
+    public static function downloadAllPlayerSeasonStatistic(Player $player, ?string $seasonNumber, bool $saveMatches = false): array
     {
         $season = Season::where('number', $seasonNumber)->first();
 
@@ -57,6 +57,21 @@ class PlayerMatchSeasonStatisticService
 
         foreach ($allMatchesPlayer as $match) {
             $match->attributes->stats->season_id = $season->id;
+        }
+
+        if ($saveMatches) {
+            foreach ($allMatchesPlayer as $match) {
+                $matchDB = PlayerMatchStatistic::where('match_id', $match->id)->where('player_id', $player->id)->first();
+                $statistics = $match->attributes->stats;
+
+                if (!$matchDB) {
+                    $newMatch = new PlayerMatchStatistic();
+                    $newMatch->fill(collect($statistics)->except('playerId')->toArray());
+                    $newMatch->match_id = $match->id;
+                    $newMatch->player_id = $player->id;
+                    $newMatch->save();
+                }
+            }
         }
 
         return $allMatchesPlayer;

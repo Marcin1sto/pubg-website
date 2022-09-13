@@ -7,6 +7,7 @@ use App\Models\PlayerMatchStatistic;
 use App\Models\Season;
 use App\Services\PlayerMatchSeasonStatisticService;
 use App\Services\PlayerSeasonStatisticService;
+use App\Services\PlayerService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -26,11 +27,9 @@ class StatisticController extends Controller
      */
     public function show(string $playerName): Factory|View|Application
     {
-        $numberSeason = $season = Season::where('isCurrentSeason', true)->first()->number;
+        PlayerService::createPlayer($playerName);
 
-        PlayerSeasonStatisticService::updatePlayerSeasonStatistic($playerName, $numberSeason);
         $player = Player::with(['actualSeason'])->where('playerName', $playerName)->first();
-        PlayerMatchSeasonStatisticService::downloadAllPlayerSeasonStatistic($player, $numberSeason);
 
         $season = $player->actualSeason->groupBy('type');
 

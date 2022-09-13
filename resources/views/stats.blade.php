@@ -36,7 +36,6 @@
     }
 
     $('#player-name').on('change', () => {
-        console.log('asdasd')
         playerName = $('#player-name').val()
         checkFormAction()
     })
