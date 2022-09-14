@@ -16,6 +16,8 @@ class Player extends Model
 
     protected $guarded = [];
 
+    const DELAY_TIME = 1;
+
     /**
      * Player Matches Relationship
      *
@@ -46,5 +48,30 @@ class Player extends Model
         $season = Season::where('isCurrentSeason', true)->first();
 
         return $this->hasMany(PlayerMatchStatistic::class, 'player_id', 'id')->where('season_id', $season->id);
+    }
+
+    public function canUpdateMatches(): bool
+    {
+        $lastCheckTime = date('Y-m-d H:i:s', strtotime($this->matchesUpdate));
+        $delayTime = date('Y-m-d H:i:s', strtotime($lastCheckTime. '+'.self::DELAY_TIME.' hour'));
+
+        return !$this->matchesUpdate || $delayTime <= date('Y-m-d H:i:s');
+    }
+
+
+    public function canUpdateSeason(): bool
+    {
+        $lastCheckTime = date('Y-m-d H:i:s', strtotime($this->seasonUpdate));
+        $delayTime = date('Y-m-d H:i:s', strtotime($lastCheckTime. '+'.self::DELAY_TIME.' hour'));
+
+        return !$this->seasonUpdate || $delayTime <= date('Y-m-d H:i:s');
+    }
+
+    public function canUpdateRanking(): bool
+    {
+        $lastCheckTime = date('Y-m-d H:i:s', strtotime($this->rankingUpdate));
+        $delayTime = date('Y-m-d H:i:s', strtotime($lastCheckTime. '+'.self::DELAY_TIME.' hour'));
+
+        return !$this->rankingUpdate || $delayTime <= date('Y-m-d H:i:s');
     }
 }

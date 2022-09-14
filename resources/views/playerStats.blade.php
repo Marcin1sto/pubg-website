@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="container mx-auto h-screen">
+    <div class="container mx-auto h-screen mt-10">
             <div class="text-white flex justify-center ">
                 @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])
             </div>
@@ -11,10 +11,12 @@
                     <h1 class="text-white font-bold text-xl">{{ count($player->matches) }} {{ __('layout/stats.matches') }}</h1>
                 </div>
                 <div class="flex justify-end items-center">
-                    <button id="updateMatches" type="button" class="text-blue-700 border border-blue-700 hover:bg-blue-700 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1.5 text-center inline-flex items-center mr-2">
-                        <svg class="animate-bounce w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                        <span class="sr-only">Icon description</span>
-                    </button>
+                    @if($player->canUpdateMatches())
+                        <button id="updateMatches" type="button" class="animate-bounce text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1.5 text-center inline-flex items-center mr-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            <span class="sr-only">Icon description</span>
+                        </button>
+                    @endif
                     @include('parts.stats.matchesPagination')
                 </div>
             </div>
@@ -80,7 +82,6 @@
                 url: <?php env('APP_URL') ?>'/api/matches/<?php echo $player->playerName ?>',
                 method: 'GET'
             }).done(function () {
-                $('#loader').addClass('hidden');
                 location.reload();
             })
         })
@@ -91,7 +92,6 @@
                 url: <?php env('APP_URL') ?>'/api/season/<?php echo $player->playerName ?>',
                 method: 'GET'
             }).done(function () {
-                $('#loader').addClass('hidden');
                 location.reload();
             })
         })

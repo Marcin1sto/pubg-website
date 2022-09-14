@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('content')
-    <div class="text-white flex justify-center w-full" style="margin-top: 80px">
-        <div class="flex justify-center items-center">
+    <div class="text-white flex justify-center w-full" style="margin-top: 70px">
+        <div class="flex justify-center items-center p-8">
             <div>
                 <img class="w-full" src="images/statsimg2.png" alt="Stats Image PUBG">
             </div>

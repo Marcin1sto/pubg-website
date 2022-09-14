@@ -3,72 +3,84 @@
 @section('content')
     <div class="text-white flex justify-center w-full mt-[70px] h-max" style="margin-bottom: 50px">
         <div class="grid grid-rows-2 h-max">
-            <div class="scoreboard">
-                <div class="scoreboard__podiums">
-                    <div class="scoreboard__podium js-podium" data-height="200px">
-                        <div class="scoreboard__podium-base scoreboard__podium-base--second">
-                            <div class="scoreboard__podium-rank">2</div>
-                        </div>
-                        <div class="scoreboard__podium-number">
-                            {{ $top3->get(1)->player->playerName }}
-                            <small><span class="js-podium-data text-white">{{ $top3->get(1)->points }} pkt</span></small>
-                        </div>
-
-                    </div>
-                    <div class="scoreboard__podium js-podium" data-height="250px">
-                        <div class="scoreboard__podium-base scoreboard__podium-base--first">
-                            <div class="scoreboard__podium-rank">1</div>
+            @if($top3->isNotEmpty() && $top3->get(0) && $top3->get(1) && $top3->get(2))
+                <div class="scoreboard">
+                    <div class="scoreboard__podiums">
+                        <div class="scoreboard__podium js-podium" data-height="200px">
+                            <div class="scoreboard__podium-base scoreboard__podium-base--second">
+                                <div class="scoreboard__podium-rank">2</div>
+                            </div>
+                            <div class="scoreboard__podium-number">
+                                {{ $top3->get(1)->player->playerName }}
+                                <small><span
+                                        class="js-podium-data text-white">{{ $top3->get(1)->points }} pkt</span></small>
+                            </div>
 
                         </div>
-                        <div class="scoreboard__podium-number">
-                            {{ $top3->get(0)->player->playerName }}
-                            <small><span class="js-podium-data text-white">{{ $top3->get(0)->points }} pkt</span></small>
+                        <div class="scoreboard__podium js-podium" data-height="250px">
+                            <div class="scoreboard__podium-base scoreboard__podium-base--first">
+                                <div class="scoreboard__podium-rank">1</div>
+
+                            </div>
+                            <div class="scoreboard__podium-number">
+                                {{ $top3->get(0)->player->playerName }}
+                                <small><span
+                                        class="js-podium-data text-white">{{ $top3->get(0)->points }} pkt</span></small>
+                            </div>
                         </div>
-                    </div>
-                    <div class="scoreboard__podium js-podium" data-height="150px">
-                        <div class="scoreboard__podium-base scoreboard__podium-base--third">
-                            <div class="scoreboard__podium-rank">3</div>
-                        </div>
-                        <div class="scoreboard__podium-number">
-                            {{ $top3->get(2)->player->playerName }}
-                            <small><span class="js-podium-data text-white">{{ $top3->get(2)->points }} pkt</span></small>
+                        <div class="scoreboard__podium js-podium" data-height="150px">
+                            <div class="scoreboard__podium-base scoreboard__podium-base--third">
+                                <div class="scoreboard__podium-rank">3</div>
+                            </div>
+                            <div class="scoreboard__podium-number">
+                                {{ $top3->get(2)->player->playerName }}
+                                <small><span
+                                        class="js-podium-data text-white">{{ $top3->get(2)->points }} pkt</span></small>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div style="height: max-content;">
-                <table class="w-full text-sm text-left text-white font-bold">
-                    <thead class="text-xs text-gray-100 uppercase bg-gray-800 border-b border-gray-700">
-                    <tr>
-                        <th scope="col" class="py-3 px-6">
-                            Place
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Points
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Player name
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php $position = 4 ?>
-                    @foreach($ranking as $key => $playerRank)
-                        <tr class="border-b bg-gray-800 border-gray-700">
-                            <td class="py-4 px-6">
-                                {{ $position++ }}
-                            </td>
-                            <th scope="row" class="py-4 px-6 font-medium text-white whitespace-nowrap">
-                                <span class="bg-red-100 text-gray-900 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{$playerRank->points}} pkt</span>
+            @endif
+            @if($ranking->isNotEmpty())
+                <div style="height: max-content;">
+                    <table class="w-full text-sm text-left text-white font-bold">
+                        <thead class="text-xs text-gray-100 uppercase bg-gray-800 border-b border-gray-700">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                Place
                             </th>
-                            <td class="py-4 px-6">
-                                {{ $playerRank->player->playerName }}
-                            </td>
+                            <th scope="col" class="py-3 px-6">
+                                Points
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Player name
+                            </th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                        <?php $position = 4 ?>
+                        @foreach($ranking as $key => $playerRank)
+                            <tr class="border-b bg-gray-800 border-gray-700">
+                                <td class="py-4 px-6">
+                                    {{ $position++ }}
+                                </td>
+                                <th scope="row" class="py-4 px-6 font-medium text-white whitespace-nowrap">
+                                    <span
+                                        class="bg-red-100 text-gray-900 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{$playerRank->points}} pkt</span>
+                                </th>
+                                <td class="py-4 px-6">
+                                    {{ $playerRank->player->playerName }}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <div class="mt-10 flex justify-center items-center font-medium text-white">
+                    Ranking nie został jeszcze ustanowiony.
+                </div>
+            @endif
         </div>
     </div>
 @endsection

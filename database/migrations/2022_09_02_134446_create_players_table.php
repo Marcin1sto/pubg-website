@@ -19,6 +19,9 @@ class CreatePlayersTable extends Migration
             $table->softDeletes();
             $table->string('playerId');
             $table->string('playerName');
+            $table->dateTime('matchesUpdate')->nullable();
+            $table->dateTime('seasonUpdate')->nullable();
+            $table->dateTime('rankingUpdate')->nullable();
         });
     }
 

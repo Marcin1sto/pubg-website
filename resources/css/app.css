@@ -1,9 +1,10 @@
 /*@tailwind base;*/
 /*@tailwind components;*/
-/*@tailwind utilities;*/
+@tailwind utilities;
 
 @import "ranking.scss";
 
 html {
     height: 100%;
 }
+

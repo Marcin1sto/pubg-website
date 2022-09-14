@@ -7,10 +7,13 @@ module.exports = {
         "./resources/**/*.vue",
         "./node_modules/flowbite/**/*.js"
     ],
-  theme: {
-    extend: {},
-  },
-  plugins: [
-      require('flowbite/plugin')
-  ],
+    theme: {
+        extend: {},
+    },
+    animation: {
+        bounce: 'bounce 1s infinite',
+    },
+    plugins: [
+        require('flowbite/plugin')
+    ],
 }

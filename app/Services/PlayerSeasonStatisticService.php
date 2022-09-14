@@ -24,25 +24,31 @@ class PlayerSeasonStatisticService
             $player = Player::where('playerName', $nickName)->first();
         }
 
-        $connector = new PubgConnector();
-        $response = $connector->connect('players/'. $player->playerId.'/seasons/'. $season->api_id.'?filter[gamepad]=false')->getData();
-        $playerStatistics = $response->data->attributes->gameModeStats;
+        if ($player->canUpdateSeason()) {
+            $connector = new PubgConnector();
+            $response = $connector->connect('players/'. $player->playerId.'/seasons/'. $season->api_id.'?filter[gamepad]=false')->getData();
+            $playerStatistics = $response->data->attributes->gameModeStats;
 
-        foreach ($playerStatistics as $keyMode => $mode) {
-            $playerStatistic = PlayerSeasonStatistic::where('player_id', $player->id)
-                ->where('type', $keyMode);
+            foreach ($playerStatistics as $keyMode => $mode) {
+                $playerStatistic = PlayerSeasonStatistic::where('player_id', $player->id)
+                    ->where('type', $keyMode);
 
-            if ($numberSeason) {
-                $playerStatistic->where('season_id', $season->id);
+                if ($numberSeason) {
+                    $playerStatistic->where('season_id', $season->id);
+                }
+                $playerStatistic = $playerStatistic->first();
+
+                $modeObject = !$playerStatistic ? new PlayerSeasonStatistic() : $playerStatistic;
+                $modeObject->fill(collect($mode)->toArray());
+                $modeObject->type = $keyMode;
+                $modeObject->season_id = $season->id;
+                $modeObject->player_id = $player->id;
+                $modeObject->save();
             }
-            $playerStatistic = $playerStatistic->first();
 
-            $modeObject = !$playerStatistic ? new PlayerSeasonStatistic() : $playerStatistic;
-            $modeObject->fill(collect($mode)->toArray());
-            $modeObject->type = $keyMode;
-            $modeObject->season_id = $season->id;
-            $modeObject->player_id = $player->id;
-            $modeObject->save();
+            $player->update([
+                'seasonUpdate' => date('Y-m-d H:i:s')
+            ]);
         }
     }
 }
