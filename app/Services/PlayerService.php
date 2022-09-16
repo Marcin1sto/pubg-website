@@ -12,17 +12,19 @@ class PlayerService
      */
     public static function createPlayer(string $nickName): bool
     {
-        $connector = new PubgConnector();
-        $connector->connect('players?filter[playerNames]=' . $nickName);
-        $response = $connector->getData()->data[0];
-
         $player = Player::where('playerName', $nickName)->first();
 
-        if (!$player && $response->type = 'player') {
-            $player = new Player();
-            $player->playerId = $response->id;
-            $player->playerName = $response->attributes->name;
-            $player->save();
+        if (!$player) {
+            $connector = new PubgConnector();
+            $connector->connect('players?filter[playerNames]=' . $nickName);
+            $response = $connector->getData()->data[0];
+
+            if ($response->type = 'player') {
+                $player = new Player();
+                $player->playerId = $response->id;
+                $player->playerName = $response->attributes->name;
+                $player->save();
+            }
 
             return true;
         }
