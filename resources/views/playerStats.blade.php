@@ -1,14 +1,14 @@
-@extends('layout')
+    @extends('layout')
 
 @section('content')
-    <div class="container mx-auto h-screen mt-10">
+    <div class="container mx-auto h-screen">
             <div class="text-white flex justify-center ">
                 @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])
             </div>
-        <div class="mt-10" style="margin-bottom: 50px;">
-            <div class="grid grid-cols-2">
+        <div class="mt-2" style="margin-bottom: 50px;">
+            <div class="grid grid-cols-2 p-3 lg:p-0">
                 <div class="flex items-center">
-                    <h1 class="text-white font-bold text-xl">{{ count($player->matches) }} {{ __('layout/stats.matches') }}</h1>
+                    <h1 class="text-white font-bold text-xl">{{ __('layout/stats.matches') }}:</h1>
                 </div>
                 <div class="flex justify-end items-center">
                     @if($player->canUpdateMatches())
@@ -20,7 +20,7 @@
                     @include('parts.stats.matchesPagination')
                 </div>
             </div>
-            <div class="overflow-x-auto relative mt-6">
+            <div class="overflow-x-auto relative">
                 <table class="w-full text-sm text-left text-white font-bold">
                     <thead class="text-xs text-gray-100 uppercase bg-gray-800 border-b border-gray-700">
                     <tr>
@@ -67,7 +67,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="mt-6">
+            <div class="p-3 lg:p-0">
                 @include('parts.stats.matchesPagination')
             </div>
         </div>

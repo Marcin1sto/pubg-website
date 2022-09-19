@@ -1,15 +1,17 @@
-<div class="w-full mt-10 block" style="margin-top: 70px">
+<div class="w-full mt-4 block">
     <div class="h-max mb-2 flex items-center">
-        <div class="w-1/2 flex justify-start">
-            <h1 class="text-white font-bold text-xl">{{ __('layout/stats.actual_season_stats') }} {{ $player->playerName }}</h1>
-        </div>
-        <div class="w-1/2 flex justify-end">
-            @if($player->canUpdateSeason())
-                <button id="updateSeason" type="button" class="animate-bounce text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    <span class="sr-only">Icon description</span>
-                </button>
-            @endif
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+            <div class="flex justify-start p-2 lg:p-0">
+                <h1 class="text-white font-bold text-xl">{{ __('layout/stats.actual_season_stats') }} {{ $player->playerName }}</h1>
+            </div>
+            <div class=" flex justify-end">
+                @if($player->canUpdateSeason())
+                    <button id="updateSeason" type="button" class="animate-bounce text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        <span class="sr-only">Icon description</span>
+                    </button>
+                @endif
+            </div>
         </div>
     </div>
 
@@ -27,7 +29,7 @@
 
         <div id="myTabContent">
             <div class="hidden p-4  rounded-lg bg-gray-800" id="tpp" role="tabpanel" aria-labelledby="tpp-tab">
-                <div class="grid grid-cols-3 gap-2">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                     <div class="rounded rounded-t-lg border-2 border-sky-500">
                         <div class="overflow-x-auto relative shadow-md">
                             <div class="flex justify-center items-center">

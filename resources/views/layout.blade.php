@@ -19,9 +19,12 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<body class="h-screen bg-black bg-gray-900">
+<body class="bg-gray-900">
     @include('parts.menu')
-    @yield('content')
+    <div class="relative">
+        @yield('content')
+    </div>
+
     @include('parts.loader')
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
 

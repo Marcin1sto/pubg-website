@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="text-white flex justify-center w-full mt-[70px] h-max" style="margin-bottom: 50px">
+    <div class="text-white flex justify-center w-full mt-10 h-max" style="margin-bottom: 50px">
         <div class="grid grid-rows-2 h-max">
             @if($top3->isNotEmpty() && $top3->get(0) && $top3->get(1) && $top3->get(2))
                 <div class="scoreboard">
