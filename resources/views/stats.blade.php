@@ -17,17 +17,10 @@
                         </button>
                     </form>
                 </div>
-                <div class="text-white flex justify-center items-center border border-gray-300 h-full rounded-lg" style="max-height: 400px">
-                    <table class="ext-sm text-left text-white overflow-auto" style="max-height: 400px">
-                        <tbody class=" overflow-auto" style="max-height: 400px">
-                        <tr class="border-b border-t dark:bg-gray-900 ">
-                            <th scope="row"
-                                class="py-4 px-6 font-medium whitespace-nowrap ">
-                                Nick
-                            </th>
-                            <td class="py-4 px-6 border-r"></td>
-                        </tr>
-                        @foreach($players as $player)
+                <div class="text-white flex justify-center items-center border border-gray-300 rounded-lg overflow-y-auto" style="height: 443px">
+                    <table class="table-auto text-md text-left text-white w-full">
+                        <tbody class=" overflow-auto">
+                        @foreach($players->random(15) as $player)
                             <tr class="border-b dark:bg-gray-900 hover:bg-blue-800">
                                 <th scope="row"
                                     class="py-4 px-6 font-medium whitespace-nowrap ">
