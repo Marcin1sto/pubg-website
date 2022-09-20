@@ -1,7 +1,7 @@
 <?php
     return [
-        'actual_season_stats' => 'Statystyki z tego sezonu:',
-        'matches' => 'Meczy',
+        'actual_season_stats' => 'Statystyki z tego sezonu gracza:',
+        'matches' => 'Mecze',
         'place' => 'Miejsce',
         'kills' => 'Zabójstwa',
         'damage' => 'Obrażenia',

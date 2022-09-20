@@ -1,4 +1,4 @@
-<nav class=" px-2 sm:px-4 py-2.5 bg-gray-800 fixed w-full z-20 top-0 left-0 border-b border-gray-900">
+<nav class=" px-2 sm:px-4 py-2.5 bg-gray-800 sticky w-full z-20 top-0 left-0 border-b border-gray-900">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a href="/" class="flex items-center">
             <h1 class="px-5 font-medium text-3xl text-white">PUBG <span class="font-bold text-2xl">Polska</span></h1>
