@@ -6,6 +6,7 @@ use App\Models\Player;
 use App\Models\PlayerMatchStatistic;
 use App\Services\PlayerMatchSeasonStatisticService;
 use App\Services\PlayerService;
+use App\Services\RankingService;
 use Illuminate\Console\Command;
 
 class GetPlayerMatchsActualSeason extends Command
@@ -72,6 +73,8 @@ class GetPlayerMatchsActualSeason extends Command
                 $count++;
             }
         }
+
+        RankingService::calculatePlayerPoints($nickName);
 
         $this->output->progressFinish();
         $this->info('Dodano '. $count . ' meczy gracz: '. $nickName);

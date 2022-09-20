@@ -73,6 +73,8 @@ class PlayerMatchSeasonStatisticService
                         $newMatch->save();
                     }
                 }
+
+                RankingService::calculatePlayerPoints($player->playerName);
             }
 
             $player->update([
