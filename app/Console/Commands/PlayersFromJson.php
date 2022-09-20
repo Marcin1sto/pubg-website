@@ -3,9 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\ProcessPlayer;
-use App\Services\PlayerService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Redis;
 
 class PlayersFromJson extends Command
 {
@@ -44,7 +42,7 @@ class PlayersFromJson extends Command
 
         foreach ($json->players as $player) {
             if (isset($player->name)) {
-                ProcessPlayer::dispatch($player->name)->onQueue('default');
+                ProcessPlayer::dispatch($player->name)->delay(now()->addSeconds(10))->onQueue('default');
             }
         }
 

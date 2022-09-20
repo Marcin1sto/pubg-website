@@ -44,7 +44,7 @@ class QueuePlayersMatchesUpload extends Command
         $seasonNumber = Season::where('isCurrentSeason', true)->first()->number;
 
         foreach ($players as $player) {
-            PlayerMatchesProcess::dispatch($player, $seasonNumber, true);
+            PlayerMatchesProcess::dispatch($player, $seasonNumber, true)->onQueue('default');
         }
 
         return 0;

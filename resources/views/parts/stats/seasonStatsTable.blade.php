@@ -2,25 +2,6 @@
     $stats = $season[$type]->first();
 ?>
 <table class="w-full text-sm text-left text-white">
-    {{--                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">--}}
-    {{--                                        <tr>--}}
-    {{--                                            <th scope="col" class="py-3 px-6">--}}
-    {{--                                                Product name--}}
-    {{--                                            </th>--}}
-    {{--                                            <th scope="col" class="py-3 px-6">--}}
-    {{--                                                Color--}}
-    {{--                                            </th>--}}
-    {{--                                            <th scope="col" class="py-3 px-6">--}}
-    {{--                                                Category--}}
-    {{--                                            </th>--}}
-    {{--                                            <th scope="col" class="py-3 px-6">--}}
-    {{--                                                Price--}}
-    {{--                                            </th>--}}
-    {{--                                            <th scope="col" class="py-3 px-6">--}}
-    {{--                                                Action--}}
-    {{--                                            </th>--}}
-    {{--                                        </tr>--}}
-    {{--                                        </thead>--}}
     <tbody>
     <tr class="border-b border-t dark:bg-gray-900 ">
         <th scope="row"
