@@ -10,12 +10,17 @@ class RankingService
 {
     // Aktualizować co 6h
     /**
-     * @param string $playerName
+     * @param string|Player $playerName
      * @return int
      */
-    public static function calculatePlayerPoints(string $playerName): int
+    public static function calculatePlayerPoints(string|Player $playerName): int
     {
-        $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
+        if (!is_string($playerName)) {
+            $player = $playerName;
+        } else {
+            $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
+        }
+
         $playerMatches = $player->actualMatches;
         $playerMatchesCount = $playerMatches->count();
 

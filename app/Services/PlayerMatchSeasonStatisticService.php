@@ -11,6 +11,7 @@ class PlayerMatchSeasonStatisticService
     /**
      * @param Player $player
      * @param string|null $seasonNumber
+     * @param bool $saveMatches
      * @return array
      */
     public static function downloadAllPlayerSeasonStatistic(Player $player, ?string $seasonNumber, bool $saveMatches = false): array
@@ -41,7 +42,7 @@ class PlayerMatchSeasonStatisticService
                             return $value->type === 'participant';
                         });
 
-                        $playerMatches = array_filter($players, function ($value, $key) use ($playerId) {
+                        $playerMatches = array_filter($players, function ($value) use ($playerId) {
                             $matchPlayerId = $value->attributes->stats->playerId;
 
                             return $matchPlayerId &&

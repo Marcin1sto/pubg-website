@@ -21,3 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('matches/{nickName}', [ApiMatchesController::class, 'updatePlayerMatches']);
 Route::get('season/{nickName}', [ApiSeasonController::class, 'updatePlayerSeason']);
+
+Route::get('/test', function () {
+    return response()->json([
+        'working' => true
+    ]);
+});
