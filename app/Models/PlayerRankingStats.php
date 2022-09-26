@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PlayerRankingPoint extends Model
+class PlayerRankingStats extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'players_ranking_points';
+    protected $table = 'player_stats';
 
     protected $guarded = [];
 

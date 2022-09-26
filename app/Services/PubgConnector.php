@@ -27,8 +27,13 @@ class PubgConnector
         return $this;
     }
 
-    public function getData(): stdClass
+    public function getData(): ?stdClass
     {
-        return $this->response;
+        return $this?->response;
+    }
+
+    public function connectFalse(): bool
+    {
+        return is_null($this?->response);
     }
 }

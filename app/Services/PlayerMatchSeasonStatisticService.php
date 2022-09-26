@@ -13,12 +13,14 @@ class PlayerMatchSeasonStatisticService
      * @param string|null $seasonNumber
      * @return array
      */
-    public static function downloadAllPlayerSeasonStatistic(Player $player, ?string $seasonNumber, bool $saveMatches = false): array
+    public static function downloadAllPlayerSeasonStatistic(Player $player, ?string $seasonNumber = null, bool $saveMatches = false): array
     {
         if ($player->canUpdateMatches()) {
-            $season = Season::where('number', $seasonNumber)->first();
+            if ($seasonNumber) {
+                $season = Season::where('number', $seasonNumber)->first();
+            }
 
-            if (!$season) {
+            if (!isset($season)) {
                 $season = Season::where('isCurrentSeason', true)->first();
             }
 

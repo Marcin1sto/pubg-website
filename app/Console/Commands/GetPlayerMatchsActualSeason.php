@@ -16,7 +16,7 @@ class GetPlayerMatchsActualSeason extends Command
      *
      * @var string
      */
-    protected $signature = 'pubg:player-matches {nickName} {seasonNumber?}';
+    protected $signature = 'pubg:player-matches {nickName}';
 
     /**
      * The console command description.
@@ -40,19 +40,22 @@ class GetPlayerMatchsActualSeason extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(): bool|int
     {
         $nickName = $this->argument('nickName');
 
         $player = Player::where('playerName', $nickName)->first();
         if (!$player) {
-            PlayerService::createPlayer($nickName);
-            $player = Player::where('playerName', $nickName)->first();
+            $player = PlayerService::createPlayer($nickName);
+        }
+
+        if (is_null($player)) {
+            $this->alert('Wystąpił problem z połaczeniem się do PUBG API');
+            return false;
         }
 
         $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerSeasonStatistic(
             $player,
-            $this->argument('seasonNumber')
         );
 
         $count = 0;
@@ -79,6 +82,6 @@ class GetPlayerMatchsActualSeason extends Command
         $this->output->progressFinish();
         $this->info('Dodano '. $count . ' meczy gracz: '. $nickName);
 
-        return 0;
+        return false;
     }
 }

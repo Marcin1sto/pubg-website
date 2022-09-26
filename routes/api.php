@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ApiMatchesController;
 use App\Http\Controllers\API\ApiSeasonController;
+use App\Http\Controllers\API\RankingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +22,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('matches/{nickName}', [ApiMatchesController::class, 'updatePlayerMatches']);
 Route::get('season/{nickName}', [ApiSeasonController::class, 'updatePlayerSeason']);
+
+Route::get('update/ranking/{nickName}', [RankingController::class, 'updatePlayer']);
