@@ -2,24 +2,31 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Models\PlayerRankingStats;
+use App\Models\Player;
+use App\Models\Season;
+use App\Services\PlayerMatchSeasonStatisticService;
 use App\Services\RankingService;
 
-class RankingController extends Controller
+class RankingController
 {
-    public function index()
+    public function update(string $playerName)
     {
-        $ranking = PlayerRankingStats::with('player')->get()->sortByDesc('points');
-        $top_3 = $ranking->slice(0, 3)->values();
+        $seasonNumber = Season::where('isCurrentSeason', true)->first()?->number;
+        $player = Player::where('playerName', $playerName)->first();
 
-        return view('ranking', ['ranking' => $ranking->skip(3)->values(), 'top3' => $top_3]);
+        if ($player->canUpdateMatches()) {
+            PlayerMatchSeasonStatisticService::downloadAllPlayerSeasonStatistic($player, $seasonNumber, true);
+            $stats = RankingService::calculatePlayerPoints($nickName);
+
+        } else {
+            return response()->json([
+                'correct' => false,
+                'msg' => 'Możesz zaktualizować swój ranking raz na godzinę.'
+            ]);
+        }
+
+        return response()->json([
+            'correct' => true,
+            'stats' => $stats
+        ]);
     }
-
-    public function updatePlayer(string $nickName)
-    {
-        $stats = RankingService::calculatePlayerPoints($nickName);
-
-        return response()->json($stats->toArray());
-    }
-}
