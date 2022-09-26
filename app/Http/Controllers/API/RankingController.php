@@ -30,3 +30,4 @@ class RankingController
             'stats' => $stats
         ]);
     }
+}
