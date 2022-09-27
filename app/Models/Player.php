@@ -16,6 +16,8 @@ class Player extends Model
 
     protected $guarded = [];
 
+    protected $hidden = ['id', 'created_at', 'deleted_at', 'matchesUpdate', 'seasonUpdate', 'rankingUpdate'];
+
     const DELAY_TIME = 1;
 
     /**

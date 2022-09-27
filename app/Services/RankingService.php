@@ -17,6 +17,7 @@ class RankingService
     public static function calculatePlayerPoints(string $playerName): ?PlayerRankingStats
     {
         $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
+
         if ($player) {
             $playerMatches = $player->actualMatches;
             $calculator = new CalculatorHelper($player);
@@ -54,6 +55,17 @@ class RankingService
             }
         }
 
+
+        return null;
+    }
+
+    public static function getPlayerStats(string $playerName): ?PlayerRankingStats
+    {
+        $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
+
+        if ($player) {
+            return PlayerRankingStats::where('player_id', $player->id)->first();
+        }
 
         return null;
     }

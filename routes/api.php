@@ -29,4 +29,6 @@ Route::get('/test', function () {
     ]);
 });
 
-Route::get('update/ranking/{nickName}', [RankingController::class, 'updatePlayer']);
+Route::get('bot/ranking/index/{count}', [RankingController::class, 'index']);
+Route::get('bot/ranking/update/{nickName}', [RankingController::class, 'update']);
+Route::get('bot/ranking/stats/{nickName}', [RankingController::class, 'show']);
