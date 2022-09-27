@@ -34,22 +34,22 @@ class RankingService
 
                 if (!$playerRankingStats) {
                     $playerRankingStats = new PlayerRankingStats();
-                } else {
-                    $season = Season::where('isCurrentSeason', true)->first();
-
-                    $playerRankingStats->player_id = $player->id;
-                    $playerRankingStats->season_id = $season->id;
-                    $playerRankingStats->matches = $playerMatchesCount;
-                    $playerRankingStats->wins =  $playerMatches->filter(function ($match) {
-                        return $match->winPlace == 1;
-                    })->count();
-                    $playerRankingStats->points = $calculator->points;
-                    $playerRankingStats->percent_wins = $calculator->wins_percent;
-                    $playerRankingStats->percent_headshot = $calculator->headshots_percent;
-                    $playerRankingStats->kda = $calculator->kda;
-                    $playerRankingStats->kd = $calculator->kd;
-                    $playerRankingStats->save();
                 }
+
+                $season = Season::where('isCurrentSeason', true)->first();
+
+                $playerRankingStats->player_id = $player->id;
+                $playerRankingStats->season_id = $season->id;
+                $playerRankingStats->matches = $playerMatchesCount;
+                $playerRankingStats->wins =  $playerMatches->filter(function ($match) {
+                    return $match->winPlace == 1;
+                })->count();
+                $playerRankingStats->points = $calculator->points;
+                $playerRankingStats->percent_wins = $calculator->wins_percent;
+                $playerRankingStats->percent_headshot = $calculator->headshots_percent;
+                $playerRankingStats->kda = $calculator->kda;
+                $playerRankingStats->kd = $calculator->kd;
+                $playerRankingStats->save();
 
                 return $playerRankingStats;
             }

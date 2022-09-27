@@ -13,9 +13,9 @@ class PlayerRankingStats extends Model
 
     protected $table = 'player_stats';
 
-    protected $guarded = ['id', 'created_at', 'deleted_at'];
+    protected $guarded = [];
 
-    protected $hidden = ['id', 'created_at', 'deleted_at'];
+//    protected $hidden = ['id', 'created_at', 'deleted_at'];
 
     /**
      * @return HasOne
