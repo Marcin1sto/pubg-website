@@ -43,7 +43,7 @@ class RankingController
         if ($player) {
             $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerSeasonStatistic($player, $seasonNumber, true);
             if (count($matches) >= 25) {
-                RankingService::calculatePlayerPoints($playerName);
+                $stats = RankingService::calculatePlayerPoints($playerName);
             } else {
                 return response()->json([
                     'correct' => false,
@@ -56,8 +56,6 @@ class RankingController
                 'msg' => 'Możesz zaktualizować swój ranking raz na godzinę.'
             ]);
         }
-
-        dd(PlayerRankingStats::where('player_id', $player->id)->first());
 
         return response()->json([
             'correct' => true,

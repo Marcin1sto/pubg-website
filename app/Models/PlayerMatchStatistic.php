@@ -15,6 +15,8 @@ class PlayerMatchStatistic extends Model
 
     protected $guarded = [];
 
+    protected $hidden = ['player_id'];
+
     public function season(): BelongsTo
     {
         return $this->belongsTo(Season::class, 'season_id', 'id');
