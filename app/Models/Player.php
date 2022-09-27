@@ -57,6 +57,10 @@ class Player extends Model
         $lastCheckTime = date('Y-m-d H:i:s', strtotime($this->matchesUpdate));
         $delayTime = date('Y-m-d H:i:s', strtotime($lastCheckTime. '+'.self::DELAY_TIME.' hour'));
 
+        if (env('APP_ENV') === 'local') {
+            return true;
+        }
+
         return !$this->matchesUpdate || $delayTime <= date('Y-m-d H:i:s');
     }
 
@@ -66,6 +70,10 @@ class Player extends Model
         $lastCheckTime = date('Y-m-d H:i:s', strtotime($this->seasonUpdate));
         $delayTime = date('Y-m-d H:i:s', strtotime($lastCheckTime. '+'.self::DELAY_TIME.' hour'));
 
+        if (env('APP_ENV') === 'local') {
+            return true;
+        }
+
         return !$this->seasonUpdate || $delayTime <= date('Y-m-d H:i:s');
     }
 
@@ -73,6 +81,10 @@ class Player extends Model
     {
         $lastCheckTime = date('Y-m-d H:i:s', strtotime($this->rankingUpdate));
         $delayTime = date('Y-m-d H:i:s', strtotime($lastCheckTime. '+'.self::DELAY_TIME.' hour'));
+
+        if (env('APP_ENV') === 'local') {
+            return true;
+        }
 
         return !$this->rankingUpdate || $delayTime <= date('Y-m-d H:i:s');
     }

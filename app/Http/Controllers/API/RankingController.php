@@ -6,6 +6,7 @@ use App\Models\Player;
 use App\Models\PlayerRankingStats;
 use App\Models\Season;
 use App\Services\PlayerMatchSeasonStatisticService;
+use App\Services\PlayerService;
 use App\Services\RankingService;
 use Illuminate\Http\JsonResponse;
 
@@ -36,18 +37,27 @@ class RankingController
     public function update(string $playerName): JsonResponse
     {
         $seasonNumber = Season::where('isCurrentSeason', true)->first()?->number;
+        PlayerService::createPlayer($playerName);
         $player = Player::where('playerName', $playerName)->first();
 
-        if ($player->canUpdateMatches()) {
-            PlayerMatchSeasonStatisticService::downloadAllPlayerSeasonStatistic($player, $seasonNumber, true);
-            $stats = RankingService::calculatePlayerPoints($playerName);
-
+        if ($player) {
+            $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerSeasonStatistic($player, $seasonNumber, true);
+            if (count($matches) >= 25) {
+                RankingService::calculatePlayerPoints($playerName);
+            } else {
+                return response()->json([
+                    'correct' => false,
+                    'msg' => 'Musisz rozegrać min. 25 meczy.'
+                ]);
+            }
         } else {
             return response()->json([
                 'correct' => false,
                 'msg' => 'Możesz zaktualizować swój ranking raz na godzinę.'
             ]);
         }
+
+        dd(PlayerRankingStats::where('player_id', $player->id)->first());
 
         return response()->json([
             'correct' => true,
@@ -63,8 +73,10 @@ class RankingController
      */
     public function show(string $playerName): JsonResponse
     {
+        $stats = RankingService::getPlayerStats($playerName);
         return response()->json([
-            'stats' => RankingService::getPlayerStats($playerName)->toArray()
+            'correct' => $stats ? true : false,
+            'stats' => $stats ? $stats->toArray() : []
         ]);
     }
 }

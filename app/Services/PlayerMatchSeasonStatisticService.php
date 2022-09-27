@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Player;
 use App\Models\PlayerMatchStatistic;
 use App\Models\Season;
+use Illuminate\Database\Eloquent\Collection;
 
 class PlayerMatchSeasonStatisticService
 {
@@ -14,7 +15,7 @@ class PlayerMatchSeasonStatisticService
      * @param bool $saveMatches
      * @return array
      */
-    public static function downloadAllPlayerSeasonStatistic(Player $player, ?string $seasonNumber = null, bool $saveMatches = false): array
+    public static function downloadAllPlayerSeasonStatistic(Player $player, ?string $seasonNumber = null, bool $saveMatches = false): array|Collection
     {
         if ($player->canUpdateMatches()) {
             if ($seasonNumber) {
@@ -84,7 +85,7 @@ class PlayerMatchSeasonStatisticService
                 'matchesUpdate' => date('Y-m-d H:i:s')
             ]);
 
-            return $allMatchesPlayer;
+            return PlayerMatchStatistic::where('player_id', $player->id)->get();
         }
 
         return [];
