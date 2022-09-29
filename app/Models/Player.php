@@ -40,6 +40,11 @@ class Player extends Model
         return $this->hasMany(PlayerSeasonStatistic::class, 'player_id', 'id')->where('season_id', $season->id);
     }
 
+    public function discordRanking()
+    {
+        return $this->hasOne(PlayerRankingStats::class, 'player_id', 'id');
+    }
+
     /**
      * Player Matches Relationship
      *

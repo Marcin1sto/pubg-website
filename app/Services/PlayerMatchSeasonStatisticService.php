@@ -32,7 +32,7 @@ class PlayerMatchSeasonStatisticService
             $last7daysMatches = $connector->connect('players?filter[playerIds]='.$player->playerId);
 
             if (!$connector->connectFalse()) {
-                $last7daysMatches->getData()
+                $last7daysMatches = $last7daysMatches->getData()
                     ->data[0]->relationships->matches->data;
                 $allMatchesPlayer = [];
                 foreach ($last7daysMatches as $match) {

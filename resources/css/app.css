@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "ranking.scss";
+@import "flowbite.css";
 
 html {
     height: 100%;

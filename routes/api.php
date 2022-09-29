@@ -23,12 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('matches/{nickName}', [ApiMatchesController::class, 'updatePlayerMatches']);
 Route::get('season/{nickName}', [ApiSeasonController::class, 'updatePlayerSeason']);
 
-Route::get('/test', function () {
-    return response()->json([
-        'working' => true
-    ]);
-});
 
-Route::get('bot/ranking/index/{count}', [RankingController::class, 'index']);
-Route::get('bot/ranking/update/{nickName}', [RankingController::class, 'update']);
-Route::get('bot/ranking/stats/{nickName}', [RankingController::class, 'show']);
+Route::prefix('bot')->group(function () {
+    Route::get('/ranking/index/{count}', [RankingController::class, 'index']);
+    Route::get('/ranking/update/{nickName}', [RankingController::class, 'update']);
+    Route::get('/ranking/stats/{nickName}', [RankingController::class, 'show']);
+});

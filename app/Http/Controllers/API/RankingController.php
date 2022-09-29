@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\Ranking\IndexRequest;
 use App\Models\Player;
 use App\Models\PlayerRankingStats;
 use App\Models\Season;
@@ -12,8 +13,9 @@ use Illuminate\Http\JsonResponse;
 
 class RankingController
 {
-    public function index(int $count)
+    public function index(IndexRequest $request)
     {
+        dd($request->all());
         $ranking = PlayerRankingStats::with('player')->limit($count)->get()->sortByDesc('points');
 
         if ($ranking->count() > 3) {

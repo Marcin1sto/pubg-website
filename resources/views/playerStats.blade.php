@@ -1,9 +1,70 @@
-    @extends('layout')
+@extends('layout')
 
 @section('content')
     <div class="container mx-auto h-screen">
-            <div class="text-white flex justify-center ">
-                @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])
+            <div class="text-white mt-4 px-2 ">
+{{--                {{ dd($player->discordRanking) }}--}}
+{{--                @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])--}}
+{{--                <div class="flex justify-start">--}}
+{{--                    <h1 class="text-white font-bold text-xl">Discord Stats:</h1>--}}
+{{--                </div>--}}
+                <div class="rounded rounded-t-lg border-2 border-sky-500">
+                    <div class="overflow-x-auto relative shadow-md">
+                        <div class="flex justify-center items-center">
+                            <p class="p-2 font-bold">Discord Stats: SILVER?? {{ $player->discordRanking->points }} pkt.</p>
+                        </div>
+                        <table class="w-full text-sm text-left text-white">
+                            <tbody>
+                            <tr class="border-b border-t dark:bg-gray-900 ">
+                                <th scope="row"
+                                    class="py-4 px-6 font-medium whitespace-nowrap ">
+                                    K/D
+                                </th>
+                                <td class="py-4 px-6 border-r">
+                                    {{ $player->discordRanking->kd }}
+                                </td>
+                                <th scope="row"
+                                    class="py-4 px-6 font-medium whitespace-nowrap ">
+                                    KDA
+                                </th>
+                                <td class="py-4 px-6 border-r">
+                                    {{ $player->discordRanking->kda }}
+                                </td>
+                            </tr>
+                            <tr class="border-b dark:bg-gray-900 ">
+                                <th scope="row"
+                                    class="py-4 px-6 font-medium whitespace-nowrap ">
+                                    Wins
+                                </th>
+                                <td class="py-4 px-6 border-r">
+                                    {{ $player->discordRanking->wins }}
+                                </td>
+                                <td class="py-4 px-6">
+                                    Wins Percent
+                                </td>
+                                <td class="py-4 px-6">
+                                    {{ $player->discordRanking->percent_wins }} %
+                                </td>
+                            </tr>
+                            <tr class="border-b dark:bg-gray-900 ">
+                                <th scope="row"
+                                    class="py-4 px-6 font-medium whitespace-nowrap ">
+                                    Matches
+                                </th>
+                                <td class="py-4 px-6 border-r">
+                                    {{ $player->discordRanking->matches }}
+                                </td>
+                                <td class="py-4 px-6">
+                                    Headshot Percent
+                                </td>
+                                <td class="py-4 px-6">
+                                    {{ $player->discordRanking->percent_headshot }} %
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         <div class="mt-2" style="margin-bottom: 50px;">
             <div class="grid grid-cols-2 p-3 lg:p-0">
