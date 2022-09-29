@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container mx-auto h-screen">
+        @if($player->discordRanking)
             <div class="text-white mt-4 px-2 ">
 {{--                {{ dd($player->discordRanking) }}--}}
 {{--                @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])--}}
@@ -66,6 +67,7 @@
                     </div>
                 </div>
             </div>
+        @endif
         <div class="mt-2" style="margin-bottom: 50px;">
             <div class="grid grid-cols-2 p-3 lg:p-0">
                 <div class="flex items-center">
