@@ -18,7 +18,7 @@ class RankingService
     {
         $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
 
-        if ($player) {
+        if ($player && $player->actualMatches->count() >= 25) {
             $playerMatches = $player->actualMatches;
             $calculator = new CalculatorHelper($player);
             $calculator = $calculator
@@ -50,7 +50,7 @@ class RankingService
                 $playerRankingStats->kda = $calculator->kda;
                 $playerRankingStats->kd = $calculator->kd;
                 $playerRankingStats->save();
-
+//                dd($playerRankingStats);
                 return $playerRankingStats;
             }
         }

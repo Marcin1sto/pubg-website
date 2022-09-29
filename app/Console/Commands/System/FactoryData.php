@@ -40,7 +40,7 @@ class FactoryData extends Command
     public function handle()
     {
         if (env('APP_ENV') === 'local') {
-            PlayerFactory::new()->count(10)->create();
+            PlayerFactory::new()->count(5)->create();
             PlayerMatchesFactory::new()->count(1000)->create();
         }
 

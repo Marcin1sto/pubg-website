@@ -4,11 +4,6 @@
     <div class="container mx-auto h-screen">
         @if($player->discordRanking)
             <div class="text-white mt-4 px-2 ">
-{{--                {{ dd($player->discordRanking) }}--}}
-{{--                @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])--}}
-{{--                <div class="flex justify-start">--}}
-{{--                    <h1 class="text-white font-bold text-xl">Discord Stats:</h1>--}}
-{{--                </div>--}}
                 <div class="rounded rounded-t-lg border-2 border-sky-500">
                     <div class="overflow-x-auto relative shadow-md">
                         <div class="flex justify-center items-center">
@@ -134,6 +129,7 @@
                 @include('parts.stats.matchesPagination')
             </div>
         </div>
+            @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])
     </div>
 @endsection
 

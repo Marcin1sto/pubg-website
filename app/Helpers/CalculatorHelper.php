@@ -25,6 +25,9 @@ class CalculatorHelper
         $winMatchesCount = $playerMatches->filter(function ($match) {
             return $match->winPlace == 1;
         })->count();
+//        if (($playerMatchesCount - $winMatchesCount) == 0) {
+//            dd($playerMatchesCount , $winMatchesCount);
+//        }
 
         $this->kda = round(($allKills + $allAssists ) / ($playerMatchesCount - $winMatchesCount), 2);
 

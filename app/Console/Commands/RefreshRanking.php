@@ -39,18 +39,26 @@ class RefreshRanking extends Command
      */
     public function handle(): int
     {
-        $players = Player::all();
+        $players = Player::with('actualMatches')->get()->filter(function ($object) {
+            return $object->actualMatches->count() >= 25;
+        });
         $this->output->progressStart(count($players));
-        foreach ($players as $player) {
+        $playersFails = [];
+
+        foreach ($players as $key => $player) {
             $status = RankingService::calculatePlayerPoints($player->playerName);
             if (is_null($status)) {
-                $this->error('Wystąpił problem z obliczeniem rankingu gracza: '. $player->playerName);
+                $playersFails[$key] = $player->playerName;
             } else {
                 $this->output->progressAdvance();
             }
         }
-
         $this->output->progressFinish();
+
+        foreach ($playersFails as $playerName) {
+            $this->error('Wystąpił problem z obliczeniem rankingu gracza: '. $playerName);
+        }
+
         $this->info('Zakończono obliczanie rankingu.');
         return 0;
     }

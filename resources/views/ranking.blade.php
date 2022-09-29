@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="text-white flex justify-center w-full mt-10 h-max" style="margin-bottom: 50px">
-        <div class="grid grid-rows-2 h-max">
+        <div class="grid">
             @if($top3->isNotEmpty() && $top3->get(0) && $top3->get(1) && $top3->get(2))
-                <div class="scoreboard">
+                <div class="scoreboard hidden md:block">
                     <div class="scoreboard__podiums">
                         <div class="scoreboard__podium js-podium" data-height="200px">
                             <div class="scoreboard__podium-base scoreboard__podium-base--second">
@@ -40,6 +40,49 @@
                         </div>
                     </div>
                 </div>
+                <div class="mb-6 md:hidden">
+                    <h1 class="text-white">Top 3</h1>
+                    <table class="w-full text-sm text-left text-white font-bold">
+                        <thead class="text-xs text-gray-100 uppercase bg-gray-800 border-b border-gray-700">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+                                Place
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Player name
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Points
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                KD/A
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                K/D
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <?php $positionTop3 = 1 ?>
+                        @foreach($top3 as $key => $playerRank)
+                            <tr class="border-b bg-gray-800 border-gray-700">
+                                <td class="py-4 px-6">
+                                    {{ $positionTop3++ }}
+                                </td>
+                                <td class="py-4 px-6">
+                                    {{ $playerRank->player->playerName }}
+                                </td>
+                                <th scope="row" class="py-4 px-6 font-medium text-white whitespace-nowrap">
+                                    <span
+                                        class="bg-red-100 text-gray-900 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{$playerRank->points}} pkt</span>
+                                </th>
+                                <td class="py-4 px-6"> {{ $playerRank->kda }}</td>
+                                <td class="py-4 px-6"> {{ $playerRank->kd }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @endif
             @if($ranking->isNotEmpty())
                 <div style="height: max-content;">
@@ -50,10 +93,16 @@
                                 Place
                             </th>
                             <th scope="col" class="py-3 px-6">
+                                Player name
+                            </th>
+                            <th scope="col" class="py-3 px-6">
                                 Points
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Player name
+                                KD/A
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                K/D
                             </th>
                         </tr>
                         </thead>
@@ -64,13 +113,15 @@
                                 <td class="py-4 px-6">
                                     {{ $position++ }}
                                 </td>
+                                <td class="py-4 px-6">
+                                    {{ $playerRank->player->playerName }}
+                                </td>
                                 <th scope="row" class="py-4 px-6 font-medium text-white whitespace-nowrap">
                                     <span
                                         class="bg-red-100 text-gray-900 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{$playerRank->points}} pkt</span>
                                 </th>
-                                <td class="py-4 px-6">
-                                    {{ $playerRank->player->playerName }}
-                                </td>
+                                <td class="py-4 px-6"> {{ $playerRank->kda }}</td>
+                                <td class="py-4 px-6"> {{ $playerRank->kd }}</td>
                             </tr>
                         @endforeach
                         </tbody>
