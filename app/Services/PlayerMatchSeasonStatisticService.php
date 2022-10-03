@@ -49,8 +49,6 @@ class PlayerMatchSeasonStatisticService
                                 return $value->type === 'participant';
                             });
 
-//                            dd($players);
-
                             $playerMatch = array_values(array_filter($players, function ($value) use ($playerId) {
                                 $matchPlayerId = $value->attributes->stats->playerId;
 
@@ -73,14 +71,14 @@ class PlayerMatchSeasonStatisticService
 
                 if ($saveMatches) {
                     foreach ($allMatchesPlayer as $match) {
-                        $matchDB = PlayerMatchStatistic::where('match_id', $match->id)->where('player_id', $player->id)->first();
-                        $statistics = $match->attributes->stats;
+                        $matchDB = PlayerMatchStatistic::where('match_id', $match['id'])->where('player_id', $player->id)->first();
+                        $statistics = $match['attributes']['stats'];
 
                         if (!$matchDB) {
                             $newMatch = new PlayerMatchStatistic();
                             $newMatch->fill(collect($statistics)->except('playerId')->toArray());
-                            $newMatch->match_id = $match->id;
-                            $newMatch->type = $match->attributes->gameMode;
+                            $newMatch->match_id = $match['id'];
+                            $newMatch->type = $match['attributes']['stats']['gameMode'];
                             $newMatch->player_id = $player->id;
                             $newMatch->save();
                         }
