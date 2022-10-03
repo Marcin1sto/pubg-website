@@ -84,6 +84,9 @@ class PlayerMatchSeasonStatisticService
                         }
                     }
 
+                    $player->update([
+                        'matchesUpdate' => date('Y-m-d H:i:s')
+                    ]);
 
                     return PlayerMatchStatistic::where('player_id', $player->id)->get();
                 }

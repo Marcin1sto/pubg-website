@@ -103,6 +103,9 @@
                                 Points
                             </th>
                             <th scope="col" class="py-3 px-6">
+                                Rang
+                            </th>
+                            <th scope="col" class="py-3 px-6">
                                 KD/A
                             </th>
                             <th scope="col" class="py-3 px-6">
@@ -124,6 +127,7 @@
                                     <span
                                         class="bg-red-100 text-gray-900 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">{{$playerRank->points}} pkt</span>
                                 </th>
+                                <td class="py-4 px-6 uppercase"> {{ $playerRank->rang->name }}</td>
                                 <td class="py-4 px-6"> {{ $playerRank->kda }}</td>
                                 <td class="py-4 px-6"> {{ $playerRank->kd }}</td>
                             </tr>
