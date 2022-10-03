@@ -25,7 +25,7 @@ class ApiMatchesController
             }
         }
         $seasonNumber = Season::where('isCurrentSeason', true)->first()->number;
-        $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerSeasonStatistic($player, $seasonNumber, true);
+        $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $seasonNumber, true);
 
         if ($matches) {
             return response()->json([

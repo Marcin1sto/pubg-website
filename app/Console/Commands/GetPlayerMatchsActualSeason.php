@@ -54,7 +54,7 @@ class GetPlayerMatchsActualSeason extends Command
             return false;
         }
 
-        $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerSeasonStatistic(
+        $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerMatches(
             $player,
         );
 
@@ -62,13 +62,13 @@ class GetPlayerMatchsActualSeason extends Command
         $this->output->progressStart(count($matches));
 
         foreach ($matches as $match) {
-            $matchDB = PlayerMatchStatistic::where('match_id', $match->id)->where('player_id', $player->id)->first();
-            $statistics = $match->attributes->stats;
+            $matchDB = PlayerMatchStatistic::where('match_id', $match['id'])->where('player_id', $player->id)->first();
+            $statistics = $match['attributes']['stats'];
 
             if (!$matchDB) {
                 $newMatch = new PlayerMatchStatistic();
                 $newMatch->fill(collect($statistics)->except('playerId')->toArray());
-                $newMatch->match_id = $match->id;
+                $newMatch->match_id = $match['id'];
                 $newMatch->player_id = $player->id;
                 $newMatch->save();
 

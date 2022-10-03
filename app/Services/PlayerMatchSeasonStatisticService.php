@@ -15,7 +15,7 @@ class PlayerMatchSeasonStatisticService
      * @param bool $saveMatches
      * @return array
      */
-    public static function downloadAllPlayerSeasonStatistic(Player $player, ?string $seasonNumber = null, bool $saveMatches = false): array|Collection
+    public static function downloadAllPlayerMatches(Player $player, ?string $seasonNumber = null, bool $saveMatches = false): array|Collection
     {
         if ($player->canUpdateMatches()) {
             if ($seasonNumber) {
@@ -35,35 +35,40 @@ class PlayerMatchSeasonStatisticService
                 $last7daysMatches = $last7daysMatches->getData()
                     ->data[0]->relationships->matches->data;
                 $allMatchesPlayer = [];
-                foreach ($last7daysMatches as $match) {
+
+                foreach ($last7daysMatches as $key => $match) {
                     $matchDb = PlayerMatchStatistic::where('match_id', $match->id)->first();
 
                     if (!$matchDb) {
                         $matchConnector = new PubgConnector();
                         $matchResponse = $matchConnector->connect('matches/'.$match->id)->getData();
 
-                        if ($matchResponse->data->attributes->matchType == 'official') {
+                        if ($matchResponse->data->attributes->matchType == 'official' ||
+                            $matchResponse->data->attributes->matchType == 'custom') {
                             $players = array_filter($matchResponse->included, function ($value) {
                                 return $value->type === 'participant';
                             });
 
-                            $playerMatches = array_filter($players, function ($value) use ($playerId) {
+//                            dd($players);
+
+                            $playerMatch = array_values(array_filter($players, function ($value) use ($playerId) {
                                 $matchPlayerId = $value->attributes->stats->playerId;
 
                                 return $matchPlayerId &&
                                     $value->type == 'participant' &&
                                     $matchPlayerId == $playerId;
-                            }, ARRAY_FILTER_USE_BOTH);
+                            }, ARRAY_FILTER_USE_BOTH))[0];
 
+                            $playerMatch = json_decode(json_encode($playerMatch), true);
 
-                            $allMatchesPlayer[] = collect($playerMatches)->first();
+                            $playerMatch['attributes']['stats']['gameMode'] = $matchResponse->data->attributes->gameMode;
+                            $playerMatch['attributes']['stats']['type'] = $matchResponse->data->attributes->matchType;
+                            $playerMatch['attributes']['stats']['mapName'] = $matchResponse->data->attributes->mapName;
+                            $playerMatch['attributes']['stats']['isCustomMatch'] = $matchResponse->data->attributes->isCustomMatch;
+                            $playerMatch['attributes']['stats']['season_id'] = $season->id;
+                            $allMatchesPlayer[$key] = (array)$playerMatch;
                         }
                     }
-                }
-
-
-                foreach ($allMatchesPlayer as $match) {
-                    $match->attributes->stats->season_id = $season->id;
                 }
 
                 if ($saveMatches) {
@@ -75,10 +80,14 @@ class PlayerMatchSeasonStatisticService
                             $newMatch = new PlayerMatchStatistic();
                             $newMatch->fill(collect($statistics)->except('playerId')->toArray());
                             $newMatch->match_id = $match->id;
+                            $newMatch->type = $match->attributes->gameMode;
                             $newMatch->player_id = $player->id;
                             $newMatch->save();
                         }
                     }
+
+
+                    return PlayerMatchStatistic::where('player_id', $player->id)->get();
                 }
 
                 $player->update([
@@ -86,8 +95,7 @@ class PlayerMatchSeasonStatisticService
                 ]);
             }
 
-
-            return PlayerMatchStatistic::where('player_id', $player->id)->get();
+            return $allMatchesPlayer;
         }
 
         return [];

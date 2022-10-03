@@ -21,6 +21,9 @@ class CreatePlayerMatchStatisticTable extends Migration
             $table->unsignedBigInteger('player_id')->default(0);
             $table->string('match_id')->default(0);
             $table->string('type')->default(0);
+            $table->string('gameMode')->default(0);
+            $table->string('mapName')->default(0);
+            $table->boolean('isCustomMatch')->default(0);
             $table->string('idPlayerMatch')->default(0);
             $table->integer('DBNOs')->default(0);
             $table->integer('assists')->default(0);

@@ -43,7 +43,7 @@ class RankingController
         $player = Player::where('playerName', $playerName)->first();
 
         if ($player) {
-            $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerSeasonStatistic($player, $seasonNumber, true);
+            $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $seasonNumber, true);
             if (count($matches) >= 25) {
                 $stats = RankingService::calculatePlayerPoints($playerName);
             } else {

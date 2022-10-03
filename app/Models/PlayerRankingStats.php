@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Ranking\RankingRang;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -16,6 +17,11 @@ class PlayerRankingStats extends Model
     protected $guarded = [];
 
     protected $hidden = ['id', 'created_at', 'deleted_at', 'player_id'];
+
+    public function rang()
+    {
+        return $this->hasOne(RankingRang::class, 'id', 'rang_id');
+    }
 
     /**
      * @return HasOne

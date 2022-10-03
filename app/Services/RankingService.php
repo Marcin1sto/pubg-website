@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Enums\RankingRangEnum;
 use App\Helpers\CalculatorHelper;
 use App\Models\Player;
 use App\Models\PlayerRankingStats;
+use App\Models\Ranking\RankingRang;
 use App\Models\Season;
 
 class RankingService
@@ -40,6 +42,7 @@ class RankingService
 
                 $playerRankingStats->player_id = $player->id;
                 $playerRankingStats->season_id = $season->id;
+                $playerRankingStats->rang_id = RankingRangEnum::getRang($calculator->points)->id;
                 $playerRankingStats->matches = $playerMatchesCount;
                 $playerRankingStats->wins =  $playerMatches->filter(function ($match) {
                     return $match->winPlace == 1;
@@ -50,11 +53,10 @@ class RankingService
                 $playerRankingStats->kda = $calculator->kda;
                 $playerRankingStats->kd = $calculator->kd;
                 $playerRankingStats->save();
-//                dd($playerRankingStats);
+
                 return $playerRankingStats;
             }
         }
-
 
         return null;
     }

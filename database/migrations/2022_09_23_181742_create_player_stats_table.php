@@ -19,6 +19,7 @@ class CreatePlayerStatsTable extends Migration
             $table->softDeletes();
             $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('season_id');
+            $table->unsignedBigInteger('rang_id')->nullable();
             $table->integer('points');
             $table->integer('wins');
             $table->integer('percent_wins');
@@ -29,6 +30,7 @@ class CreatePlayerStatsTable extends Migration
 
             $table->foreign('season_id')->references('id')->on('seasons')->onDelete('cascade');
             $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+            $table->foreign('rang_id')->references('id')->on('ranking_ranks')->onDelete('cascade');
         });
     }
 

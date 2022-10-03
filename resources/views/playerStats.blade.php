@@ -1,13 +1,24 @@
 @extends('layout')
 
 @section('content')
+    <div class="flex justify-start items-start" style="
+            height: 400px;
+     background: url('/images/playerprofile.jpg') no-repeat center;
+             background-size: 100% 500px;
+             ">
+        <p class="text-white font-bold uppercase p-5 font-medium" style="font-size: 36px">{{ $player->playerName }}</p>
+    </div>
     <div class="container mx-auto h-screen">
         @if($player->discordRanking)
-            <div class="text-white mt-4 px-2 ">
+            <div class="text-white mt-8 px-2 ">
                 <div class="rounded rounded-t-lg border-2 border-sky-500">
                     <div class="overflow-x-auto relative shadow-md">
                         <div class="flex justify-center items-center">
-                            <p class="p-2 font-bold">Discord Stats: SILVER?? {{ $player->discordRanking->points }} pkt.</p>
+                            <p class="p-2 font-bold">
+                                Discord Stats:
+                            <p class="uppercase px-2">{{ $player->discordRanking->rang->name }} </p>
+                             {{ $player->discordRanking->points }} pkt.
+                            </p>
                         </div>
                         <table class="w-full text-sm text-left text-white">
                             <tbody>
@@ -86,6 +97,9 @@
                             {{ __('layout/stats.place') }}
                         </th>
                         <th scope="col" class="py-3 px-6">
+                            Typ
+                        </th>
+                        <th scope="col" class="py-3 px-6">
                             {{ __('layout/stats.kills') }}
                         </th>
                         <th scope="col" class="py-3 px-6">
@@ -111,6 +125,9 @@
                                         class="bg-red-100 text-gray-900 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">#{{$match->winPlace}}</span>
                                 @endif
                             </th>
+                            <td class="py-4 px-6 uppercase">
+                                {{ $match->gameMode }}
+                            </td>
                             <td class="py-4 px-6">
                                 {{ $match->kills }}
                             </td>
