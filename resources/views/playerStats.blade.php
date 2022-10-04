@@ -40,7 +40,7 @@
         <div class="mt-2" style="margin-bottom: 50px;">
             <div class="grid grid-cols-2 p-3 lg:p-0">
                 <div class="flex items-center">
-                    <h1 class="text-white font-bold text-xl">{{ __('layout/stats.matches') }}:</h1>
+                    <h1 class="text-white font-bold text-xl">{{ __('layout/stats.matches') }}: ({{ $countMatches }})</h1>
                 </div>
                 <div class="flex justify-end items-center">
                     @if($player->canUpdateMatches())
