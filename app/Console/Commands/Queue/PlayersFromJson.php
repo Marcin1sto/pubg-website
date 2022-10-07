@@ -50,7 +50,6 @@ class PlayersFromJson extends Command
                     default: $timeDelay = (int)($key * 30 /  2);
                 }
 
-                var_dump($timeDelay);
                 ProcessPlayer::dispatch($player->name)->delay(now()->addSeconds($timeDelay));
             }
         }

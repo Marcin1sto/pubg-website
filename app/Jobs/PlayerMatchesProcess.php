@@ -33,14 +33,11 @@ class PlayerMatchesProcess implements ShouldQueue
      */
     public function handle()
     {
-        Redis::throttle('default')->block(0)->allow(1)->every(60)->then(function () {
-            info('Lock obtained...');
-
+        try {
             PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($this->player, $this->seasonNumber, $this->withSave);
-        }, function () {
-            // Could not obtain lock...
-            return $this->release(120);
-        });
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());
+        }
     }
 
     /**
