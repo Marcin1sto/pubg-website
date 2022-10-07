@@ -34,7 +34,11 @@ class ProcessPlayer implements ShouldQueue
      */
     public function handle()
     {
-        PlayerService::createPlayer($this->nickName);
+        try {
+            PlayerService::createPlayer($this->nickName);
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ class QueuePlayersMatchesUpload extends Command
      *
      * @var string
      */
-    protected $signature = 'pubg:queue-matches';
+    protected $signature = 'queue:matches';
 
     /**
      * The console command description.
@@ -43,9 +43,19 @@ class QueuePlayersMatchesUpload extends Command
         $players = Player::all();
         $seasonNumber = Season::where('isCurrentSeason', true)->first()->number;
 
-        foreach ($players as $player) {
-            PlayerMatchesProcess::dispatch($player, $seasonNumber, true)->onQueue('default');
+        foreach ($players as $key => $player) {
+            switch ($key) {
+                case $key >= 20:
+                    $timeDelay = (int)($key * 30 / 2);
+                case $key >= 40:
+                    $timeDelay = (int)($key * 30 / 4);
+                default: $timeDelay = (int)($key * 30 /  2);
+            }
+
+            PlayerMatchesProcess::dispatch($player, $seasonNumber, true)->delay(now()->addSeconds($timeDelay))->onQueue('default');
         }
+
+        $this->info('Do kolejki zostały dodane mecze do pobrania.');
 
         return 0;
     }

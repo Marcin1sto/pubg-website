@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Queue;
 
 use App\Jobs\ProcessPlayer;
 use Illuminate\Console\Command;
@@ -12,7 +12,7 @@ class PlayersFromJson extends Command
      *
      * @var string
      */
-    protected $signature = 'pubg:players-json';
+    protected $signature = 'queue:players-json';
 
     /**
      * The console command description.
@@ -40,12 +40,22 @@ class PlayersFromJson extends Command
     {
         $json = json_decode(file_get_contents(storage_path() . "/players.json"));
 
-        foreach ($json->players as $player) {
+        foreach ($json->players as $key => $player) {
             if (isset($player->name)) {
-                ProcessPlayer::dispatch($player->name)->delay(now()->addSeconds(10))->onQueue('default');
+                switch ($key) {
+                    case $key >= 20:
+                        $timeDelay = (int)($key * 30 /  2);
+                    case $key >= 40:
+                        $timeDelay = (int)($key * 30 /  3);
+                    default: $timeDelay = (int)($key * 30 /  2);
+                }
+
+                var_dump($timeDelay);
+                ProcessPlayer::dispatch($player->name)->delay(now()->addSeconds($timeDelay));
             }
         }
 
+        $this->info('Gracze zostali dodani do kolejki.');
 
         return 0;
     }
