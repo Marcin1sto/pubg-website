@@ -11,9 +11,10 @@
                                 <div class="scoreboard__podium-rank">2</div>
                             </div>
                             <div class="scoreboard__podium-number">
-                                {{ $top3->get(1)->player->playerName }}
-                                <small><span
-                                        class="js-podium-data text-white">{{ $top3->get(1)->points }} pkt</span></small>
+                                <a href="{{ env('APP_URL') }}/stats/{{ $top3->get(1)->player->playerName }}">{{ $top3->get(1)->player->playerName }}</a>
+                                <small>
+                                    <span class="js-podium-data text-white">{{ $top3->get(1)->points }} pkt</span>
+                                </small>
                             </div>
 
                         </div>
@@ -23,9 +24,10 @@
 
                             </div>
                             <div class="scoreboard__podium-number">
-                                {{ $top3->get(0)->player->playerName }}
-                                <small><span
-                                        class="js-podium-data text-white">{{ $top3->get(0)->points }} pkt</span></small>
+                                <a href="{{ env('APP_URL') }}/stats/{{ $top3->get(0)->player->playerName }}">{{ $top3->get(0)->player->playerName }}</a>
+                                <small>
+                                    <span class="js-podium-data text-white">{{ $top3->get(0)->points }} pkt</span>
+                                </small>
                             </div>
                         </div>
                         <div class="scoreboard__podium js-podium" data-height="150px">
@@ -33,9 +35,10 @@
                                 <div class="scoreboard__podium-rank">3</div>
                             </div>
                             <div class="scoreboard__podium-number">
-                                {{ $top3->get(2)->player->playerName }}
-                                <small><span
-                                        class="js-podium-data text-white">{{ $top3->get(2)->points }} pkt</span></small>
+                                <a href="{{ env('APP_URL') }}/stats/{{ $top3->get(2)->player->playerName }}">{{ $top3->get(2)->player->playerName }}</a>
+                                <small>
+                                    <span class="js-podium-data text-white">{{ $top3->get(2)->points }} pkt</span>
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -73,7 +76,7 @@
                                     {{ $positionTop3++ }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{ $playerRank->player->playerName }}
+                                    <a href="{{ env('APP_URL') }}/stats/{{ $playerRank->player->playerName }}">{{ $playerRank->player->playerName }}</a>
                                 </td>
                                 <th scope="row" class="py-4 px-6 font-medium text-white whitespace-nowrap">
                                     <span
@@ -121,7 +124,7 @@
                                     {{ $position++ }}
                                 </td>
                                 <td class="py-4 px-6">
-                                    {{ $playerRank->player->playerName }}
+                                    <a href="{{ env('APP_URL') }}/stats/{{ $playerRank->player->playerName }}">{{ $playerRank->player->playerName }}</a>
                                 </td>
                                 <th scope="row" class="py-4 px-6 font-medium text-white whitespace-nowrap">
                                     <span

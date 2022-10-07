@@ -29,15 +29,14 @@ class StatisticController extends Controller
     {
         PlayerService::createPlayer($playerName);
 
-        $player = Player::with(['actualSeason', 'discordRanking'])->where('playerName', $playerName)->first();
+        $player = Player::with(['actualSeason', 'discordRanking', 'matches'])->where('playerName', $playerName)->first();
 
         $season = $player->actualSeason->groupBy('type');
-
-
 
         return view('playerStats')->with([
             'player' => $player,
             'season' => $season,
+            'countMatches' => $player->matches->count(),
             'matches' => $player->matches()->paginate()
         ]);
     }
