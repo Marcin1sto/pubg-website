@@ -62,7 +62,7 @@ class Player extends Model
         $lastCheckTime = date('Y-m-d H:i:s', strtotime($this->matchesUpdate));
         $delayTime = date('Y-m-d H:i:s', strtotime($lastCheckTime. '+'.self::DELAY_TIME.' hour'));
 
-        if (env('APP_ENV') === 'local' || $this->playerName === 'Marcin1sto') {
+        if (env('APP_ENV') === 'local') {
             return true;
         }
 

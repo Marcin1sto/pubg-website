@@ -19,12 +19,14 @@ class PlayerMatchSeasonStatisticService
     {
         if ($player->canUpdateMatches()) {
             if ($seasonNumber) {
-                $season = Season::where('number', $seasonNumber)->first();
+                $actualSeason = Season::where('number', $seasonNumber)->first();
             }
 
-            if (!isset($season)) {
-                $season = Season::where('isCurrentSeason', true)->first();
+            if (!isset($actualSeason)) {
+                $actualSeason = Season::where('isCurrentSeason', true)->first();
             }
+
+            $beforeSeason = Season::where('number', $actualSeason->number - 1)->first();
 
             $playerId = $player->playerId;
 
@@ -34,37 +36,46 @@ class PlayerMatchSeasonStatisticService
             if (!$connector->connectFalse()) {
                 $last7daysMatches = $last7daysMatches->getData()
                     ->data[0]->relationships->matches->data;
-                $allMatchesPlayer = [];
 
+                $allMatchesPlayer = [];
                 foreach ($last7daysMatches as $key => $match) {
                     $matchDb = PlayerMatchStatistic::where('match_id', $match->id)->first();
 
                     if (!$matchDb) {
                         $matchConnector = new PubgConnector();
-                        $matchResponse = $matchConnector->connect('matches/'.$match->id)->getData();
+                        $matchResponse = $matchConnector->connect('matches/'.$match->id);
 
-                        if ($matchResponse->data->attributes->matchType == 'official' ||
-                            $matchResponse->data->attributes->matchType == 'custom') {
-                            $players = array_filter($matchResponse->included, function ($value) {
-                                return $value->type === 'participant';
-                            });
+                        if (!$matchResponse->connectFalse()) {
+                            $matchResponse = $matchResponse->getData();
+                            if ($matchResponse->data->attributes->matchType == 'official' ||
+                                $matchResponse->data->attributes->matchType == 'custom') {
+                                $players = array_filter($matchResponse->included, function ($value) {
+                                    return $value->type === 'participant';
+                                });
 
-                            $playerMatch = array_values(array_filter($players, function ($value) use ($playerId) {
-                                $matchPlayerId = $value->attributes->stats->playerId;
+                                $playerMatch = array_values(array_filter($players, function ($value) use ($playerId) {
+                                    $matchPlayerId = $value->attributes->stats->playerId;
 
-                                return $matchPlayerId &&
-                                    $value->type == 'participant' &&
-                                    $matchPlayerId == $playerId;
-                            }, ARRAY_FILTER_USE_BOTH))[0];
+                                    return $matchPlayerId &&
+                                        $value->type == 'participant' &&
+                                        $matchPlayerId == $playerId;
+                                }, ARRAY_FILTER_USE_BOTH))[0];
 
-                            $playerMatch = json_decode(json_encode($playerMatch), true);
+                                $playerMatch = json_decode(json_encode($playerMatch), true);
 
-                            $playerMatch['attributes']['stats']['gameMode'] = $matchResponse->data->attributes->gameMode;
-                            $playerMatch['attributes']['stats']['type'] = $matchResponse->data->attributes->matchType;
-                            $playerMatch['attributes']['stats']['mapName'] = $matchResponse->data->attributes->mapName;
-                            $playerMatch['attributes']['stats']['isCustomMatch'] = $matchResponse->data->attributes->isCustomMatch;
-                            $playerMatch['attributes']['stats']['season_id'] = $season->id;
-                            $allMatchesPlayer[$key] = (array)$playerMatch;
+                                if (date('Y-m-d:H:i:s', strtotime($matchResponse->data->attributes->createdAt)) < $actualSeason->created_at) {
+                                    $seasonId = $beforeSeason->id;
+                                } else {
+                                    $seasonId = $actualSeason->id;
+                                }
+
+                                $playerMatch['attributes']['stats']['gameMode'] = $matchResponse->data->attributes->gameMode;
+                                $playerMatch['attributes']['stats']['type'] = $matchResponse->data->attributes->matchType;
+                                $playerMatch['attributes']['stats']['mapName'] = $matchResponse->data->attributes->mapName;
+                                $playerMatch['attributes']['stats']['isCustomMatch'] = $matchResponse->data->attributes->isCustomMatch;
+                                $playerMatch['attributes']['stats']['season_id'] = $seasonId;
+                                $allMatchesPlayer[$key] = (array)$playerMatch;
+                            }
                         }
                     }
                 }
