@@ -68,6 +68,9 @@
                             Typ
                         </th>
                         <th scope="col" class="py-3 px-6">
+                            Sezon
+                        </th>
+                        <th scope="col" class="py-3 px-6">
                             {{ __('layout/stats.kills') }}
                         </th>
                         <th scope="col" class="py-3 px-6">
@@ -94,7 +97,10 @@
                                 @endif
                             </th>
                             <td class="py-4 px-6 uppercase">
-                                {{ $match->gameMode }}
+                                @if($match->gameMode == 'normal-squad') custom @else {{ $match->gameMode }} @endif
+                            </td>
+                            <td>
+                                {{ $match->season->name }}
                             </td>
                             <td class="py-4 px-6">
                                 {{ $match->kills }}
