@@ -43,13 +43,14 @@ class RankingController
         $player = Player::where('playerName', $playerName)->first();
 
         if ($player) {
-            $matches = PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $seasonNumber, true);
-            if (count($matches) >= 25) {
+            PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $seasonNumber, true);
+            $matchesCount = $player->actualMatches->count();
+            if ($matchesCount >= 25) {
                 $stats = RankingService::calculatePlayerPoints($playerName);
             } else {
                 return response()->json([
                     'correct' => false,
-                    'msg' => 'Musisz rozegrać min. 25 meczy.'
+                    'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: '.$matchesCount.' meczy.'
                 ]);
             }
         } else {
