@@ -33,11 +33,13 @@ class StatisticController extends Controller
 
         $season = $player->actualSeason->groupBy('type');
 
+        dd($player->matches()->orderBy('season_id', 'ASC')->get()->toArray());
+
         return view('playerStats')->with([
             'player' => $player,
             'season' => $season,
             'countMatches' => $player->matches->count(),
-            'matches' => $player->matches()->paginate()
+            'matches' => $player->matches()->orderBy('season_id', 'ASC')->paginate()
         ]);
     }
 }
