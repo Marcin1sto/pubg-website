@@ -27,7 +27,7 @@ class Player extends Model
      */
     public function matches(): HasMany
     {
-        return $this->hasMany(PlayerMatchStatistic::class, 'player_id', 'id');
+        return $this->hasMany(PlayerMatchStatistic::class, 'player_id', 'id')->orderByDesc('played_at');
     }
 
     /**

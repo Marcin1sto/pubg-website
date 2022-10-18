@@ -33,8 +33,6 @@ class StatisticController extends Controller
 
         $season = $player->actualSeason->groupBy('type');
 
-        dd($player->matches()->orderBy('season_id', 'ASC')->get()->toArray());
-
         return view('playerStats')->with([
             'player' => $player,
             'season' => $season,

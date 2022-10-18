@@ -68,6 +68,9 @@
                             Typ
                         </th>
                         <th scope="col" class="py-3 px-6">
+                            Mapa
+                        </th>
+                        <th scope="col" class="py-3 px-6">
                             Sezon
                         </th>
                         <th scope="col" class="py-3 px-6">
@@ -98,6 +101,9 @@
                             </th>
                             <td class="py-4 px-6 uppercase">
                                 @if($match->gameMode == 'normal-squad') custom @else {{ $match->gameMode }} @endif
+                            </td>
+                            <td>
+                                {{ \App\Enums\PubgMapEnum::getName($match->mapName) }}
                             </td>
                             <td>
                                 {{ $match->season->name }}

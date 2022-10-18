@@ -27,21 +27,21 @@ class RankingRangEnum
         switch ($points) {
             case $points > 0 && $points <= 100:
                 return self::BRONZE;
-            case $points >= 100 && $points <= 200:
+            case $points >= 101 && $points <= 200:
                 return self::SILVER;
-            case $points >= 200 && $points <= 300:
+            case $points >= 201 && $points <= 300:
                 return self::GOLD;
-            case $points >= 300 && $points <= 400:
+            case $points >= 301 && $points <= 400:
                 return self::PLATINUM;
-            case $points >= 400 && $points <= 500:
+            case $points >= 401 && $points <= 500:
                 return self::DIAMOND;
-            case $points >= 500 && $points <= 600:
+            case $points >= 501 && $points <= 600:
                 return self::MASTER;
-            case $points >= 600 && $points <= 700:
+            case $points >= 601 && $points <= 700:
                 return self::GRANDMASTER;
-            case $points >= 700 && $points <= 800:
+            case $points >= 701 && $points <= 800:
                 return self::CHALLENGER;
-            case $points >= 800:
+            case $points >= 801:
                 return self::ELITE;
         }
     }

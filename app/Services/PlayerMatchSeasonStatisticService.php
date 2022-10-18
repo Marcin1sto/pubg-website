@@ -47,6 +47,7 @@ class PlayerMatchSeasonStatisticService
 
                         if (!$matchResponse->connectFalse()) {
                             $matchResponse = $matchResponse->getData();
+
                             if ($matchResponse->data->attributes->matchType == 'official' ||
                                 $matchResponse->data->attributes->matchType == 'custom') {
                                 $players = array_filter($matchResponse->included, function ($value) {
@@ -69,10 +70,12 @@ class PlayerMatchSeasonStatisticService
                                     $seasonId = $actualSeason->id;
                                 }
 
+                                $playerMatch['match_uid'] = $matchResponse->data->id;
                                 $playerMatch['attributes']['stats']['gameMode'] = $matchResponse->data->attributes->gameMode;
                                 $playerMatch['attributes']['stats']['type'] = $matchResponse->data->attributes->matchType;
                                 $playerMatch['attributes']['stats']['mapName'] = $matchResponse->data->attributes->mapName;
                                 $playerMatch['attributes']['stats']['isCustomMatch'] = $matchResponse->data->attributes->isCustomMatch;
+                                $playerMatch['attributes']['stats']['played_at'] = date('Y-m-d H:i:s', strtotime($matchResponse->data->attributes->createdAt));
                                 $playerMatch['attributes']['stats']['season_id'] = $seasonId;
                                 $allMatchesPlayer[$key] = (array)$playerMatch;
                             }
@@ -88,7 +91,7 @@ class PlayerMatchSeasonStatisticService
                         if (!$matchDB) {
                             $newMatch = new PlayerMatchStatistic();
                             $newMatch->fill(collect($statistics)->except('playerId')->toArray());
-                            $newMatch->match_id = $match['id'];
+                            $newMatch->match_id = $match['match_uid'];
                             $newMatch->type = $match['attributes']['stats']['gameMode'];
                             $newMatch->player_id = $player->id;
                             $newMatch->save();

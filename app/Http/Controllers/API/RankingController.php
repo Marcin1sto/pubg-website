@@ -42,6 +42,13 @@ class RankingController
         PlayerService::createPlayer($playerName);
         $player = Player::where('playerName', $playerName)->first();
 
+        if (!$player->canUpdateMatches()) {
+            return response()->json([
+                'correct' => false,
+                'msg' => 'Możesz aktualizować ranking raz na godzinę.'
+            ]);
+        }
+
         if ($player) {
             PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $seasonNumber, true);
             $matchesCount = $player->actualMatches->count();
