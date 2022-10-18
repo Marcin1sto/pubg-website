@@ -75,9 +75,17 @@ class RankingController
     public function show(string $playerName): JsonResponse
     {
         $stats = RankingService::getPlayerStats($playerName);
+
+        $msg = '';
+
+        if (!$stats) {
+            $msg = 'Nie odnaleziono gracza w bazie danych.';
+        }
+
         return response()->json([
             'correct' => $stats ? true : false,
-            'stats' => $stats ? $stats->toArray() : []
+            'stats' => $stats ? $stats->toArray() : [],
+            'msg' => $msg
         ]);
     }
 }

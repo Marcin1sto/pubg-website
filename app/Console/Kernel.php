@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('queue:matches')->daily();
-         $schedule->command('inspire')->everyMinute();
+        $schedule->command('pubg:download-seasons')->monthly();
+//         $schedule->command('inspire')->everyMinute();
     }
 
     /**
