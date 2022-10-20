@@ -20,10 +20,12 @@ class RankingService
     {
         $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
 
+        $player->actualMatches = $player->actualMatches->filter(function ($match) {
+            return $match->type !== 'custom';
+        });
+
         if ($player && $player->actualMatches->count() >= 25) {
-            $playerMatches = $player->actualMatches->filter(function ($match) {
-                return $match->type != 'custom';
-            });
+            $playerMatches = $player->actualMatches;
 
             $calculator = new CalculatorHelper($player);
             $calculator = $calculator
