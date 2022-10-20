@@ -21,7 +21,7 @@ class RankingService
         $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
 
         $player->actualMatches = $player->actualMatches->filter(function ($match) {
-            return $match->type !== 'custom';
+            return $match->type !== 'normal-squad';
         });
 
         if ($player && $player->actualMatches->count() >= 25) {

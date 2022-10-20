@@ -54,7 +54,7 @@ class Player extends Model
     {
         $season = Season::where('isCurrentSeason', true)->first();
 
-        return $this->hasMany(PlayerMatchStatistic::class, 'player_id', 'id')->where('season_id', $season->id)->where('type', '!=', 'custom');
+        return $this->hasMany(PlayerMatchStatistic::class, 'player_id', 'id')->where('season_id', $season->id)->where('type', '!=', 'normal-squad');
     }
 
     public function canUpdateMatches(): bool
