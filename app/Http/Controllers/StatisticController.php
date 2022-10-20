@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
-use App\Models\PlayerMatchStatistic;
-use App\Models\Season;
-use App\Services\PlayerMatchSeasonStatisticService;
-use App\Services\PlayerSeasonStatisticService;
 use App\Services\PlayerService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -37,7 +33,7 @@ class StatisticController extends Controller
             'player' => $player,
             'season' => $season,
             'countMatches' => $player->matches->count(),
-            'matches' => $player->matches()->orderBy('season_id', 'ASC')->paginate()
+            'matches' => $player->matches()->paginate()
         ]);
     }
 }

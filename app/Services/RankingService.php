@@ -21,7 +21,10 @@ class RankingService
         $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
 
         if ($player && $player->actualMatches->count() >= 25) {
-            $playerMatches = $player->actualMatches;
+            $playerMatches = $player->actualMatches->filter(function ($match) {
+                return $match->type != 'custom';
+            });
+
             $calculator = new CalculatorHelper($player);
             $calculator = $calculator
                 ->calculateKda()
