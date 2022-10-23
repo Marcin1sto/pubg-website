@@ -15,8 +15,7 @@ class RankingController
 {
     public function index(IndexRequest $request)
     {
-        dd($request->all());
-        $ranking = PlayerRankingStats::with('player')->limit($count)->get()->sortByDesc('points');
+        $ranking = PlayerRankingStats::with('player')->limit($request?->count)->get()->sortByDesc('points');
 
         if ($ranking->count() > 3) {
             return response()->json([
@@ -42,10 +41,10 @@ class RankingController
         PlayerService::createPlayer($playerName);
         $player = Player::where('playerName', $playerName)->first();
 
-        if (!$player->canUpdateMatches()) {
+        if (!$player->canUpdateMatches() || !$player->canUpdateRanking()) {
             return response()->json([
                 'correct' => false,
-                'msg' => 'Możesz aktualizować ranking raz na godzinę.'
+                'msg' => 'Możesz aktualizować swój ranking raz na godzinę.'
             ]);
         }
 

@@ -31,6 +31,7 @@ class RankingService
             $calculator = $calculator
                 ->calculateKda()
                 ->calculateKd()
+                ->calculateMediumDamage()
                 ->calculatePercentWins()
                 ->calculatePercentHeadShots()
                 ->calculateRankingPoints();
@@ -57,6 +58,7 @@ class RankingService
                 $playerRankingStats->percent_headshot = $calculator->headshots_percent;
                 $playerRankingStats->kda = $calculator->kda;
                 $playerRankingStats->kd = $calculator->kd;
+                $playerRankingStats->medium_damage = $calculator->medium_damage;
                 $playerRankingStats->save();
 
                 return $playerRankingStats;

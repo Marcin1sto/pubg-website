@@ -8,6 +8,7 @@ class CalculatorHelper
 {
     public float $kda;
     public float $kd;
+    public float $medium_damage;
     public int $points;
     public int $wins_percent;
     public int $headshots_percent;
@@ -42,6 +43,17 @@ class CalculatorHelper
         $allDeaths = ($playerMatchesCount - $winMatchesCount);
 
         $this->kd = round(($allKills / $allDeaths), 2);
+
+        return $this;
+    }
+
+    public function calculateMediumDamage(): static
+    {
+        $playerMatches = $this->player->actualMatches;
+        $allDamage = $playerMatches->sum('damageDealt');
+        $countMatches = $playerMatches->count();
+
+        $this->medium_damage = (int)($allDamage / $countMatches);
 
         return $this;
     }
