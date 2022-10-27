@@ -38,8 +38,8 @@ class RankingController
     public function update(string $playerName): JsonResponse
     {
         $seasonNumber = Season::where('isCurrentSeason', true)->first()?->number;
-        $player = PlayerService::createPlayer($playerName);
-//        $player = Player::where('playerName', $playerName)->first();
+        PlayerService::createPlayer($playerName);
+        $player = Player::where('playerName', $playerName)->first();
 
         if (!$player) {
             return response()->json([
