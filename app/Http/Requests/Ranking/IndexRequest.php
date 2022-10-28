@@ -25,7 +25,7 @@ class IndexRequest extends FormRequest
     {
         return [
             'count' => 'nullable|int|max:100',
-            'type' => 'require|string|in:kd,kda,points,adr',
+            'type' => 'require|string|in:kd,kda,points,adr,',
         ];
     }
 }

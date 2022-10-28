@@ -13,11 +13,18 @@ use Illuminate\Http\JsonResponse;
 
 class RankingController
 {
-    public function index(IndexRequest $request)
+    public function index(string $component, int $count)
     {
-        $ranking = PlayerRankingStats::with('player')->limit($request?->count)->get()->sortByDesc('points');
+        switch ($component) {
+            case $component === 'adr':
+                $component = 'medium_damage';
+            default: break;
+        }
 
-        if ($ranking->count() > 3) {
+        $ranking = PlayerRankingStats::with('player')->orderBy($component, 'DESC')
+            ->limit($count)->get();
+
+        if ($ranking) {
             return response()->json([
                 'correct' => true,
                 'ranking' => $ranking->toArray()
