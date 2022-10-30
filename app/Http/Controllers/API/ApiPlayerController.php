@@ -14,7 +14,8 @@ class ApiPlayerController extends Controller
 
         return response()->json([
             'correct' => !!$player,
-            'data' => $player?->toArray()
+            'data' => $player?->toArray(),
+            'msg' => !$player ? 'Nie istnieje gracz z takim nickname!' : 'Zostałeś poprawnie zweryfikowany.'
         ]);
     }
 
