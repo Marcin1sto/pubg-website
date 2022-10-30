@@ -32,6 +32,6 @@ class PlayerService
             }
         }
 
-        return null;
+        return $player;
     }
 }

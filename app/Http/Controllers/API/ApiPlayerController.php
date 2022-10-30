@@ -14,7 +14,7 @@ class ApiPlayerController extends Controller
 
         return response()->json([
             'correct' => !!$player,
-            'data' => $player->toArray()
+            'data' => $player?->toArray()
         ]);
     }
 
