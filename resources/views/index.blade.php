@@ -3,10 +3,11 @@
 @section('content')
     <div class="text-white flex justify-center w-full mt-10">
         <div class="grid grid-cols-3 gap-1">
-            <div class="border border-green-500 p-5 m-5 rounded">
-                <div class="flex items-center justify-center">Rozegraliśmy meczy</div>
-                <div class="flex items-center justify-center p-5">{{ $allMatches }}</div>
-            </div>
+            Welcome :)
+{{--            <div class="border border-green-500 p-5 m-5 rounded">--}}
+{{--                <div class="flex items-center justify-center">Rozegraliśmy meczy</div>--}}
+{{--                <div class="flex items-center justify-center p-5">{{ $allMatches }}</div>--}}
+{{--            </div>--}}
 {{--            <div class="border border-green-500 p-5 m-5 rounded">--}}
 {{--                <div class="flex items-center justify-center">Zabiliśmy łącznie</div>--}}
 {{--                <div class="flex items-center justify-center p-5">{{ $allKills }} graczy</div>--}}

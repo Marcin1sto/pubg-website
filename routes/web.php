@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $matches = \App\Models\PlayerMatchStatistic::all();
     $data = [
-        'allMatches' => $matches->count(),
+//        'allMatches' => $matches->count(),
 //        'allKills' => $matches->sum('kills'),
 //        'allAssists' => $matches->sum('assists'),
 //        'rideDistance' => round($matches->sum('rideDistance') / 100, 1),
