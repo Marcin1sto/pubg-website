@@ -72,7 +72,7 @@ class RankingService
     {
         $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
 
-        if ($player) {
+        if ($player && $player->actualSeason->isNotEmpty()) {
             return PlayerRankingStats::where('player_id', $player->id)->first();
         }
 
