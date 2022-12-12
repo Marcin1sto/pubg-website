@@ -44,16 +44,15 @@ class PlayerMatchSeasonStatisticService
                     if (!$matchDb) {
                         $matchConnector = new PubgConnector();
                         $matchResponse = $matchConnector->connect('matches/'.$match->id);
-
                         if (!$matchResponse->connectFalse()) {
                             $matchResponse = $matchResponse->getData();
 
-                            if ($matchResponse->data->attributes->matchType == 'official' ||
-                                $matchResponse->data->attributes->matchType == 'custom') {
+                            if ($matchResponse->data->attributes->matchType === 'official' ||
+                                $matchResponse->data->attributes->matchType === 'custom' ||
+                                $matchResponse->data->attributes->matchType === 'seasonal') {
                                 $players = array_filter($matchResponse->included, function ($value) {
                                     return $value->type === 'participant';
                                 });
-
                                 $playerMatch = array_values(array_filter($players, function ($value) use ($playerId) {
                                     $matchPlayerId = $value->attributes->stats->playerId;
 

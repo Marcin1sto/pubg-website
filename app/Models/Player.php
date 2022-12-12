@@ -42,7 +42,9 @@ class Player extends Model
 
     public function discordRanking()
     {
-        return $this->hasOne(PlayerRankingStats::class, 'player_id', 'id');
+        $season = Season::where('isCurrentSeason', true)->first();
+
+        return $this->hasOne(PlayerRankingStats::class, 'player_id', 'id')->where('season_id', $season->id);
     }
 
     /**
