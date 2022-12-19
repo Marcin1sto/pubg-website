@@ -70,9 +70,9 @@ class RankingService
 
     public static function getPlayerStats(string $playerName): ?PlayerRankingStats
     {
-        $player = Player::with('actualMatches')->where('playerName', $playerName)->first();
+        $player = Player::with('discordRanking')->where('playerName', $playerName)->first();
 
-        if ($player && $player->actualSeason->isNotEmpty()) {
+        if ($player && $player->discordRanking->isNotEmpty()) {
             return PlayerRankingStats::where('player_id', $player->id)->first();
         }
 
