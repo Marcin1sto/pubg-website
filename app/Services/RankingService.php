@@ -72,7 +72,7 @@ class RankingService
     {
         $player = Player::with('discordRanking')->where('playerName', $playerName)->first();
 
-        if ($player && $player->discordRanking->isNotEmpty()) {
+        if ($player && $player->discordRanking) {
             return PlayerRankingStats::where('player_id', $player->id)->first();
         }
 
