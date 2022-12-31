@@ -1,4 +1,4 @@
-<nav class=" px-2 sm:px-4 py-2.5 bg-gray-800 sticky w-full  z-20 top-0 left-0 border-b border-green-500">
+<nav class="flex justify-center px-2 sm:px-4 py-2.5 bg-gray-800 sticky w-full z-20 top-0 left-0 border-b border-green-500" style="height: 100px">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a href="/" class="flex items-center">
             <h1 class="px-5 font-medium text-3xl text-white">PUBG <span class="font-bold text-2xl">Polska</span></h1>
@@ -32,15 +32,19 @@
         <div class="hidden justify-between items-center w-full lg:flex md:w-auto md:order-1" id="navbar-sticky">
             <ul class="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:items-center">
                 <li>
-                    <a href="/" class="py-2 pr-4 pl-3 text-white hover:text-blue-700">{{ __('layout/menu.home') }}</a>
+                    <a href="/" class="py-2 pr-4 pl-3 text-white hover:text-blue-700 text-lg">{{ __('layout/menu.home') }}</a>
                 </li>
                 <li>
                     <a href="/stats"
-                       class="py-2 pr-4 pl-3 text-white hover:text-blue-700">{{ __('layout/menu.stats') }}</a>
+                       class="py-2 pr-4 pl-3 text-white hover:text-blue-700 text-lg">{{ __('layout/menu.stats') }}</a>
                 </li>
                 <li>
                     <a href="/ranking"
-                       class="py-2 pr-4 pl-3 text-white hover:text-blue-700">{{ __('layout/menu.ranking') }}</a>
+                       class="py-2 pr-4 pl-3 text-white hover:text-blue-700 text-lg">{{ __('layout/menu.ranking') }}</a>
+                </li>
+                <li>
+                    <a href="/tournament"
+                       class="py-2 pr-4 pl-3 text-white hover:text-blue-700 text-lg">{{ __('layout/menu.tournament') }}</a>
                 </li>
                 <li class="mt-2 lg:mt-0">
                     <a href="https://discord.gg/pubgpolska"

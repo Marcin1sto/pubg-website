@@ -18,24 +18,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $actualSeason = Season::where('isCurrentSeason', true)->first();
-    $matches = \App\Models\PlayerMatchStatistic::select(['kills', 'assists', 'rideDistance', 'swimDistance', 'walkDistance', 'winPlace'])
-        ->where('season_id', $actualSeason->id)->get();
+    $matches = \App\Models\PlayerMatchStatistic::select(['kills', 'winPlace'])->get();
     $data = [
+        'players' => \App\Models\Player::all()->count(),
         'season_number' => $actualSeason->number,
         'allMatches' => $matches->count(),
         'allKills' => $matches->sum('kills'),
-        'allAssists' => $matches->sum('assists'),
-        'rideDistance' => round($matches->sum('rideDistance') / 100, 1),
-        'swimDistance' => round($matches->sum('swimDistance') / 100, 1),
-        'walkDistance' => round($matches->sum('walkDistance') / 100, 1),
         'allWins' => $matches->filter(function ($match) {
             return $match->winPlace === 1;
         })->count(),
+        'events' => \App\Models\Tournament\Tournament::all()
     ];
 
     return view('index', $data);
 });
 
 Route::get('/ranking', [RankingController::class, 'index']);
+Route::get('/tournament', [RankingController::class, 'index']);
 Route::get('/stats', [StatisticController::class, 'index']);
 Route::get('/stats/{playerName}', [StatisticController::class, 'show']);
