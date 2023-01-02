@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="text-white mt-10 flex justify-center text-2xl mb-10 uppercase" style="margin-top: 40px">Współpracujący z nami stremerzy</div>
+        <div class="text-white mt-10 flex justify-center text-2xl mb-10 uppercase" style="margin-top: 120px">Współpracujący z nami stremerzy</div>
         <div class="px-4 py-16 mx-auto text-white sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div class="grid grid-cols-2 row-gap-8 md:grid-cols-4">
                 <div class="text-center">
@@ -52,7 +52,7 @@
 {{--                </div>--}}
             </div>
         </div>
-        <div class="text-white mt-10 flex justify-center text-2xl mb-10 uppercase" style="margin-top: 40px">Nasze wydarzenia.</div>
+        <div class="text-white mt-10 flex justify-center text-2xl mb-10 uppercase" style="margin-top: 120px">Nasze wydarzenia.</div>
         <div class="px-4 py-16 mx-auto text-white sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div class="grid grid-cols-2 row-gap-8 md:grid-cols-4">
                 @foreach($events as $event)
