@@ -7,6 +7,7 @@ use App\Enums\MatchTypeEnum;
 use App\Http\Requests\Ranking\IndexRequest;
 use App\Models\Player;
 use App\Models\PlayerRankingStats;
+use App\Models\Ranking\RankingRang;
 use App\Models\Season;
 use App\Services\PlayerMatchSeasonStatisticService;
 use App\Services\PlayerService;
@@ -122,5 +123,10 @@ class RankingController
             'stats' => $stats ? $stats->toArray() : [],
             'msg' => $msg
         ]);
+    }
+
+    public function ranks()
+    {
+        return response()->json(RankingRang::all());
     }
 }

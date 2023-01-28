@@ -34,6 +34,7 @@ Route::get('/', function () {
 });
 
 Route::get('/ranking', [RankingController::class, 'index']);
+Route::get('/ranking/{modeType}', [RankingController::class, 'show']);
 Route::get('/tournament', [RankingController::class, 'index']);
 Route::get('/stats', [StatisticController::class, 'index']);
 Route::get('/stats/{playerName}', [StatisticController::class, 'show']);

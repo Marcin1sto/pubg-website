@@ -30,4 +30,5 @@ Route::prefix('bot')->group(function () {
     Route::get('/ranking/index/{matchMode}/{component}/{count}', [RankingController::class, 'index']);
     Route::get('/ranking/update/{nickName}', [RankingController::class, 'update']);
     Route::get('/ranking/stats/{matchMode}/{nickName}', [RankingController::class, 'show']);
+    Route::get('/ranking/ranks', [RankingController::class, 'ranks']);
 });
