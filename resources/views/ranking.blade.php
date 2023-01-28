@@ -1,14 +1,27 @@
 @extends('layout')
 
 @section('content')
-    <div class="text-white flex justify-center w-full mt-10 h-max" style="margin-bottom: 50px">
-        <div class="grid">
-            @if($mode)
+    @if($mode)
+        <div class="text-white flex justify-center w-full mt-10 h-max" style="margin-bottom: 50px">
+            <div class="grid">
                 @include('parts.ranking.top3')
                 @include('parts.ranking.table')
-            @endif
+            </div>
         </div>
-    </div>
+    @else
+        <div class="text-white mt-10 flex justify-center text-2xl mb-10 uppercase">Wybierz ranking</div>
+        <div class="flex justify-center items-center mt-10 px-4 py-16 mx-auto sm:max-w-xl text-white md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+            <h5 class="text-4xl mr-8 uppercase font-bold lg:text-5xl xl:text-6xl">
+                <a href="{{ route('ranking.type', ['modeType' => \App\Enums\MatchGameModeEnum::PARENT_TPP]) }}">Tpp</a>
+            </h5>
+            <h5 class="text-4xl mr-8 uppercase font-bold lg:text-5xl xl:text-6xl">
+                <a href="{{ route('ranking.type', ['modeType' => \App\Enums\MatchGameModeEnum::PARENT_FPP]) }}">Fpp</a>
+            </h5>
+            <h5 class="text-4xl mr-8 uppercase font-bold lg:text-5xl xl:text-6xl">
+                <a href="{{ route('ranking.type', ['modeType' => \App\Enums\MatchGameModeEnum::PARENT_RANKED]) }}">Ranked</a>
+            </h5>
+        </div>
+    @endif
 @endsection
 
 @section('scripts')

@@ -127,6 +127,12 @@ class RankingController
 
     public function ranks()
     {
-        return response()->json(RankingRang::all());
+        $ranks = [];
+        foreach (RankingRang::all() as $rang) {
+            $rang->name = ucfirst($rang->name);
+            $ranks[] = $rang;
+        }
+
+        return response()->json($ranks);
     }
 }
