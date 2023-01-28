@@ -115,7 +115,7 @@ class RankingController
         $msg = '';
 
         if (!$stats) {
-            $msg = 'Nie odnaleziono gracza w bazie danych lub gracz nie ma ustanowionych statystyk dla aktualnego sezonu.';
+            $msg = 'Nie odnaleziono gracza w bazie danych lub gracz nie ma ustanowionych statystyk dla aktualnego sezonu w trybie '. $matchMode .'.';
         }
 
         return response()->json([
