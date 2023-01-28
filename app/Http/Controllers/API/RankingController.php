@@ -69,25 +69,16 @@ class RankingController
 
         if ($player) {
             PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $season?->number, true);
-            $matchesCount = $player->actualMatches->count();
 
-            if ($matchesCount >= 25) {
-                $stats = RankingService::calculatePlayerPoints($playerName);
+            $stats = RankingService::calculatePlayerPoints($playerName);
 
-                foreach (MatchGameModeEnum::parentModes() as $mode) {
-                    if (is_int($stats[$mode])) {
-                        $stats[$mode] = [
-                            'correct' => false,
-                            'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: '.$stats[$mode].' meczy.'
-                        ];
-                    }
+            foreach (MatchGameModeEnum::parentModes() as $mode) {
+                if (is_int($stats[$mode])) {
+                    $stats[$mode] = [
+                        'correct' => false,
+                        'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: '.$stats[$mode].' meczy w trybie '. $mode .'.'
+                    ];
                 }
-
-            } else {
-                return response()->json([
-                    'correct' => false,
-                    'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: '.$matchesCount.' meczy.'
-                ]);
             }
         } else {
             return response()->json([
