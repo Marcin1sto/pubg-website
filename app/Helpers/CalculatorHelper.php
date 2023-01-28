@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Player;
+use Illuminate\Support\Collection;
 
 class CalculatorHelper
 {
@@ -13,13 +14,15 @@ class CalculatorHelper
     public int $wins_percent;
     public int $headshots_percent;
 
-    public function __construct(private Player $player)
+    public function __construct(
+        private Collection $matches,
+    )
     {
     }
 
     public function calculateKda(): static
     {
-        $playerMatches = $this->player->actualMatches;
+        $playerMatches = $this->matches;
         $playerMatchesCount = $playerMatches->count();
         $allKills = $playerMatches->sum('kills');
         $allAssists = $playerMatches->sum('assists');
@@ -34,7 +37,7 @@ class CalculatorHelper
 
     public function calculateKd(): static
     {
-        $playerMatches = $this->player->actualMatches;
+        $playerMatches = $this->matches;
         $allKills = $playerMatches->sum('kills');
         $playerMatchesCount = $playerMatches->count();
         $winMatchesCount = $playerMatches->filter(function ($match) {
@@ -49,7 +52,7 @@ class CalculatorHelper
 
     public function calculateMediumDamage(): static
     {
-        $playerMatches = $this->player->actualMatches;
+        $playerMatches = $this->matches;
         $allDamage = $playerMatches->sum('damageDealt');
         $countMatches = $playerMatches->count();
 
@@ -60,7 +63,7 @@ class CalculatorHelper
 
     public function calculateRankingPoints(): static
     {
-        $playerMatches = $this->player->actualMatches;
+        $playerMatches = $this->matches;
         $playerMatchesCount = $playerMatches->count();
         $winMatchesCount = $playerMatches->filter(function ($match) {
             return $match->winPlace == 1;
@@ -78,7 +81,7 @@ class CalculatorHelper
      */
     public function calculatePercentWins(): static
     {
-        $playerMatches = $this->player->actualMatches;
+        $playerMatches = $this->matches;
         $playerMatchesCount = $playerMatches->count();
         $winMatchesCount = $playerMatches->filter(function ($match) {
             return $match->winPlace == 1;
@@ -94,7 +97,7 @@ class CalculatorHelper
      */
     public function calculatePercentHeadShots(): static
     {
-        $playerMatches = $this->player->actualMatches;
+        $playerMatches = $this->matches;
         $kills = $playerMatches->sum('kills');
         $headshots = $playerMatches->sum('headshotKills');
 

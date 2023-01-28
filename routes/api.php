@@ -27,7 +27,7 @@ Route::get('season/{nickName}', [ApiSeasonController::class, 'updatePlayerSeason
 
 Route::prefix('bot')->group(function () {
     Route::get('/player/verification/{nickname}', [ApiPlayerController::class, 'verification']);
-    Route::get('/ranking/index/{component}/{count}', [RankingController::class, 'index']);
+    Route::get('/ranking/index/{matchMode}/{component}/{count}', [RankingController::class, 'index']);
     Route::get('/ranking/update/{nickName}', [RankingController::class, 'update']);
-    Route::get('/ranking/stats/{nickName}', [RankingController::class, 'show']);
+    Route::get('/ranking/stats/{matchMode}/{nickName}', [RankingController::class, 'show']);
 });

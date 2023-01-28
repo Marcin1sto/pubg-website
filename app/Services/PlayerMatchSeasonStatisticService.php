@@ -46,38 +46,33 @@ class PlayerMatchSeasonStatisticService
                         $matchResponse = $matchConnector->connect('matches/'.$match->id);
                         if (!$matchResponse->connectFalse()) {
                             $matchResponse = $matchResponse->getData();
+                            $players = array_filter($matchResponse->included, function ($value) {
+                                return $value->type === 'participant';
+                            });
+                            $playerMatch = array_values(array_filter($players, function ($value) use ($playerId) {
+                                $matchPlayerId = $value->attributes->stats->playerId;
 
-                            if ($matchResponse->data->attributes->matchType === 'official' ||
-                                $matchResponse->data->attributes->matchType === 'custom' ||
-                                $matchResponse->data->attributes->matchType === 'seasonal') {
-                                $players = array_filter($matchResponse->included, function ($value) {
-                                    return $value->type === 'participant';
-                                });
-                                $playerMatch = array_values(array_filter($players, function ($value) use ($playerId) {
-                                    $matchPlayerId = $value->attributes->stats->playerId;
+                                return $matchPlayerId &&
+                                    $value->type == 'participant' &&
+                                    $matchPlayerId == $playerId;
+                            }, ARRAY_FILTER_USE_BOTH))[0];
 
-                                    return $matchPlayerId &&
-                                        $value->type == 'participant' &&
-                                        $matchPlayerId == $playerId;
-                                }, ARRAY_FILTER_USE_BOTH))[0];
+                            $playerMatch = json_decode(json_encode($playerMatch), true);
 
-                                $playerMatch = json_decode(json_encode($playerMatch), true);
-
-                                if (date('Y-m-d:H:i:s', strtotime($matchResponse->data->attributes->createdAt)) < $actualSeason->created_at) {
-                                    $seasonId = $beforeSeason->id;
-                                } else {
-                                    $seasonId = $actualSeason->id;
-                                }
-
-                                $playerMatch['match_uid'] = $matchResponse->data->id;
-                                $playerMatch['attributes']['stats']['gameMode'] = $matchResponse->data->attributes->gameMode;
-                                $playerMatch['attributes']['stats']['type'] = $matchResponse->data->attributes->matchType;
-                                $playerMatch['attributes']['stats']['mapName'] = $matchResponse->data->attributes->mapName;
-                                $playerMatch['attributes']['stats']['isCustomMatch'] = $matchResponse->data->attributes->isCustomMatch;
-                                $playerMatch['attributes']['stats']['played_at'] = date('Y-m-d H:i:s', strtotime($matchResponse->data->attributes->createdAt));
-                                $playerMatch['attributes']['stats']['season_id'] = $seasonId;
-                                $allMatchesPlayer[$key] = (array)$playerMatch;
+                            if (date('Y-m-d:H:i:s', strtotime($matchResponse->data->attributes->createdAt)) < $actualSeason->created_at) {
+                                $seasonId = $beforeSeason->id;
+                            } else {
+                                $seasonId = $actualSeason->id;
                             }
+
+                            $playerMatch['match_uid'] = $matchResponse->data->id;
+                            $playerMatch['attributes']['stats']['gameMode'] = $matchResponse->data->attributes->gameMode;
+                            $playerMatch['attributes']['stats']['type'] = $matchResponse->data->attributes->matchType;
+                            $playerMatch['attributes']['stats']['mapName'] = $matchResponse->data->attributes->mapName;
+                            $playerMatch['attributes']['stats']['isCustomMatch'] = $matchResponse->data->attributes->isCustomMatch;
+                            $playerMatch['attributes']['stats']['played_at'] = date('Y-m-d H:i:s', strtotime($matchResponse->data->attributes->createdAt));
+                            $playerMatch['attributes']['stats']['season_id'] = $seasonId;
+                            $allMatchesPlayer[$key] = (array)$playerMatch;
                         }
                     }
                 }
@@ -91,7 +86,7 @@ class PlayerMatchSeasonStatisticService
                             $newMatch = new PlayerMatchStatistic();
                             $newMatch->fill(collect($statistics)->except('playerId')->toArray());
                             $newMatch->match_id = $match['match_uid'];
-                            $newMatch->type = $match['attributes']['stats']['gameMode'];
+                            $newMatch->type = $match['attributes']['stats']['type'] === 'seasonal' ? 'official' : $match['attributes']['stats']['type'];
                             $newMatch->player_id = $player->id;
                             $newMatch->save();
                         }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\MatchGameModeEnum;
+use App\Enums\MatchTypeEnum;
 use App\Http\Requests\Ranking\IndexRequest;
 use App\Models\Player;
 use App\Models\PlayerRankingStats;
@@ -13,22 +15,24 @@ use Illuminate\Http\JsonResponse;
 
 class RankingController
 {
-    public function index(string $component, int $count)
+    public function index(string $matchMode, string $component, int $count)
     {
-        switch ($component) {
-            case $component === 'adr':
-                $component = 'medium_damage';
-            default: break;
-        }
+        if (in_array($matchMode, MatchGameModeEnum::parentModes())) {
+            switch ($component) {
+                case $component === 'adr':
+                    $component = 'medium_damage';
+                default: break;
+            }
 
-        $ranking = PlayerRankingStats::with('player')->orderBy($component, 'DESC')
-            ->limit($count)->get();
+            $ranking = PlayerRankingStats::with('player')->where('type', $matchMode)->orderBy($component, 'DESC')
+                ->limit($count)->get();
 
-        if ($ranking) {
-            return response()->json([
-                'correct' => true,
-                'ranking' => $ranking->toArray()
-            ]);
+            if ($ranking) {
+                return response()->json([
+                    'correct' => true,
+                    'ranking' => $ranking->toArray()
+                ]);
+            }
         }
 
         return response()->json([
@@ -44,7 +48,7 @@ class RankingController
      */
     public function update(string $playerName): JsonResponse
     {
-        $seasonNumber = Season::where('isCurrentSeason', true)->first()?->number;
+        $season = Season::where('isCurrentSeason', true)->first();
         PlayerService::createPlayer($playerName);
         $player = Player::where('playerName', $playerName)->first();
 
@@ -63,10 +67,21 @@ class RankingController
         }
 
         if ($player) {
-            PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $seasonNumber, true);
+            PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $season?->number, true);
             $matchesCount = $player->actualMatches->count();
+
             if ($matchesCount >= 25) {
                 $stats = RankingService::calculatePlayerPoints($playerName);
+
+                foreach (MatchGameModeEnum::parentModes() as $mode) {
+                    if (is_int($stats[$mode])) {
+                        $stats[$mode] = [
+                            'correct' => false,
+                            'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: '.$stats[$mode].' meczy.'
+                        ];
+                    }
+                }
+
             } else {
                 return response()->json([
                     'correct' => false,
@@ -92,9 +107,9 @@ class RankingController
      * @param string $playerName
      * @return JsonResponse
      */
-    public function show(string $playerName): JsonResponse
+    public function show(string $matchMode, string $playerName): JsonResponse
     {
-        $stats = RankingService::getPlayerStats($playerName);
+        $stats = RankingService::getPlayerStats($matchMode, $playerName);
 
         $msg = '';
 

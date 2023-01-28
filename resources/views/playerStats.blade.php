@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+    @if($correct)
     <div class="flex flex-col" style="
         height: 400px;
         background: url('/images/playerprofile1.jpg') no-repeat center;
@@ -130,9 +131,17 @@
             @include('parts.stats.playerSeasonStats', ['player' => $player, 'season' => $season])
         </div>
     </div>
+    @else
+        <div class="container mx-auto h-screen mt-10">
+            <div class="flex justify-center items-center">
+                <h1 class="text-white font-bold text-xl">Nie odnaleziono Gracza</h1>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @section('scripts')
+    @if($correct)
     <script>
         $('#updateMatches').on('click', function () {
             $('#loader').removeClass('hidden');
@@ -154,4 +163,5 @@
             })
         })
     </script>
+    @endif
 @append

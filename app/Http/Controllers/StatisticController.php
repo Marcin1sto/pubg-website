@@ -27,13 +27,24 @@ class StatisticController extends Controller
 
         $player = Player::with(['actualSeason', 'discordRanking', 'matches'])->where('playerName', $playerName)->first();
 
-        $season = $player->actualSeason->groupBy('type');
+        if ($player) {
+            $season = $player->actualSeason->groupBy('type');
+
+            return view('playerStats')->with([
+                'correct' => true,
+                'player' => $player,
+                'season' => $season,
+                'countMatches' => $player->matches->count(),
+                'matches' => $player->matches()->paginate()
+            ]);
+        }
 
         return view('playerStats')->with([
-            'player' => $player,
-            'season' => $season,
-            'countMatches' => $player->matches->count(),
-            'matches' => $player->matches()->paginate()
+            'correct' => false,
+            'player' => null,
+            'season' => null,
+            'countMatches' => null,
+            'matches' => null
         ]);
     }
 }
