@@ -100,7 +100,9 @@ class RankingService
                     $modesPoints[$mode] = $playerMatchesCount;
                 }
             }
-            $modesPoints[$mostPoints['type']]->is_mostType = true;
+            if (isset($mostPoints['type'])) {
+                $modesPoints[$mostPoints['type']]->is_mostType = true;
+            }
 
 
             return $modesPoints;
