@@ -73,7 +73,7 @@ class RankingController
             $stats = RankingService::calculatePlayerPoints($playerName);
 
             foreach (MatchGameModeEnum::parentModes() as $mode) {
-                if (is_int($stats[$mode])) {
+                if (isset($stats[$mode]) && is_int($stats[$mode])) {
                     $stats[$mode] = [
                         'correct' => false,
                         'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: '.$stats[$mode].' meczy w trybie '. $mode .'.'
@@ -96,14 +96,13 @@ class RankingController
     /**
      * Show player statistic from matches
      *
+     * @param string $matchMode
      * @param string $playerName
      * @return JsonResponse
      */
     public function show(string $matchMode, string $playerName): JsonResponse
     {
         $stats = RankingService::getPlayerStats($matchMode, $playerName);
-
-        $msg = '';
 
         if (!$stats) {
             $msg = 'Nie odnaleziono gracza w bazie danych lub gracz nie ma ustanowionych statystyk dla aktualnego sezonu w trybie '. $matchMode .'.';
@@ -112,10 +111,13 @@ class RankingController
         return response()->json([
             'correct' => $stats ? true : false,
             'stats' => $stats ? $stats->toArray() : [],
-            'msg' => $msg
+            'msg' => $msg ?? null
         ]);
     }
 
+    /**
+     * @return mixed
+     */
     public function ranks()
     {
         $ranks = [];

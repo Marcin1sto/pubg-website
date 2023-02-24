@@ -25,23 +25,23 @@ class RankingRangEnum
     private static function checkPointsToRang(int $points)
     {
         switch ($points) {
-            case $points > 0 && $points <= 100:
+            case $points > 0 && $points <= 99:
                 return self::BRONZE;
-            case $points >= 101 && $points <= 200:
+            case $points >= 100 && $points <= 199:
                 return self::SILVER;
-            case $points >= 201 && $points <= 300:
+            case $points >= 200 && $points <= 299:
                 return self::GOLD;
-            case $points >= 301 && $points <= 400:
+            case $points >= 300 && $points <= 399:
                 return self::PLATINUM;
-            case $points >= 401 && $points <= 500:
+            case $points >= 400 && $points <= 499:
                 return self::DIAMOND;
-            case $points >= 501 && $points <= 600:
+            case $points >= 500 && $points <= 599:
                 return self::MASTER;
-            case $points >= 601 && $points <= 700:
+            case $points >= 600 && $points <= 699:
                 return self::GRANDMASTER;
-            case $points >= 701 && $points <= 800:
+            case $points >= 700 && $points <= 799:
                 return self::CHALLENGER;
-            case $points >= 801:
+            case $points >= 800:
                 return self::ELITE;
         }
     }

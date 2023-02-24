@@ -102,9 +102,9 @@ class PlayerMatchSeasonStatisticService
                 $player->update([
                     'matchesUpdate' => date('Y-m-d H:i:s')
                 ]);
-            }
 
-            return $allMatchesPlayer;
+                return $allMatchesPlayer;
+            }
         }
 
         return [];
