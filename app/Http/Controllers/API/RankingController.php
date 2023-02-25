@@ -67,24 +67,17 @@ class RankingController
             ]);
         }
 
-        if ($player) {
-            PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $season?->number, true);
+//        PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $season?->number, true);
 
-            $stats = RankingService::calculatePlayerPoints($playerName);
+        $stats = RankingService::calculatePlayerPoints($playerName);
 
-            foreach (MatchGameModeEnum::parentModes() as $mode) {
-                if (isset($stats[$mode]) && is_int($stats[$mode])) {
-                    $stats[$mode] = [
-                        'correct' => false,
-                        'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: '.$stats[$mode].' meczy w trybie '. $mode .'.'
-                    ];
-                }
+        foreach (MatchGameModeEnum::parentModes() as $mode) {
+            if (isset($stats[$mode]) && is_int($stats[$mode])) {
+                $stats[$mode] = [
+                    'correct' => false,
+                    'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: '.$stats[$mode].' meczy w trybie '. $mode .'.'
+                ];
             }
-        } else {
-            return response()->json([
-                'correct' => false,
-                'msg' => 'Możesz zaktualizować swój ranking raz na godzinę.'
-            ]);
         }
 
         return response()->json([

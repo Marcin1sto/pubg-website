@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('queue:matches')->daily();
         $schedule->command('pubg:download-seasons')->daily();
 //         $schedule->command('inspire')->everyMinute();
+        $schedule->command('queue:matches')->hourly();
     }
 
     /**
