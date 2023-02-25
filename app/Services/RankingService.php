@@ -113,6 +113,8 @@ class RankingService
     {
         $player = Player::with('discordRanking')->where('playerName', $playerName)->first();
 
+        dd($player->discordRanking);
+
         if ($player && $player->discordRanking) {
             return PlayerRankingStats::where('player_id', $player->id)->where('type', $matchMode)->first();
         }
