@@ -44,7 +44,7 @@ class Player extends Model
     {
         $season = Season::where('isCurrentSeason', true)->first();
 
-        return $this->hasOne(PlayerRankingStats::class, 'player_id', 'id')->where('season_id', $season->id);
+        return $this->hasMany(PlayerRankingStats::class, 'player_id', 'id')->where('season_id', $season->id);
     }
 
     /**
