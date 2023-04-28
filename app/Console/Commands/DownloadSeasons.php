@@ -39,7 +39,7 @@ class DownloadSeasons extends Command
      */
     public function handle()
     {
-        SeasonService::downloadSeasons();
+        (new \App\Services\SeasonService)->downloadSeasons();
 
         $this->info('Zaktualizowano dane o sezonach.');
 
