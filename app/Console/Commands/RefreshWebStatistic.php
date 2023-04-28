@@ -49,6 +49,9 @@ class RefreshWebStatistic extends Command
                 'count_wins' => PlayerMatchStatistic::all()->where('winPlace', 1)->count(),
                 'count_kills' => PlayerMatchStatistic::all()->sum('kills')
             ]);
+
+            $this->info('Zakończono ustanawianie statystyk strony.');
+            return 0;
         }
 
         $statistic->update([

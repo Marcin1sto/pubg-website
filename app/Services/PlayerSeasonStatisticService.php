@@ -10,8 +10,6 @@ class PlayerSeasonStatisticService
 {
     public static function updatePlayerSeasonStatistic(string $nickName, ?string $numberSeason)
     {
-        SeasonService::downloadSeasons();
-
         if ($numberSeason) {
             $season = Season::where('number', $numberSeason)->first();
         } else {
