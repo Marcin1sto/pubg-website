@@ -1,10 +1,10 @@
 @if($player->discordRanking->isNotEmpty())
     <div class="text-white bg-gray-800 mt-4">
         <div class="overflow-x-auto relative shadow-md">
-            <div class="flex justify-center items-center">
-                <p class="uppercase px-2 py-3">{{ $player->discordRanking->rang->name }} </p>
-                {{ $player->discordRanking->points }} pkt.
-            </div>
+{{--            <div class="flex justify-center items-center">--}}
+{{--                <p class="uppercase px-2 py-3">{{ $player->discordRanking->rang->name }} </p>--}}
+{{--                {{ $player->discordRanking->points }} pkt.--}}
+{{--            </div>--}}
             <table class="w-full text-sm text-left text-white bg-gray-800">
                 <tbody class="border-b bg-gray-800 border-gray-700">
                 <tr class="border-b border-t">
