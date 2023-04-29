@@ -1,4 +1,4 @@
-@if($player->discordRanking)
+@if($player->discordRanking->isNotEmpty())
     <div class="text-white bg-gray-800 mt-4">
         <div class="overflow-x-auto relative shadow-md">
             <div class="flex justify-center items-center">

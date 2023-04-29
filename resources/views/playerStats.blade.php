@@ -10,7 +10,8 @@
         <div class="flex justify-start items-start">
             <p class="text-white font-bold p-5 font-medium" style="font-size: 36px">{{ $player->playerName }}</p>
         </div>
-        @if($player->discordRanking)
+
+        @if(!$player->discordRanking->isEmpty())
             <div class="flex grow justify-end items-end">
                 <div class="flex justify-center items-center p-5">
                     <p class="text-white font-bold uppercase p-5 font-medium"
