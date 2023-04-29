@@ -13,12 +13,13 @@
 
         @if(!$player->discordRanking->isEmpty())
             <div class="flex grow justify-end items-end">
-                <div class="flex justify-center items-center p-5">
-                    {{ dd($player->discordRanking) }}
-                    <p class="text-white font-bold uppercase p-5 font-medium"
-                       style="font-size: 25px">{{ $player->discordRanking->rang->name }}</p>
-                    <img height="104" width="104" src="/images/rangs/{{ $player->discordRanking->rang->name }}.png">
-                </div>
+                @foreach($player->discordRanking as $ranking)
+                    <div class="flex justify-center items-center p-5">
+                        <p class="text-white font-bold uppercase p-5 font-medium"
+                           style="font-size: 25px">{{ $ranking->rang->name }}</p>
+                        <img height="104" width="104" src="/images/rangs/{{ $ranking->rang->name }}.png">
+                    </div>
+                @endforeach
             </div>
         @endif
     </div>
