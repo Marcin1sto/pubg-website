@@ -16,7 +16,7 @@
                 @foreach($player->discordRanking as $ranking)
                     <div class="flex justify-center items-center p-5">
                         <p class="text-white font-bold uppercase p-5 font-medium"
-                           style="font-size: 25px">{{ $ranking->rang->name }}</p>
+                           style="font-size: 25px">{{ $ranking->rang->name }} {{$ranking->type}}</p>
                         <img height="104" width="104" src="/images/rangs/{{ $ranking->rang->name }}.png">
                     </div>
                 @endforeach
