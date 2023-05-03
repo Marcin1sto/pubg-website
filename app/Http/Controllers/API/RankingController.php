@@ -25,7 +25,11 @@ class RankingController
                 default: break;
             }
 
-            $ranking = PlayerRankingStats::with('player')->where('type', $matchMode)->orderBy($component, 'DESC')
+            $season = Season::where('isCurrentSeason', true)->first();
+
+            $ranking = PlayerRankingStats::with('player')
+                ->where('season_id', $season->id)
+                ->where('type', $matchMode)->orderBy($component, 'DESC')
                 ->limit($count)->get();
 
             if ($ranking) {
