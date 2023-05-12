@@ -71,7 +71,7 @@ class RankingController
             ]);
         }
 
-//        PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $season?->number, true);
+        PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, $season?->number, true);
 
         $stats = RankingService::calculatePlayerPoints($playerName);
 
