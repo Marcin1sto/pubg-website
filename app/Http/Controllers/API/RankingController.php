@@ -22,7 +22,8 @@ class RankingController
             switch ($component) {
                 case $component === 'adr':
                     $component = 'medium_damage';
-                default: break;
+                default:
+                    break;
             }
 
             $season = Season::where('isCurrentSeason', true)->first();
@@ -57,6 +58,15 @@ class RankingController
         PlayerService::createPlayer($playerName);
         $player = Player::where('playerName', $playerName)->first();
 
+        $bannedPlayers = ['UFO_Oumuamua', 'Marcin1sto',];
+
+        if (in_array($playerName, $bannedPlayers)) {
+            return response()->json([
+                'correct' => false,
+                'msg' => 'Gracz nie ma uprawnień do rankingowania się.'
+            ]);
+        }
+
         if (!$player) {
             return response()->json([
                 'correct' => false,
@@ -79,7 +89,7 @@ class RankingController
             if (isset($stats[$mode]) && is_int($stats[$mode])) {
                 $stats[$mode] = [
                     'correct' => false,
-                    'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: '.$stats[$mode].' meczy w trybie '. $mode .'.'
+                    'msg' => 'Musisz rozegrać min. 25 meczy, rozegrałeś do tej pory: ' . $stats[$mode] . ' meczy w trybie ' . $mode . '.'
                 ];
             }
         }
@@ -102,7 +112,7 @@ class RankingController
         $stats = RankingService::getPlayerStats($matchMode, $playerName);
 
         if (!$stats) {
-            $msg = 'Nie odnaleziono gracza w bazie danych lub gracz nie ma ustanowionych statystyk dla aktualnego sezonu w trybie '. $matchMode .'.';
+            $msg = 'Nie odnaleziono gracza w bazie danych lub gracz nie ma ustanowionych statystyk dla aktualnego sezonu w trybie ' . $matchMode . '.';
         }
 
         return response()->json([
