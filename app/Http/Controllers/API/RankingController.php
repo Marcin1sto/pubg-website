@@ -13,6 +13,7 @@ use App\Services\PlayerMatchSeasonStatisticService;
 use App\Services\PlayerService;
 use App\Services\RankingService;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\ErrorHandler\Debug;
 
 class RankingController
 {
@@ -54,6 +55,7 @@ class RankingController
      */
     public function update(string $playerName): JsonResponse
     {
+        Debug::log('Player name: ' . $playerName . ' - ' . date('Y-m-d H:i:s'));
         $season = Season::where('isCurrentSeason', true)->first();
         PlayerService::createPlayer($playerName);
         $player = Player::where('playerName', $playerName)->first();
