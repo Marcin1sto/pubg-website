@@ -55,7 +55,6 @@ class RankingController
      */
     public function update(string $playerName): JsonResponse
     {
-        Debug::log('Player name: ' . $playerName . ' - ' . date('Y-m-d H:i:s'));
         $season = Season::where('isCurrentSeason', true)->first();
         PlayerService::createPlayer($playerName);
         $player = Player::where('playerName', $playerName)->first();
