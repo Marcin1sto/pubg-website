@@ -59,7 +59,7 @@ class RankingController
         PlayerService::createPlayer($playerName);
         $player = Player::where('playerName', $playerName)->first();
 
-        $bannedPlayers = ['UFO_Oumuamua', 'Marcin1sto',];
+        $bannedPlayers = ['UFO_Oumuamua'];
 
         if (in_array($playerName, $bannedPlayers)) {
             return response()->json([
