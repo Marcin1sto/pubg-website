@@ -24,14 +24,22 @@ class SeasonService
 
     public function importFakeSeason()
     {
+        $actualSeason = Season::where('isCurrentSeason', true)->first();
+
         $season = new Season();
-        $season->number = 0;
+        $season->number = $actualSeason ? $actualSeason->number + 1 : 0;
         $season->api_id = '';
-        $season->name = 'Sezon '. 0;
+        $season->name = 'Sezon '. $actualSeason ? $actualSeason->number + 1 : 0;
         $season->type = 'pc';
         $season->isCurrentSeason = true;
         $season->isOffseason = false;
         $season->save();
+
+        if ($actualSeason) {
+            $actualSeason->isCurrentSeason = false;
+            $actualSeason->save();
+        }
+
     }
 
     public function downloadSeasonsFromApi()
