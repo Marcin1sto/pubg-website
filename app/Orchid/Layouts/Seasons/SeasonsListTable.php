@@ -24,9 +24,8 @@ class SeasonsListTable extends Table
      */
     protected function columns(): iterable
     {
-//        dd($this->query);
         return [
-            TD::make('id', 'ID')->sort(),
+//            TD::make('id', 'ID')->sort(),
             TD::make('name', 'Name')->sort(),
             TD::make('isCurrentSeason', 'Is Current Season')
                 ->render(function ($season) {
