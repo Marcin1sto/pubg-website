@@ -7,16 +7,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsMultiSource;
 
 class Player extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, AsMultiSource, Filterable;
 
     protected $table = 'players';
 
     protected $guarded = [];
 
     protected $hidden = ['id', 'created_at', 'deleted_at', 'matchesUpdate', 'seasonUpdate', 'rankingUpdate'];
+
+    protected array $allowedSorts = [
+        'id',
+        'matchesUpdate',
+        'seasonUpdate',
+        'created_at',
+        'deleted_at',
+    ];
 
     const DELAY_TIME = 1;
 

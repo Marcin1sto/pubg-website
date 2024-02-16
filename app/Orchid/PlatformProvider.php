@@ -39,6 +39,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('PUBG API')
                 ->route('seasons.index'),
 
+            Menu::make('Gracze')
+                ->icon('bs.book')
+                ->title('Baza danych')
+                ->route('players.index'),
+
+
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')

@@ -12,6 +12,7 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Players\PlayersListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\Seasons\SeasonsListScreen;
@@ -34,6 +35,9 @@ use Tabuna\Breadcrumbs\Trail;
 
 Route::screen('seasons-list', SeasonsListScreen::class)
     ->name('seasons.index');
+
+Route::screen('players-list', PlayersListScreen::class)
+    ->name('players.index');
 
 // Main
 Route::screen('/main', PlatformScreen::class)

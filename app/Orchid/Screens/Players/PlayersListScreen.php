@@ -1,15 +1,15 @@
 <?php
-declare(strict_types=1);
 
-namespace App\Orchid\Screens\Seasons;
+namespace App\Orchid\Screens\Players;
 
-use App\Models\Season;
-use App\Orchid\Layouts\Seasons\SeasonsListTable;
-use App\Services\SeasonService;
-use Orchid\Screen\Actions\Button;
+use App\Models\Player;
+use App\Orchid\Filters\Players\PlayerNameFilter;
+use App\Orchid\Filters\Players\PlayersPubgIdFilter;
+use App\Orchid\Layouts\Players\PlayersFiltersLayout;
+use App\Orchid\Layouts\Players\PlayersListTable;
 use Orchid\Screen\Screen;
 
-class SeasonsListScreen extends Screen
+class PlayersListScreen extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -19,7 +19,9 @@ class SeasonsListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'seasons' => Season::orderBy('number', 'desc')->paginate(10)
+            'players' => Player::
+                filters([PlayerNameFilter::class, PlayersPubgIdFilter::class])
+                ->paginate(10)
         ];
     }
 
@@ -30,7 +32,7 @@ class SeasonsListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Lista sezonów';
+        return 'Lista graczy';
     }
 
     /**
@@ -40,16 +42,7 @@ class SeasonsListScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [
-            Button::make(__('Wczytaj sezony z API'))
-                ->icon('bs.plus-circle')
-                ->method('loadSeasons')
-        ];
-    }
-
-    public function loadSeasons(): void
-    {
-        (new SeasonService)->downloadSeasons();
+        return [];
     }
 
     /**
@@ -60,7 +53,8 @@ class SeasonsListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            SeasonsListTable::class
+            PlayersFiltersLayout::class,
+            PlayersListTable::class
         ];
     }
 }
