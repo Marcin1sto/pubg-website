@@ -6,6 +6,13 @@ use App\Models\Player;
 
 class PlayerService
 {
+    private PubgConnector $connector;
+
+    public function __construct()
+    {
+        $this->connector = new PubgConnector();
+    }
+
     /**
      * @param string $nickName
      * @return bool
@@ -33,5 +40,43 @@ class PlayerService
         }
 
         return $player;
+    }
+
+    public static function updatePlayerName(Player $player): ?Player
+    {
+        $connector = new PubgConnector();
+        $connector->connect('players/' . $player->playerId);
+
+        if (!$connector->connectFalse()) {
+            $response = $connector->getData()->data;
+
+            if ($response->type = 'player') {
+                $player->playerName = $response->attributes->name;
+                $player->save();
+            }
+
+            return $player;
+        }
+
+        return null;
+    }
+
+    public static function updatePlayerClanID(Player $player): ?Player
+    {
+        $connector = new PubgConnector();
+        $connector->connect('players/' . $player->playerId);
+
+        if (!$connector->connectFalse()) {
+            $response = $connector->getData()->data;
+
+            if ($response->type = 'player') {
+                $player->clanId = $response->attributes->clanId;
+                $player->save();
+            }
+
+            return $player;
+        }
+
+        return null;
     }
 }

@@ -15,9 +15,14 @@ class PlayerMatchSeasonStatisticService
      * @param bool $saveMatches
      * @return array
      */
-    public static function downloadAllPlayerMatches(Player $player, ?string $seasonNumber = null, bool $saveMatches = false): array|Collection
+    public static function downloadAllPlayerMatches(
+        Player $player,
+        ?string $seasonNumber = null,
+        bool $saveMatches = false,
+        bool $force = false
+    ): array|Collection
     {
-        if ($player->canUpdateMatches()) {
+        if ($player->canUpdateMatches($force)) {
             if ($seasonNumber) {
                 $actualSeason = Season::where('number', $seasonNumber)->first();
             }
@@ -32,7 +37,6 @@ class PlayerMatchSeasonStatisticService
 
             $connector = new PubgConnector();
             $last7daysMatches = $connector->connect('players?filter[playerIds]='.$player->playerId);
-
             if (!$connector->connectFalse()) {
                 $last7daysMatches = $last7daysMatches->getData()
                     ->data[0]->relationships->matches->data;
@@ -92,19 +96,25 @@ class PlayerMatchSeasonStatisticService
                         }
                     }
 
-                    $player->update([
-                        'matchesUpdate' => date('Y-m-d H:i:s')
-                    ]);
+                    if (!$force) {
+                        $player->update([
+                            'matchesUpdate' => date('Y-m-d H:i:s')
+                        ]);
+                    }
 
                     return PlayerMatchStatistic::where('player_id', $player->id)->get();
                 }
 
-                $player->update([
-                    'matchesUpdate' => date('Y-m-d H:i:s')
-                ]);
+                if (!$force) {
+                    $player->update([
+                        'matchesUpdate' => date('Y-m-d H:i:s')
+                    ]);
+                }
 
                 return $allMatchesPlayer;
             }
+        } else {
+            return ['status' => 'error', 'message' => 'You can update matches after '.Player::DELAY_TIME.' hours'];
         }
 
         return [];

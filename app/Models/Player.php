@@ -69,8 +69,12 @@ class Player extends Model
         return $this->hasMany(PlayerMatchStatistic::class, 'player_id', 'id')->where('season_id', $season->id)->where('type', '!=', 'normal-squad');
     }
 
-    public function canUpdateMatches(): bool
+    public function canUpdateMatches(bool $force = false): bool
     {
+        if ($force) {
+            return true;
+        }
+
         $lastCheckTime = date('Y-m-d H:i:s', strtotime($this->matchesUpdate));
         $delayTime = date('Y-m-d H:i:s', strtotime($lastCheckTime. '+'.self::DELAY_TIME.' hour'));
 

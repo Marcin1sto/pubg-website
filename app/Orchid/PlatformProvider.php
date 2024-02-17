@@ -42,7 +42,7 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Gracze')
                 ->icon('bs.book')
                 ->title('Baza danych')
-                ->route('players.index'),
+                ->route('player.index'),
 
 
             Menu::make(__('Users'))

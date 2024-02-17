@@ -7,6 +7,9 @@ use App\Orchid\Filters\Players\PlayerNameFilter;
 use App\Orchid\Filters\Players\PlayersPubgIdFilter;
 use App\Orchid\Layouts\Players\PlayersFiltersLayout;
 use App\Orchid\Layouts\Players\PlayersListTable;
+use App\Services\PlayerMatchSeasonStatisticService;
+use App\Services\PlayerService;
+use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Screen;
 
 class PlayersListScreen extends Screen
@@ -56,5 +59,29 @@ class PlayersListScreen extends Screen
             PlayersFiltersLayout::class,
             PlayersListTable::class
         ];
+    }
+
+    public function updateMatches(Player $player): void
+    {
+        PlayerMatchSeasonStatisticService::downloadAllPlayerMatches($player, null, true, true);
+        Toast::success('Mecze gracza zostały zaktualizowane');
+    }
+
+    public function updateNickName(Player $player): void
+    {
+        PlayerService::updatePlayerName($player);
+        Toast::success('Nick gracza został zaktualizowany');
+    }
+
+    public function updateClanID(Player $player): void
+    {
+        PlayerService::updatePlayerClanID($player);
+        Toast::success('Clan ID gracza został zaktualizowany');
+    }
+
+    public function remove(Player $player): void
+    {
+        $player->delete();
+        Toast::info('Gracz został usunięty');
     }
 }

@@ -37,7 +37,9 @@ Route::screen('seasons-list', SeasonsListScreen::class)
     ->name('seasons.index');
 
 Route::screen('players-list', PlayersListScreen::class)
-    ->name('players.index');
+    ->name('player.index');
+Route::screen('players/{player}', PlayersListScreen::class)
+    ->name('player.edit');
 
 // Main
 Route::screen('/main', PlatformScreen::class)
