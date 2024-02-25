@@ -17,29 +17,22 @@ use Symfony\Component\ErrorHandler\Debug;
 
 class RankingController
 {
-    public function index(string $matchMode, string $component, int $count)
+    private RankingService $rankingService;
+
+    public function __construct()
     {
-        if (in_array($matchMode, MatchGameModeEnum::parentModes())) {
-            switch ($component) {
-                case $component === 'adr':
-                    $component = 'medium_damage';
-                default:
-                    break;
-            }
+        $this->rankingService = new RankingService();
+    }
 
-            $season = Season::where('isCurrentSeason', true)->first();
+    public function index(string $matchMode, string $component, int $count): JsonResponse
+    {
+        $ranking = $this->rankingService->getRanking($matchMode, $component, $count);
 
-            $ranking = PlayerRankingStats::with('player')
-                ->where('season_id', $season->id)
-                ->where('type', $matchMode)->orderBy($component, 'DESC')
-                ->limit($count)->get();
-
-            if ($ranking) {
-                return response()->json([
-                    'correct' => true,
-                    'ranking' => $ranking->toArray()
-                ]);
-            }
+        if ($ranking) {
+            return response()->json([
+                'correct' => true,
+                'ranking' => $ranking->toArray()
+            ]);
         }
 
         return response()->json([
@@ -126,7 +119,7 @@ class RankingController
     /**
      * @return mixed
      */
-    public function ranks()
+    public function ranks(): mixed
     {
         $ranks = [];
         foreach (RankingRang::all() as $rang) {

@@ -10,6 +10,7 @@ use App\Models\Player;
 use App\Models\PlayerRankingStats;
 use App\Models\Ranking\RankingRang;
 use App\Models\Season;
+use Illuminate\Support\Collection;
 
 class RankingService
 {
@@ -118,5 +119,34 @@ class RankingService
         }
 
         return null;
+    }
+
+    public function getRanking(string $matchMode, string $component, int $count): null|Collection
+    {
+        if (in_array($matchMode, MatchGameModeEnum::parentModes())) {
+            $component = $this->getComponent($component);
+
+            $season = Season::where('isCurrentSeason', true)->first();
+
+            return PlayerRankingStats::with('player')
+                ->where('season_id', $season->id)
+                ->where('type', $matchMode)->orderBy($component, 'DESC')
+                ->limit($count)->get();
+        }
+
+        return null;
+    }
+
+    private function getComponent(string $component): string
+    {
+        switch ($component) {
+            case $component === 'adr':
+                $component = 'medium_damage';
+                break;
+            default:
+                break;
+        }
+
+        return $component;
     }
 }

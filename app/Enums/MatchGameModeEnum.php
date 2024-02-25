@@ -33,4 +33,9 @@ class MatchGameModeEnum
             self::DUO_FPP, self::SOLO_FPP, self::SQUAD_FPP
         ];
     }
+
+    public static function parentModesToString(): string
+    {
+        return implode(',', self::parentModes());
+    }
 }

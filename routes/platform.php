@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\API\ApiListScreen;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -40,6 +41,11 @@ Route::screen('players-list', PlayersListScreen::class)
     ->name('player.index');
 Route::screen('players/{player}', PlayersListScreen::class)
     ->name('player.edit');
+
+
+// API view doc
+Route::screen('api', ApiListScreen::class)
+    ->name('api.index');
 
 // Main
 Route::screen('/main', PlatformScreen::class)

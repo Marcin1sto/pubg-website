@@ -44,6 +44,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('Baza danych')
                 ->route('player.index'),
 
+            Menu::make('API')
+                ->icon('bs.book')
+                ->title('Dostęne endpointy')
+                ->route('api.index')
+                ->permission('api.index'),
 
             Menu::make(__('Users'))
                 ->icon('bs.people')
@@ -72,6 +77,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.systems.users', __('Użytkownicy'))
                 ->addPermission('platform.systems.players', __('Gracze'))
                 ->addPermission('seasons.index', __('Sezony')),
+            ItemPermission::group(__('API'))
+                ->addPermission('api.index', __('Dostępne endpointy'))
+
         ];
     }
 }
