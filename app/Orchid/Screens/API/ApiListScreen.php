@@ -82,7 +82,7 @@ class ApiListScreen extends Screen
                 env('APP_URL').'/bot/ranking/index/{matchMode}/{component}/{count}',
                 [
                     'matchMode' => 'enum: '.MatchGameModeEnum::parentModesToString(),
-                    'component' => 'string enum: wins,adr,kda,kd',
+                    'component' => 'string enum: medium_damage,kda,points,percent_wins',
                     'count' => 'integer'
                 ],
                 $rankingIndex
