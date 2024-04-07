@@ -3,17 +3,10 @@
 declare(strict_types=1);
 
 use App\Orchid\Screens\API\ApiListScreen;
-use App\Orchid\Screens\Examples\ExampleActionsScreen;
-use App\Orchid\Screens\Examples\ExampleCardsScreen;
-use App\Orchid\Screens\Examples\ExampleChartsScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
-use App\Orchid\Screens\Examples\ExampleFieldsScreen;
-use App\Orchid\Screens\Examples\ExampleGridScreen;
-use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
-use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Players\PlayersListScreen;
+use App\Orchid\Screens\Ranking\BoostConfigureScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\Seasons\SeasonsListScreen;
@@ -42,6 +35,8 @@ Route::screen('players-list', PlayersListScreen::class)
 Route::screen('players/{player}', PlayersListScreen::class)
     ->name('player.edit');
 
+Route::screen('/configure/boost/stats', BoostConfigureScreen::class)
+    ->name('platform.configuration.stats');
 
 // API view doc
 Route::screen('api', ApiListScreen::class)

@@ -101,9 +101,9 @@ class RankingController
      * @param string $playerName
      * @return JsonResponse
      */
-    public function show(string $matchMode, string $playerName): JsonResponse
+    public function showOne(string $matchMode, string $playerName): JsonResponse
     {
-        $stats = RankingService::getPlayerStats($matchMode, $playerName);
+        $stats = RankingService::getPlayerStats($playerName, $matchMode);
 
         if (!$stats) {
             $msg = 'Nie odnaleziono gracza w bazie danych lub gracz nie ma ustanowionych statystyk dla aktualnego sezonu w trybie ' . $matchMode . '.';
@@ -112,6 +112,22 @@ class RankingController
         return response()->json([
             'correct' => $stats ? true : false,
             'stats' => $stats ? $stats->toArray() : [],
+            'msg' => $msg ?? null
+        ]);
+    }
+
+    public function show(string $playerName)
+    {
+        $stats = RankingService::getPlayerStats($playerName);
+
+        $groupedResults = array_reduce($stats->toArray(), function ($carry, $item) {
+            $carry[$item['type']] = $item;
+            return $carry;
+        }, []);
+
+        return response()->json([
+            'correct' => $stats ? true : false,
+            'stats' => !empty($groupedResults) ? $groupedResults : [],
             'msg' => $msg ?? null
         ]);
     }

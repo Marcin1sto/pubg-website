@@ -59,15 +59,27 @@ class ApiListScreen extends Screen
             ...$this->createEndpointLayout(
                 'Player Update',
                 'Update player data',
-                env('APP_URL').'/bot/ranking/update/{nickName}',
+                env('APP_URL').'/api/bot/ranking/update/{nickName}',
                 ['nickName' => 'string'],
                 $playerUpdate
             ),
-            ...$this->createEndpointLayout('Player Stats',
-                'Update player data',
-                env('APP_URL').'/bot/ranking/stats/{matchMode}/{nickName}',
+            ...$this->createEndpointLayout('Player data',
+                'Get player data',
+                env('APP_URL').'/api/bot/player/{nickname}',
+                ['nickname' => 'string'],
+                '{"correct":true,"data":{"updated_at":"2024-04-07T07:30:57.000000Z","playerId":"account.622b9f4ff2c84987b39bebdfed5aa6e4","playerName":"Marcin1sto","clanId":"clan.8fa7fb703eb84f86bf52e649febaf700"},"msg":""}'
+            ),
+            ...$this->createEndpointLayout('Player stats by mode',
+                'Get player stats for specific mode',
+                env('APP_URL').'/api/bot/ranking/stats/{matchMode}/{nickName}',
                 ['matchMode' => 'enum: '.MatchGameModeEnum::parentModesToString()],
                 $playerStats
+            ),
+            ...$this->createEndpointLayout('Player stats',
+                'Get player all stats',
+                env('APP_URL').'/api/bot/ranking/stats/{nickName}',
+                [],
+                '{"correct":true,"stats":{"tpp":{"updated_at":"2024-04-07T07:30:57.000000Z","season_id":37,"rang_id":4,"points":313,"wins":50,"percent_wins":16,"matches":311,"kd":2.02,"kda":3.23,"percent_headshot":22,"medium_damage":246,"type":"tpp"}},"msg":null}'
             ),
             ...$this->createEndpointLayout('Player Verification',
                 'Verify player',
@@ -90,9 +102,18 @@ class ApiListScreen extends Screen
             ...$this->createEndpointLayout('Discord Ranks.',
                 'Get ranks by points.',
                 env('APP_URL').'/bot/ranking/ranks',
-                [
-                ],
+                [],
                 $rankingRanksIndex
+            ),
+
+            // Klan
+            ...$this->createEndpointLayout('Get clan data from API PUBG',
+                '',
+                env('APP_URL').'/api/bot/clan/{clan_id}',
+                [
+                    'clan_id' => 'string'
+                ],
+                '{"correct":true,"data":{"id":"clan.8fa7fb703eb84f86bf52e649febaf700","clanName":"Discord_Polska","clanTag":"PLNY","clanLevel":18,"clanMemberCount":95}}'
             ),
         ];
     }

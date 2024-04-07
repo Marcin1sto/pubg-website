@@ -50,6 +50,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('api.index')
                 ->permission('api.index'),
 
+            Menu::make(__('Boost Statystyk'))
+                ->icon('bs.people')
+                ->route('platform.configuration.stats')
+                ->permission('platform.configuration.stats')
+                ->title(__('Konfiguracja')),
+
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')
@@ -77,8 +83,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.systems.users', __('Użytkownicy'))
                 ->addPermission('platform.systems.players', __('Gracze'))
                 ->addPermission('seasons.index', __('Sezony')),
+
             ItemPermission::group(__('API'))
-                ->addPermission('api.index', __('Dostępne endpointy'))
+                ->addPermission('api.index', __('Dostępne endpointy')),
+
+            ItemPermission::group(__('Konfiguracja'))
+                ->addPermission('platform.configuration.stats', __('Boost Statystyk'))
 
         ];
     }

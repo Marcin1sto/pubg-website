@@ -110,15 +110,15 @@ class RankingService
         }
     }
 
-    public static function getPlayerStats(string $matchMode, string $playerName): ?PlayerRankingStats
+    public static function getPlayerStats(string $playerName, ?string $matchMode = null): PlayerRankingStats|Collection
     {
         $player = Player::with('discordRanking')->where('playerName', $playerName)->first();
 
-        if ($player && $player->discordRanking) {
+        if ($player && $player->discordRanking && $matchMode) {
             return $player->discordRanking->where('type', $matchMode)->first();
         }
 
-        return null;
+        return $player->discordRanking;
     }
 
     public function getRanking(string $matchMode, string $component, int $count): null|Collection
