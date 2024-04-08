@@ -44,6 +44,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('Baza danych')
                 ->route('player.index'),
 
+            Menu::make('Stremerzy')
+                ->icon('bs.book')
+                ->route('streamers.index'),
+
             Menu::make('API')
                 ->icon('bs.book')
                 ->title('Dostęne endpointy')
@@ -83,6 +87,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.systems.users', __('Użytkownicy'))
                 ->addPermission('platform.systems.players', __('Gracze'))
                 ->addPermission('seasons.index', __('Sezony')),
+
+            ItemPermission::group('Stremerzy')
+                ->addPermission('platform.systems.streamers', __('Streamy'))
+                ->addPermission('platform.streamers.index.add', __('Stremerzy dodawanie')),
 
             ItemPermission::group(__('API'))
                 ->addPermission('api.index', __('Dostępne endpointy')),

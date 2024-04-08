@@ -107,8 +107,14 @@ class ApiListScreen extends Screen
             ),
 
             // Klan
-            ...$this->createEndpointLayout('Get clan data from API PUBG',
+            ...$this->createEndpointLayout('Get index of clans',
                 '',
+                env('APP_URL').'/api/bot/clan',
+                [],
+                '{"correct":true,"data":{"correct":true,"data":[[{"id":"clan.8fa7fb703eb84f86bf52e649febaf700","clanName":"Discord_Polska","clanTag":"PLNY","clanLevel":18,"clanMemberCount":95}],[{"id":"clan.4dd6efa470fe4cf5a773cd2555ed8196","clanName":"poGROM","clanTag":"GROM","clanLevel":10,"clanMemberCount":21}],[{"id":"clan.f9af606d47d94bccbe93eb02e16ecbd6","clanName":"Green8","clanTag":"G8","clanLevel":13,"clanMemberCount":16}]]}}'
+            ),
+            ...$this->createEndpointLayout('Get clan data from API PUBG',
+                'Get specific clan data from API PUBG',
                 env('APP_URL').'/api/bot/clan/{clan_id}',
                 [
                     'clan_id' => 'string'

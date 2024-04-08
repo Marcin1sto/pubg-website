@@ -36,10 +36,17 @@ class PlayerMatchSeasonStatisticService
             $playerId = $player->playerId;
 
             $connector = new PubgConnector();
-            $last7daysMatches = $connector->connect('players?filter[playerIds]='.$player->playerId);
+            $last7daysMatches = $connector->connect('players?filter[playerIds]='.$playerId);
             if (!$connector->connectFalse()) {
+                if (!empty($last7daysMatches->getData()->data[0]->attributes->clanId)) {
+                    $player->update([
+                        'clanId' => $last7daysMatches->getData()->data[0]->attributes->clanId
+                    ]);
+                }
+
                 $last7daysMatches = $last7daysMatches->getData()
                     ->data[0]->relationships->matches->data;
+
 
                 $allMatchesPlayer = [];
                 foreach ($last7daysMatches as $key => $match) {

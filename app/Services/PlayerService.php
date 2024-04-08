@@ -32,6 +32,7 @@ class PlayerService
                     $player = new Player();
                     $player->playerId = $response->id;
                     $player->playerName = $response->attributes->name;
+                    $player->clanId = $response->attributes->clanId;
                     $player->save();
                 }
 

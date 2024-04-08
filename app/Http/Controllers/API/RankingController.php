@@ -125,6 +125,16 @@ class RankingController
             return $carry;
         }, []);
 
+        foreach (MatchGameModeEnum::parentModes() as $mode) {
+            if (!isset($groupedResults[$mode])) {
+                $groupedResults[$mode] = [
+                    'correct' => false,
+                    'msg' => 'Musisz rozegrać min. 25 meczy.'
+                ];
+            }
+        }
+
+
         return response()->json([
             'correct' => $stats ? true : false,
             'stats' => !empty($groupedResults) ? $groupedResults : [],

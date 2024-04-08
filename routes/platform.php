@@ -10,6 +10,8 @@ use App\Orchid\Screens\Ranking\BoostConfigureScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\Seasons\SeasonsListScreen;
+use App\Orchid\Screens\Stream\StreamerEditScreen;
+use App\Orchid\Screens\Stream\StreamListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -37,6 +39,11 @@ Route::screen('players/{player}', PlayersListScreen::class)
 
 Route::screen('/configure/boost/stats', BoostConfigureScreen::class)
     ->name('platform.configuration.stats');
+
+Route::screen('streamers-list', StreamListScreen::class)
+    ->name('streamers.index');
+Route::screen('streamers-list-create', StreamerEditScreen::class)
+    ->name('streamers.index.add');
 
 // API view doc
 Route::screen('api', ApiListScreen::class)
