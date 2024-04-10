@@ -38,7 +38,7 @@ class ApiClanController
 
         return response()->json([
             'correct' => true,
-            'data' => $data
+            'data' => json_decode($data)
         ]);
     }
 
