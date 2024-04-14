@@ -17,10 +17,10 @@ class RankingRangEnum
     const ELITE = 'elite';
 
 
-    public static function getRang(int $points): RankingRang
+    public static function getRang(int $points): ?RankingRang
     {
-//        RankingRang::where('from', '>=', $points)->where('to', '<=', $points)->first();
-        return RankingRang::where('from', '>=', $points)->where('to', '<=', $points)->first();
+//        dd(RankingRang::where('from', '>=', $points)->where('to', '>=', $points)->first());
+        return RankingRang::where('from', '>=', $points)->where('to', '>=', $points)->first();
     }
 
     private static function checkPointsToRang(int $points)
