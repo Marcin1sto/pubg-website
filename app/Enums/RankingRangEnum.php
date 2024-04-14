@@ -19,7 +19,8 @@ class RankingRangEnum
 
     public static function getRang(int $points): RankingRang
     {
-        return RankingRang::where('name', self::checkPointsToRang($points))->first();
+//        RankingRang::where('from', '>=', $points)->where('to', '<=', $points)->first();
+        return RankingRang::where('from', '>=', $points)->where('to', '<=', $points)->first();
     }
 
     private static function checkPointsToRang(int $points)
