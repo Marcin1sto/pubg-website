@@ -69,7 +69,7 @@ class RankingService
                     $playerRankingStats->type = $mode;
                     $playerRankingStats->player_id = $player->id;
                     $playerRankingStats->season_id = $season->id;
-                    $playerRankingStats->rang_id = RankingRangEnum::getRang($calculator->points)->id;
+                    $playerRankingStats->rang_id = RankingRang::getRang($calculator->points)->id;
                     $playerRankingStats->matches = $playerMatchesCount;
                     $playerRankingStats->wins =  $matches->filter(function ($match) {
                         return $match->winPlace == 1;

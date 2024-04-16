@@ -12,4 +12,9 @@ class RankingRang extends Model
     protected $table = 'ranking_ranks';
 
     protected $guarded = [];
+
+    public static function getRang(int $points): ?RankingRang
+    {
+        return RankingRang::where('from', '<=', $points)->where('to', '>=', $points)->first();
+    }
 }

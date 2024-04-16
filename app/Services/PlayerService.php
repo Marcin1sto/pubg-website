@@ -40,6 +40,8 @@ class PlayerService
             }
         }
 
+        self::updatePlayerClanID($player);
+
         return $player;
     }
 
