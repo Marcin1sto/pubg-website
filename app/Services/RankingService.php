@@ -55,6 +55,7 @@ class RankingService
                         ->calculateMediumDamage()
                         ->calculatePercentWins()
                         ->calculatePercentHeadShots()
+                        ->boostByGameMode($mode)
                         ->calculateRankingPoints();
 
                     $playerRankingStats = PlayerRankingStats::where('player_id', $player->id)

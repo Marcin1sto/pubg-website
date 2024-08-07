@@ -76,6 +76,31 @@ class CalculatorHelper
         return $this;
     }
 
+    public function boostByGameMode(string $mode)
+    {
+        $playerMatches = $this->matches;
+        $playerMatchesCount = $playerMatches->count();
+
+        //=JEŻELI([@matches]<50;1,1;JEŻELI([@matches]<100;1,2;JEŻELI([@matches]>100;1,3;1,5)))
+        if ($playerMatchesCount < 50) {
+            $percent = 1.1;
+        } elseif ($playerMatchesCount < 100) {
+            $percent = 1.2;
+        } elseif ($playerMatchesCount > 100) {
+            $percent = 1.3;
+        } else {
+            $percent = 1.0;
+        }
+
+        if ($mode == 'ranked') {
+            $this->points = (int)($this->points * $percent) + 150;
+        } else {
+            $this->points = (int)($this->points * $percent);
+        }
+
+        return $this;
+    }
+
     /**
      * @return $this
      */
