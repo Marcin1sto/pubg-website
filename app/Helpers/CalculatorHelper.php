@@ -93,7 +93,7 @@ class CalculatorHelper
         }
 
         if ($mode == 'ranked') {
-            $this->points = (int)($this->points * $percent) + 150;
+            $this->points = (int)($this->points ?? 0 * $percent) + 150;
         } else {
             $this->points = (int)($this->points ?? 0 * $percent);
         }
