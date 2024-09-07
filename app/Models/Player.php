@@ -40,6 +40,11 @@ class Player extends Model
         return $this->hasMany(PlayerMatchStatistic::class, 'player_id', 'id')->orderByDesc('played_at');
     }
 
+    public function platform()
+    {
+        return $this->hasMany(PlayerPlatform::class, 'player_id', 'id');
+    }
+
     /**
      * @return Collection
      */

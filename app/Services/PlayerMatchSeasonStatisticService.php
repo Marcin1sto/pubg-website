@@ -49,8 +49,13 @@ class PlayerMatchSeasonStatisticService
 
 
                 $allMatchesPlayer = [];
+
                 foreach ($last7daysMatches as $key => $match) {
                     $matchDb = PlayerMatchStatistic::where('match_id', $match->id)->where('player_id', $player->id)->first();
+
+
+//                    $matchConnector = new PubgConnector();
+//                    $matchResponse = $matchConnector->connect('matches/'.$match->id);
 
                     if (!$matchDb) {
                         $matchConnector = new PubgConnector();

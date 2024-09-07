@@ -13,7 +13,7 @@ class ApiMatchesController
      * @param string $nickName
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updatePlayerMatches(string $nickName): \Illuminate\Http\JsonResponse
+    public function updatePlayerMatches(string $platform, string $nickName): \Illuminate\Http\JsonResponse
     {
         $player = Player::where('playerName', $nickName)->first();
 

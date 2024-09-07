@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Enums\PlatformEnum;
 use App\Models\Player;
+use App\Models\PlayerPlatform;
 
 class PlayerService
 {
@@ -17,7 +19,7 @@ class PlayerService
      * @param string $nickName
      * @return bool
      */
-    public static function createPlayer(string $nickName): ?Player
+    public static function createPlayer(string $nickName, $platform = 'steam'): ?Player
     {
         $player = Player::where('playerName', $nickName)->first();
 
@@ -40,41 +42,69 @@ class PlayerService
             }
         }
 
-        self::updatePlayerClanID($player);
+        self::updatePlayerClanID($player, $platform);
 
         return $player;
     }
 
     public static function updatePlayerName(Player $player): ?Player
     {
-        $connector = new PubgConnector();
-        $connector->connect('players/' . $player->playerId);
+        $platforms = PlatformEnum::toArray();
 
-        if (!$connector->connectFalse()) {
-            $response = $connector->getData()->data;
+        foreach ($platforms as $platform) {
+            $playerPlatform = PlayerPlatform::where('player_id', $player->id)->where('platform', $platform)->first();
 
-            if ($response->type = 'player') {
-                $player->playerName = $response->attributes->name;
-                $player->save();
+            $connector = new PubgConnector();
+            $connector->setPlatform($platform);
+            $connector->connect('players/' . $player->playerId);
+
+            if (!$connector->connectFalse()) {
+                $response = $connector->getData()->data;
+
+                if ($playerPlatform) {
+                    if ($response->type = 'player') {
+                        $playerPlatform->playerName = $response->attributes->name;
+                        $playerPlatform->save();
+                    }
+                } else {
+                    if ($response->type = 'player') {
+                        $playerPlatform = new PlayerPlatform();
+                        $playerPlatform->player_id = $player->id;
+                        $playerPlatform->platform = $platform;
+                        $playerPlatform->playerName = $response->attributes->name;
+                        $playerPlatform->clanId = $response->attributes->clanId;
+                        $playerPlatform->save();
+                    }
+                }
             }
-
-            return $player;
         }
 
         return null;
     }
 
-    public static function updatePlayerClanID(Player $player): ?Player
+    public static function updatePlayerClanID(Player $player, string $platform = 'steam'): ?Player
     {
         $connector = new PubgConnector();
+        $connector->setPlatform($platform);
         $connector->connect('players/' . $player->playerId);
 
         if (!$connector->connectFalse()) {
             $response = $connector->getData()->data;
 
             if ($response->type = 'player') {
-                $player->clanId = $response->attributes->clanId;
-                $player->save();
+                $playerPlatform = PlayerPlatform::where('player_id', $player->id)->where('platform', $platform)->first();
+
+                if ($playerPlatform) {
+                    $playerPlatform->clanId = $response->attributes->clanId;
+                    $playerPlatform->save();
+                } else {
+                    $playerPlatform = new PlayerPlatform();
+                    $playerPlatform->player_id = $player->id;
+                    $playerPlatform->platform = $platform;
+                    $playerPlatform->playerName = $response->attributes->name;
+                    $playerPlatform->clanId = $response->attributes->clanId;
+                    $playerPlatform->save();
+                }
             }
 
             return $player;

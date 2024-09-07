@@ -29,9 +29,13 @@ class PlayersListTable extends Table
     protected function columns(): iterable
     {
         return [
-            TD::make('playerName', 'NickName')->sort(),
+            TD::make('playerName', 'NickName')->render(function (Player $player) {
+                return $player->platform->pluck('playerName')->implode(', ');
+            })->sort(),
             TD::make('playerId', 'Player PUBG ID')->sort(),
-            TD::make('clanId', 'PUBG Clan ID')->sort(),
+            TD::make('clanId', 'PUBG Clan')->render(function (Player $player) {
+                return $player->platform->pluck('clanId')->implode(', ');
+            })->sort(),
             TD::make('created_at', 'Utworzono')
                 ->render(function (Player $player) {
                     return $player->updated_at->diffForHumans();

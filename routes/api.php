@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ApiClanController;
 use App\Http\Controllers\API\ApiMatchesController;
 use App\Http\Controllers\API\ApiPlayerController;
 use App\Http\Controllers\API\ApiSeasonController;
@@ -21,18 +22,18 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::get('matches/{nickName}', [ApiMatchesController::class, 'updatePlayerMatches']);
-Route::get('season/{nickName}', [ApiSeasonController::class, 'updatePlayerSeason']);
+Route::get('/{platform}/matches/{nickName}', [ApiMatchesController::class, 'updatePlayerMatches']);
+Route::get('/{platform}/season/{nickName}', [ApiSeasonController::class, 'updatePlayerSeason']);
 
 
 Route::prefix('bot')->group(function () {
-    Route::get('/clan/{clan_id}', [\App\Http\Controllers\API\ApiClanController::class, 'show']);
-    Route::get('/clan', [\App\Http\Controllers\API\ApiClanController::class, 'index']);
-    Route::get('/player/verification/{nickname}', [ApiPlayerController::class, 'verification']);
+    Route::get('/{platform}/clan/{clan_id}', [ApiClanController::class, 'show']);
+    Route::get('/{platform}/clan', [ApiClanController::class, 'index']);
+    Route::get('/{platform}/player/verification/{nickname}', [ApiPlayerController::class, 'verification']);
     Route::get('/player/{nickname}', [ApiPlayerController::class, 'show']);
-    Route::get('/ranking/index/{matchMode}/{component}/{count}', [RankingController::class, 'index']);
-    Route::get('/ranking/update/{nickName}', [RankingController::class, 'update']);
-    Route::get('/ranking/stats/{matchMode}/{nickName}', [RankingController::class, 'showOne']);
-    Route::get('/ranking/stats/{nickName}', [RankingController::class, 'show']);
-    Route::get('/ranking/ranks', [RankingController::class, 'ranks']);
+    Route::get('/{platform}/ranking/index/{matchMode}/{component}/{count}', [RankingController::class, 'index']);
+    Route::get('/{platform}/ranking/update/{nickName}', [RankingController::class, 'update']);
+    Route::get('/{platform}/ranking/stats/{matchMode}/{nickName}', [RankingController::class, 'showOne']);
+    Route::get('/{platform}/ranking/stats/{nickName}', [RankingController::class, 'show']);
+    Route::get('/{platform}/ranking/ranks', [RankingController::class, 'ranks']);
 });

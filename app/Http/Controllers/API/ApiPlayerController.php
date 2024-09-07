@@ -28,9 +28,9 @@ class ApiPlayerController extends Controller
      * @param string $nickName
      * @return JsonResponse
      */
-    public function show(string $nickName): JsonResponse
+    public function show(string $discordId): JsonResponse
     {
-        $player = Player::where('playerName', $nickName)->first();
+        $player = Player::where('discord_id', $discordId)->first();
 
         return response()->json([
             'correct' => !!$player,
