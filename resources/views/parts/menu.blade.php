@@ -6,7 +6,7 @@
         </a>
         <div class="flex md:order-2">
             <div class="hidden lg:block">
-                <a href="https://discord.gg/FKKeXsC5uW"
+                <a href="https://discord.gg/8hZAt7DXdA"
                    target="_blank"
                    class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-white rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-800">
               <span
