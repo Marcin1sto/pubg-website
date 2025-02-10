@@ -1,0 +1,99 @@
+.przesylkiTitle {
+  margin-bottom: 48px;
+
+  &--sliderTitle {
+    margin-left: 40px;
+
+    @media screen and (max-width: 839px) {
+      margin-left: 0;
+    }
+  }
+}
+
+.przesylki {
+  margin-top: 72px;
+  margin-bottom: 148px;
+
+  &_list {
+    //background-color: orange;
+    margin-bottom: 32px;
+    list-style: url("../../public/icons/listSquare.png");
+    max-width: 400px;
+    padding-left: 16px;
+  }
+
+  &_linkImg {
+    width: 37px;
+    height: 37px;
+  }
+
+  &_listItem {
+    color: #262B44;
+    //font-family: Open Sans;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 17px;
+    margin-bottom: 16px;
+    //background-color: darkorange;
+  }
+
+  &_button {
+    padding: 16px 48px;
+    background: linear-gradient(0.25turn, #5384EC, #66B5C4);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    border-radius: 100px;
+    max-height: 54px;
+
+    &:hover {
+      box-shadow: 0px 8px 24px 0px #568AE8B2;
+    }
+  }
+
+  &_rotatorPanel {
+    background-color: #F2F5FB;
+    padding: 40px 80px;
+    border-radius: 8px;
+    //min-height: 276px;
+    max-width: 100%;
+    margin: 0 40px;
+  }
+
+  &_rotatorTitle {
+    color: #262B44;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+  }
+
+  &_rotatorTitle {
+    color: #262B44;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    margin-bottom: 32px;
+  }
+
+  &_rotatorTxt {
+    color: #262B44;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+
+    &--bold {
+      font-weight: 700;
+    }
+
+    &--big {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    &--bigBold {
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+}

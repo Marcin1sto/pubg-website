@@ -1,0 +1,4 @@
+nazwa;typ;email;ulica;nr-domu;nr-lokalu;miasto;kod-pocztowy;telefon;
+Testowa Firma sp. zoo;nadawca;test@domena.pl;£adna Ulica;32;46;Warszawa;12-356;2 313 321 312 313 120;
+Imiê i Nazwisko;odbiorca;test-odbiorcy@domena.pl;Ulica Odbiorcy;32;46;Elbl¹g;82-300;2 313 321 312 313 120;
+FirmaOdbiorcy.net;odbiorca;firma-odbiorcy@domena.pl;Ulica Odbiorcy 2;32;46;Warszawa;12-356;2 313 321 312 313 120;

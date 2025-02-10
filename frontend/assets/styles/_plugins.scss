@@ -1,0 +1,130 @@
+.header {
+  font-family: Open Sans;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 62px;
+  margin-bottom: 32px;
+  color: #262B44;
+}
+
+.plugins {
+  &_container {
+    padding: 32px;
+    height: 100%;
+  }
+
+  &_containerItems {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    container-type: inline-size;
+    container-name: pluginsContainerItems;
+  }
+
+  &_containerItem {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 16px;
+    border-radius: 8px;
+    border: 2px solid #F2F2F2;
+    background-color: #FFFFFF;
+    width: 250px;
+    height: 140px;
+    font-weight: 700;
+    font-size: 25px;
+    text-decoration: none;
+    color: #262B44;
+
+    &--big {
+      width: 1000px;
+      height: 210px;
+
+      .plugins_containerContent {
+        font-size: 21px;
+      }
+    }
+
+    &--details {
+      @container pluginsContainerItems (max-width: 499px) {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+      }
+    }
+  }
+
+  &_containerContent {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-weight: 400;
+    color: #262B44;
+  }
+
+  &_infoContainer {
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    text-decoration: none;
+    color: #262B44;
+    padding: 32px;
+    margin: 32px 0;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.0784313725);
+    width: 100%;
+    max-width: 940px;
+    container-type: inline-size;
+    container-name: pluginsInfoContainer;
+  }
+
+  &_infoImg {
+    height: auto;
+    max-width: 600px;
+    margin-bottom: 16px;
+
+    @container pluginsInfoContainer (max-width: 664px) {
+      max-width: 100%;
+    }
+  }
+
+  &_infoTxt {
+    font-family: Open Sans;
+    color: #262b44;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 16px;
+  }
+
+  &_infoTitle {
+    color: #262b44;
+    font-family: Open Sans;
+    font-size: 33px;
+    font-weight: 600;
+    line-height: 33px;
+    margin-bottom: 24px;
+  }
+
+  &_infoLink {
+    font-family: Open Sans;
+    color: #262b44;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 16px;
+  }
+
+  &_ul {
+    font-family: Open Sans;
+    color: #262b44;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+  }
+}

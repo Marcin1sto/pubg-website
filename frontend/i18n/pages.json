@@ -1,0 +1,46 @@
+{
+  "login": {
+    "en": "/login",
+    "pl": "/logowanie"
+  },
+  "register": {
+    "en": "/register",
+    "pl": "/rejestracja"
+  },
+  "remember": {
+    "en": "/remember-password",
+    "pl": "/przypomnij-haslo"
+  },
+  "home": {
+    "en": "/",
+    "pl": "/"
+  },
+  "contact": {
+    "en": "/contact",
+    "pl": "/kontakt"
+  },
+  "panel/contact": {
+    "en": "/panel/contact",
+    "pl": "/panel/kontakt"
+  },
+  "panel/order": {
+    "en": "/panel/order",
+    "pl": "/panel/zamowienia"
+  },
+  "panel/bank": {
+    "en": "/panel/bank",
+    "pl": "/panel/skarbonka"
+  },
+  "regulations": {
+    "en": "/regulations",
+    "pl": "/regulamin"
+  },
+  "privacy-policy": {
+    "en": "/privacy-policy",
+    "pl": "/polityka-prywatnosci"
+  },
+  "complaints": {
+    "en": "/complaints",
+    "pl": "/reklamacje"
+  }
+}

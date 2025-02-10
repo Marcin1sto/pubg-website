@@ -1,0 +1,273 @@
+.prices {
+  &_header {
+    font-family: Open Sans;
+    font-size: 33px;
+    font-weight: 600;
+    line-height: 33px;
+    margin: 56px 0 16px;
+    color: #262B44;
+  }
+
+  &_title {
+    color: #262B44;
+    font-family: Open Sans;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 48px;
+    margin-bottom: 32px;
+
+    @media screen and (max-width: 496px) {
+      font-size: 36px;
+      line-height: 36px;
+    }
+  }
+
+  &_list {
+    margin-bottom: 32px;
+    list-style: url(../../public/icons/listCheck.png);
+    padding-left: 23px;
+    width: 100%;
+    max-width: 450px;
+  }
+
+  &_listItem {
+    color: #262B44;
+    font-family: Open Sans;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 16px;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  &_listItemLink {
+    color: #4285F4;
+    font-family: Open Sans;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 16px;
+  }
+
+  &_mainNavigation {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-top: 32px;
+
+    @media screen and (max-width: 496px) {
+      justify-content: center;
+    }
+  }
+
+  &_banerContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 56px 0 16px;
+    gap: 16px;
+
+    &--marginBig {
+      margin-bottom: 80px;
+    }
+
+    @media screen and (max-width: 849px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &_specialPromo {
+    position: absolute;
+    top: -40px;
+    left: 360px;
+
+    @media screen and (max-width: 1439px) {
+      left: 110px;
+    }
+
+    &--50 {
+      width: 170px;
+      height: auto;
+      top: 0;
+      left: 400px;
+
+      @media screen and (max-width: 1439px) {
+        left: 110px;
+      }
+    }
+  }
+
+  &_columnTxt {
+    width: calc(60% - 8px);
+    //display: flex;
+    //flex-wrap: wrap;
+    //align-items: center;
+    //justify-content: flex-start;
+
+    @media screen and (max-width: 849px) {
+      width: 100%;
+    }
+  }
+
+  &_columnImg {
+    width: calc(40% - 8px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+
+    @media screen and (max-width: 849px) {
+      width: calc(100% + 60px);
+      margin: 0 -30px;
+      overflow: hidden;
+    }
+  }
+
+  &_txt {
+    //color: #262B44;
+    //font-size: 13px;
+    //font-weight: 400;
+    //line-height: 24px;
+    color: #262B44;
+    font-family: Open Sans;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  &_tableContainer {
+    overflow: auto;
+  }
+
+  &_table {
+    border-radius: 8px;
+    border-collapse: collapse;
+    min-width: 850px;
+
+    &--marginBottom {
+      margin-bottom: 64px;
+    }
+  }
+
+  &_headerRow {
+    background: #F2F5FB;
+  }
+
+  &_th {
+    font-family: Open Sans;
+    font-size: 13.33px;
+    font-weight: 700;
+    line-height: 18.15px;
+    text-align: left;
+    color: #262B44;
+    border: 1px solid #F2F2F2;
+    height: 70px;
+    text-align: center;
+
+    &--flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+
+  &_td {
+    font-family: Open Sans;
+    font-size: 13px;
+    font-weight: 400;
+    //line-height: 24px;
+    line-height: 16px;
+    color: #262B44;
+    border: 1px solid #F2F2F2;
+    height: 70px;
+    text-align: center;
+
+    span {
+      font-size: 11px;
+    }
+  }
+
+  &_infoContainer {
+    margin: 0 40px;
+  }
+
+  &_infoTxt {
+    font-family: Open Sans;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #262B44;
+    margin-bottom: 16px;
+
+    &--bold {
+      font-weight: 700;
+    }
+  }
+
+  &_specialInfoContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  &_specialInfoTxt {
+    font-family: Open Sans;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #262B44;
+    text-align: center;
+
+    &--priceDetailsMobileInfo {
+      margin-bottom: 16px;
+
+      @media screen and (min-width: 540px) {
+        display: none;
+      }
+    }
+
+    a {
+      font-family: Open Sans;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      color: #262B44;
+    }
+  }
+
+  &_infoContainerColumnWrapper {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    align-items: center;
+    margin: 20px 0 40px;
+  }
+
+  &_infoContainerTxtWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_link {
+    font-family: Open Sans;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 27px;
+    color: #4285F4;
+    text-decoration: none;
+  }
+}
+
+#paleta1, #paleta2, #paleta3, #paleta4, #paleta5 {
+  scroll-margin-top: 217px;
+}

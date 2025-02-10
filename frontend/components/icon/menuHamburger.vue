@@ -1,0 +1,7 @@
+<template>
+  <svg width="34" height="21" viewBox="0 0 34 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="34" height="3" rx="1.5" fill="#4285F4"/>
+    <rect y="9" width="34" height="3" rx="1.5" fill="#4285F4"/>
+    <rect y="18" width="34" height="3" rx="1.5" fill="#4285F4"/>
+  </svg>
+</template>

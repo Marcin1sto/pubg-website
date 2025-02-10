@@ -1,0 +1,219 @@
+.hero {
+  //background-color: mintcream;
+}
+
+.heroContainer{
+  margin-top: 35px;
+  margin-bottom: 27px;
+
+  &--noMargin {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.heroTxtContainer {
+  width: calc(100% - 469px);
+  margin: 56px 30px 0 0;
+
+  &_subtitle {
+    color: #7E7E7E;
+    font-family: Open Sans;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 17px;
+    margin-bottom: 4px;
+  }
+
+  &_title {
+    color: #262B44;
+    font-family: Open Sans;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 48px;
+    margin-bottom: 32px;
+  }
+
+  &_list {
+    //background-color: orange;
+    margin-bottom: 32px;
+    list-style: url(../../public/icons/listCheck.png);
+    padding-left: 23px;
+    width: 100%;
+    //max-width: 400px;
+    max-width: 460px;
+  }
+
+  &_listItem {
+    color: #262B44;
+    font-family: Open Sans;
+    //font-size: 13px;
+    font-size: 17px;
+    font-weight: 400;
+    //line-height: 17px;
+    line-height: 24px;
+    margin-bottom: 16px;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  &_button {
+    padding: 16px 48px;
+    background: linear-gradient(0.25turn, #5384EC, #66B5C4);
+    color: #FFFFFF;
+    //font-family: 'Open Sans';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    border-radius: 100px;
+    max-height: 54px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 24px;
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+
+    &:hover {
+      box-shadow: 0px 8px 24px 0px #568AE8B2;
+    }
+  }
+
+  &_promoContainer {
+    width: 220px;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0px 0px 15px 0px #00000014;
+    position: absolute;
+    top: 180px;
+    left: -120px;
+
+    @media screen and (max-width: 1469px) {
+      left: 0;
+    }
+
+    @media screen and (max-width: 849px) {
+      left: 30px;
+    }
+
+    &--priceList {
+      @media screen and (max-width: 849px) {
+        top: 60px;
+      }
+    }
+  }
+
+  &_promoContainerHeader {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background: linear-gradient(90deg, #FDAC2A 0%, #E57815 100%);
+  }
+
+  &_promoContainerTitle {
+    font-family: Open Sans;
+    font-size: 21px;
+    font-weight: 700;
+    text-align: center;
+    color: #FFFFFF;
+    width: 100%;
+  }
+
+  &_promoContainerContent {
+    padding: 32px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    background-color: #ffffff;
+    height: 226px;
+  }
+
+  &_promoContainerTxt {
+    font-family: Open Sans;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: center;
+    //margin-bottom: 8px;
+    color: #262B44;
+    width: 100%;
+    //height: 44px;
+  }
+
+  &_promoContainerPrice {
+    font-family: Open Sans;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 31px;
+    text-align: center;
+    margin-bottom: 6px;
+    color: #4285F4;
+    width: 100%;
+  }
+
+  &_promoContainerLink {
+    font-family: Open Sans;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 17px;
+    text-decoration: underline;
+    text-transform: uppercase;
+    color: #4285F4;
+  }
+}
+
+.heroImg {
+  width: 439px;
+  height: 452px;
+}
+
+.couriersTitle {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 23px;
+  margin-bottom: 42px;
+  color: #262B44;
+}
+
+.couriersList {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  //padding-bottom: 70px;
+  padding-bottom: 110px;
+  width: 100%;
+
+  @media screen and (max-width: 1139px) {
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+}
+
+.couriersListItem {
+  width: 120px;
+  height: 60px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_img {
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}

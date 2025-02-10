@@ -1,0 +1,87 @@
+<template>
+  <div class="row">
+    <div class="prices_tableContainer" style="transform: rotateX(180deg);">
+      <table class="prices_table" style="transform: rotateX(180deg);">
+        <thead>
+        <tr class="prices_headerRow">
+          <th class="prices_th" width="120px">Kraj</th>
+          <th class="prices_th" width="230px">Waga do 1 kg</th>
+          <th class="prices_th" width="230px">Waga do 3 kg</th>
+          <th class="prices_th" width="230px">Waga do 5 kg</th>
+          <th class="prices_th">Waga powyżej 5 kg</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <th class="prices_th prices_th--flex">
+            <NuxtImg src="icons/selectCountry/countries/Germany.png" width="60px" height="36px"/>
+            <span>Niemcy</span>
+          </th>
+          <td class="prices_td">19,49 zł</td>
+          <td class="prices_td">19,49 zł</td>
+          <td class="prices_td">20,49 zł</td>
+          <td class="prices_td" rowspan="6">
+            <div class="prices_infoContainer">
+              <p class="prices_infoTxt">Ceny i warunki przesyłek powyżej 5 kg dostępne są po zalogowaniu się</p>
+              <nuxt-link-locale to="register" class="prices_link">Zarejestruj się</nuxt-link-locale>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <th class="prices_th prices_th--flex">
+            <NuxtImg src="icons/selectCountry/countries/Rumunia (2).png" width="60px" height="36px"/>
+            <span>Rumunia</span>
+          </th>
+          <td class="prices_td">19,49 zł</td>
+          <td class="prices_td">19,49 zł</td>
+          <td class="prices_td">19,49 zł</td>
+        </tr>
+
+        <tr>
+          <th class="prices_th prices_th--flex">
+            <NuxtImg src="icons/selectCountry/countries/Bułgaria.png" width="60px" height="36px"/>
+            <span>Bułgaria</span>
+          </th>
+          <td class="prices_td">20,49 zł</td>
+          <td class="prices_td">29,49 zł</td>
+          <td class="prices_td">29,49 zł</td>
+        </tr>
+
+        <tr>
+          <th class="prices_th prices_th--flex">
+            <NuxtImg src="icons/selectCountry/countries/Włochy.png" width="60px" height="36px"/>
+            <span>Włochy</span>
+          </th>
+          <td class="prices_td">29,49 zł</td>
+          <td class="prices_td">29,49 zł</td>
+          <td class="prices_td">10,49 zł</td>
+        </tr>
+
+        <tr>
+          <th class="prices_th prices_th--flex">
+            <NuxtImg src="icons/selectCountry/countries/Austria.png" width="60px" height="36px"/>
+            <span>Austria</span>
+          </th>
+          <td class="prices_td">29,49 zł</td>
+          <td class="prices_td">31,49 zł</td>
+          <td class="prices_td">34,99 zł</td>
+        </tr>
+
+        <tr>
+          <th class="prices_th prices_th--flex">
+            <NuxtImg src="icons/selectCountry/countries/Francja.png" width="60px" height="36px"/>
+            <span>Francja</span>
+          </th>
+          <td class="prices_td">30,49 zł</td>
+          <td class="prices_td">35,49 zł</td>
+          <td class="prices_td">45,49 zł</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+<script setup lang="ts">
+</script>
