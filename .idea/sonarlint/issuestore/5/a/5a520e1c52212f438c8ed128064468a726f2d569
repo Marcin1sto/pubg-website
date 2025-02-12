@@ -1,0 +1,7 @@
+
+_php:S1037"KSplit this 131 characters long line (which is greater than 120 authorized).(²‹óš
+K	php:S1185"6Remove this method "__construct" to simply inherit it.(ƒöÙƒ
+X	php:S18541">Remove this useless assignment to local variable '$timeDelay'.(ÿ¶°…şÿÿÿÿ
+S	php:S18543">Remove this useless assignment to local variable '$timeDelay'.(ï—û
+jphp:S1280"VEnd this switch case with an unconditional break, continue, return or throw statement.(Åİ¨‘
+ophp:S1282"VEnd this switch case with an unconditional break, continue, return or throw statement.(Ö‰öàúÿÿÿÿ
