@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import bgImage from '@/public/assets/img/bg/team_bg.jpg'
+
+const { selectedGame } = storeToRefs(usePagesStore())
+const { getPageSubTitle } = usePagesStore()
+const {t} = useI18n()
+console.log(getPageSubTitle())
 </script>
 
 <template>
   <main class="main--area overflow-x-hidden">
-
     <!-- slider-area done -->
     <section class="slider__area slider__bg bg-center bg-cover z-[1] pt-[158px] pb-[54px] px-0 relative after:right-0 before:content-[''] before:absolute before:w-6/12 before:bg-[#45f882] before:h-[50px] before:left-0 before:bottom-0 before:clip-path-polygon-[0_0,_0_100%,_100%_100%] after:content-[''] after:absolute after:w-6/12 after:bg-[#45f882] after:h-[50px] after:left-auto after:bottom-0 after:clip-path-polygon-[100%_0,_0_100%,_100%_100%]
         xl:before:h-[40px] xl:after:h-[40px]
@@ -42,13 +46,7 @@ import bgImage from '@/public/assets/img/bg/team_bg.jpg'
                                     xl:text-[118px]
                         sm:text-[14vw] sm:drop-shadow-[-1px_5px_0px_rgba(69,248,130,0.66)] sm:mt-0 sm:mb-[21px] sm:mx-0
                         xsm:text-[14vw] xsm:drop-shadow-[-1px_5px_0px_rgba(69,248,130,0.66)] xsm:mt-0 xsm:mb-[21px] xsm:mx-0
-                                    " data-wow-delay=".5s">Granie</h2>
-                  <p class=" text-[26px] uppercase font-bold tracking-[5px] leading-[1.4] text-[#fff] m-0 wow fadeInUp
-                                    md:text-2xl
-                                    lg:text-[22px]
-                                    sm:text-xl sm:tracking-[3px]
-                                    xsm:text-xl xsm:tracking-[3px]
-                                    " data-wow-delay=".8s">w gry online</p>
+                                    " data-wow-delay=".5s">{{ getPageSubTitle() ? getPageSubTitle() : (selectedGame ? t('games-names.'+selectedGame) : 'Granie') }}</h2>
                 </div>
               </div>
               <div class="w-6/12 basis-6/12 xxl:w-5/12 xxl:basis-5/12 xl:w-5/12 xl:basis-5/12 lg:w-6/12 lg:basis-6/12 md:w-full md:basis-full sm:w-full sm:basis-full xsm:w-full xsm:basis-full relative px-[15px]">
@@ -58,7 +56,8 @@ import bgImage from '@/public/assets/img/bg/team_bg.jpg'
                                         lg:ml-auto lg:mr-0 lg:my-0
                                         sm:mx-auto sm:my-0
                                         xsm:mx-auto xsm:my-0
-                                    " src="/public/assets/img/slider/slider_img01.png" data-magnetic alt="img">
+                                        max-h-[600px] max-w-[600px] object-cover
+                                    " :src="selectedGame ? `/assets/img/games/${selectedGame}.png` : '/assets/img/slider/slider_img01.png'" data-magnetic alt="gameimage">
                 </div>
               </div>
             </div>
@@ -66,20 +65,20 @@ import bgImage from '@/public/assets/img/bg/team_bg.jpg'
         </div>
       </div>
       <div class="slider__shapes opacity-[0.27]">
-        <img src="/public/assets/img/slider/slider_shape01.png" alt="shape" class=" absolute animate-[shapeBlinker_1.5s_linear_infinite] opacity-0 z-[-1] left-[23%] top-[17%] delay-[0.2s]
+        <img src="/assets/img/slider/slider_shape01.png" alt="shape" class=" absolute animate-[shapeBlinker_1.5s_linear_infinite] opacity-0 z-[-1] left-[23%] top-[17%] delay-[0.2s]
                 md:left-[13%] md:top-[12%]
                 sm:left-[11%] sm:top-[11%]
                 xsm:left-[11%] xsm:top-[11%]
                 ">
-        <img src="/public/assets/img/slider/slider_shape02.png" alt="shape" class=" absolute animate-[shapeBlinker_1.5s_linear_infinite] opacity-0 z-[-1] left-[29%] bottom-[45%] delay-[0.4s]
+        <img src="/assets/img/slider/slider_shape02.png" alt="shape" class=" absolute animate-[shapeBlinker_1.5s_linear_infinite] opacity-0 z-[-1] left-[29%] bottom-[45%] delay-[0.4s]
                 md:left-[12%] md:bottom-[45%]
                 sm:left-[10%] sm:bottom-[55%]
                 xsm:left-[10%] xsm:bottom-[55%]">
-        <img src="/public/assets/img/slider/slider_shape03.png" alt="shape" class=" absolute animate-[shapeBlinker_1.5s_linear_infinite] opacity-0 z-[-1] right-[47%] top-[20%] delay-[0.2s]
+        <img src="/assets/img/slider/slider_shape03.png" alt="shape" class=" absolute animate-[shapeBlinker_1.5s_linear_infinite] opacity-0 z-[-1] right-[47%] top-[20%] delay-[0.2s]
                 md:right-[23%] md:top-[15%]
                 sm:right-[10%] sm:top-[17%]
                 xsm:right-[10%] xsm:top-[17%]">
-        <img src="/public/assets/img/slider/slider_shape04.png" alt="shape" class=" absolute animate-[shapeBlinker_1.5s_linear_infinite] opacity-0 z-[-1] right-[42%] top-[23%] delay-[0.6s]
+        <img src="/assets/img/slider/slider_shape04.png" alt="shape" class=" absolute animate-[shapeBlinker_1.5s_linear_infinite] opacity-0 z-[-1] right-[42%] top-[23%] delay-[0.6s]
                 xl:right-[40%] xl:top-[28%]
                 lg:right-[40%] lg:top-[28%]
                 md:right-[20%] md:top-[35%]

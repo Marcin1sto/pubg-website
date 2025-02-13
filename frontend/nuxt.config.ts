@@ -1,30 +1,52 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  ssr: false,
   devtools: {enabled: true},
-  css: ['@@/assets/css/tailwind.css'],
-  options: {
-    ssr: true,
-    target: 'static',
-    postcss: {
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
-      },
+
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
     },
   },
+
+  css: ['@@/assets/css/tailwind.css'],
+
+  // options: {
+  //   postcss: {
+  //     plugins: {
+  //       tailwindcss: {},
+  //       autoprefixer: {},
+  //     },
+  //   },
+  // },
+
   tailwindcss: {
     configPath: "./tailwind.config.js",
-    exposeConfig:true,
+    exposeConfig: true,
     viewer: true,
   },
+
+  i18n: {
+    locales: ['en', 'pl'],
+    defaultLocale: 'pl',
+    vueI18n: './i18n.config.ts' // Lub `i18n.config.ts`
+  },
+
   modules: [
-    // '@pinia/nuxt',
-    // '@nuxtjs/i18n',
-    // '@nuxt/image',
-    // '@pinia-plugin-persistedstate/nuxt',
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/tailwindcss',
-    // '@tailwindcss/postcss'
+    '@nuxtjs/i18n'
   ],
+  vite: {
+    server: {
+      watch: {
+        usePolling: false
+      },
+      hmr: false
+    }
+  },
+  compatibilityDate: '2025-02-13',
 })

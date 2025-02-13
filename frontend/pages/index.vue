@@ -1,15 +1,8 @@
 <template>
-  <LayoutMenu />
-  <SectionsMainArea />
-  <SectionsAdministration />
-  <SectionsJoinUs />
-  <SectionsSocials />
+
 </template>
 
 <script lang="ts" setup>
-  import {NuxtImg} from "#components";
-  import {publicAssetsURL} from "nuxt/dist/core/runtime/nitro/paths";
-
   // import('public/assets/js/vendor/jquery-3.6.0.min.js');
   // import('public/assets/js/jquery.magnific-popup.min.js');
   // import('public/assets/js/jquery.countdown.min.js');
@@ -37,16 +30,16 @@
 </script>
 
 
-<style lang="css">
-@import "public/assets/css/animate.min.css";
-@import "public/assets/css/flaticon.css";
-@import "public/assets/css/flowbite.min.css";
-@import "public/assets/css/fontawesome-all.min.css";
-@import "public/assets/css/jquery-ui.css";
-@import "public/assets/css/magnific-popup.css";
-@import "public/assets/css/odometer.css";
-@import "public/assets/css/slick.css";
-@import "public/assets/css/swiper-bundle.css";
-@import "public/assets/css/tg-cursor.css";
-@import "public/assets/style.css";
-</style>
+<!--<style lang="css">-->
+<!--//@import "public/assets/css/animate.min.css";-->
+<!--//@import "public/assets/css/flaticon.css";-->
+<!--//@import "public/assets/css/flowbite.min.css";-->
+<!--//@import "public/assets/css/fontawesome-all.min.css";-->
+<!--//@import "public/assets/css/jquery-ui.css";-->
+<!--//@import "public/assets/css/magnific-popup.css";-->
+<!--//@import "public/assets/css/odometer.css";-->
+<!--//@import "public/assets/css/slick.css";-->
+<!--//@import "public/assets/css/swiper-bundle.css";-->
+<!--//@import "public/assets/css/tg-cursor.css";-->
+<!--//@import "public/assets/style.css";-->
+<!--</style>-->

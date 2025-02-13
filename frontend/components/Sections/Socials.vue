@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const { joinDiscordUrl } = storeToRefs(usePagesStore());
 </script>
 
 <template>
@@ -39,7 +39,7 @@
         </div>
         <div class="w-2/12 basis-2/12 sm:w-4/12 sm:basis-4/12 xsm:w-6/12 xsm:basis-6/12 md:w-3/12 md:basis-3/12 md:px-[10px] sm:px-[10px] xsm:px-[10px] relative px-[5px]">
           <div class="social__item">
-            <a href="#" class=" flex flex-col items-center justify-center text-center bg-[#0a0b0f] border-[#68fb9a] w-full h-40 relative mt-0 mb-[5px] mx-0 border-[3px] border-solid group lg:h-[115px] md:h-[115px] sm:h-[115px] xsm:h-[115px]">
+            <a :href="joinDiscordUrl" target="_blank" class=" flex flex-col items-center justify-center text-center bg-[#0a0b0f] border-[#68fb9a] w-full h-40 relative mt-0 mb-[5px] mx-0 border-[3px] border-solid group lg:h-[115px] md:h-[115px] sm:h-[115px] xsm:h-[115px]">
               <i class=" text-[44px] text-[#d8d8d8] transition-all duration-[0.3s] ease-[ease-out] delay-[0s]  group-hover:text-[#68fb9a] flaticon-discord lg:text-[40px] md:text-[40px] sm:text-[40px] xsm:text-[40px]"></i>
               <span class=" block uppercase text-[#68fb9a] text-[14px] font-medium tracking-[2px] leading-none mt-[22px] mb-0 mx-0">discord</span>
               <svg class=" fill-[#68fb9a] absolute left-[-3px] -bottom-2" xmlns="http://www.w3.org/2000/svg" width="65" height="5" viewBox="0 0 65 5">
