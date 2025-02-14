@@ -4,7 +4,6 @@ import bgImage from '@/public/assets/img/bg/team_bg.jpg'
 const { selectedGame } = storeToRefs(usePagesStore())
 const { getPageSubTitle } = usePagesStore()
 const {t} = useI18n()
-console.log(getPageSubTitle())
 </script>
 
 <template>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-
+  <SectionsGameNews />
 </template>
 
 <style lang="css">

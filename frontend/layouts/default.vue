@@ -18,21 +18,21 @@ watch(router.currentRoute, () => {
 // import('public/assets/js/jquery.countdown.min.js');
 // import('public/assets/js/jquery.waypoints.min.js');
 // import('public/assets/js/jquery.odometer.min.js');
-// import('public/assets/js/simpleParallax.min.js');
-// import('public/assets/js/jquery-ui.min.js');
-// import('public/assets/js/gsap.min.js');
-// import('public/assets/js/scrollTrigger.min.js');
-// import('public/assets/js/splitText.min.js');
-// import('public/assets/js/jquery.appear.js');
-// import('public/assets/js/tg-cursor.min.js');
-// import('public/assets/js/swiper-bundle.js');
-// import('public/assets/js/jarallax.min.js');
-// import('public/assets/js/parallax.min.js');
-// import('public/assets/js/slick.min.js');
-// import('public/assets/js/ajax-form.js');
-// import('public/assets/js/vivus.min.js');
-// import('public/assets/js/wow.min.js');
-// import('~/assets/js/flowbite.min.js');
+import('~/assets/js/simpleParallax.min.js');
+// import('~/assets/js/jquery-ui.min.js');
+// import('~/assets/js/gsap.min.js');
+// import('~/assets/js/scrollTrigger.min.js');
+// import('~/assets/js/splitText.min.js');
+// import('~/assets/js/jquery.appear.js');
+import('~/assets/js/tg-cursor.min.js');
+import('~/assets/js/swiper-bundle.js');
+import('~/assets/js/jarallax.min.js');
+import('~/assets/js/parallax.min.js');
+// import('~/assets/js/slick.min.js');
+// import('~/assets/js/ajax-form.js');
+import('~/assets/js/vivus.min.js');
+// import('~/assets/js/wow.min.js');
+import('~/assets/js/flowbite.min.js');
 // import('~/assets/js/main.js');
 </script>
 
