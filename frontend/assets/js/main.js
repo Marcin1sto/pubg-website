@@ -327,7 +327,7 @@ $swiperSelector.each(function(index) {
 	=        Third Slider Active		      =
 =============================================*/
 function mainSlider() {
-	$('.slider-active').slick({
+	jQuery('.slider-active').slick({
 		autoplay: false,
 		autoplaySpeed: 10000,
 		dots: false,
@@ -433,48 +433,48 @@ var streamersSwiper = new Swiper('.streamers-active', {
 /*=============================================
 	=    		Brand Active		      =
 =============================================*/
-$('.brand-active').slick({
-	dots: false,
-	infinite: true,
-	speed: 500,
-	autoplay: true,
-	arrows: false,
-	slidesToShow: 6,
-	slidesToScroll: 2,
-	responsive: [
-		{
-			breakpoint: 1200,
-			settings: {
-				slidesToShow: 5,
-				slidesToScroll: 1,
-				infinite: true,
-			}
-		},
-		{
-			breakpoint: 992,
-			settings: {
-				slidesToShow: 4,
-				slidesToScroll: 1
-			}
-		},
-		{
-			breakpoint: 767,
-			settings: {
-				slidesToShow: 4,
-				slidesToScroll: 1,
-				arrows: false,
-			}
-		},
-		{
-			breakpoint: 575,
-			settings: {
-				slidesToShow: 3,
-				slidesToScroll: 1,
-				arrows: false,
-			}
-		},
-	]
-});
+// jQuery('.brand-active').slick({
+// 	dots: false,
+// 	infinite: true,
+// 	speed: 500,
+// 	autoplay: true,
+// 	arrows: false,
+// 	slidesToShow: 6,
+// 	slidesToScroll: 2,
+// 	responsive: [
+// 		{
+// 			breakpoint: 1200,
+// 			settings: {
+// 				slidesToShow: 5,
+// 				slidesToScroll: 1,
+// 				infinite: true,
+// 			}
+// 		},
+// 		{
+// 			breakpoint: 992,
+// 			settings: {
+// 				slidesToShow: 4,
+// 				slidesToScroll: 1
+// 			}
+// 		},
+// 		{
+// 			breakpoint: 767,
+// 			settings: {
+// 				slidesToShow: 4,
+// 				slidesToScroll: 1,
+// 				arrows: false,
+// 			}
+// 		},
+// 		{
+// 			breakpoint: 575,
+// 			settings: {
+// 				slidesToShow: 3,
+// 				slidesToScroll: 1,
+// 				arrows: false,
+// 			}
+// 		},
+// 	]
+// });
 
 
 /*=============================================
@@ -553,36 +553,36 @@ parallaxMouse();
 /*=============================================
 	=    		Odometer Active  	       =
 =============================================*/
-$('.odometer').appear(function (e) {
-	var odo = $(".odometer");
-	odo.each(function () {
-		var countNumber = $(this).attr("data-count");
-		$(this).html(countNumber);
-	});
-});
+// $('.odometer').appear(function (e) {
+// 	var odo = $(".odometer");
+// 	odo.each(function () {
+// 		var countNumber = $(this).attr("data-count");
+// 		$(this).html(countNumber);
+// 	});
+// });
 
 
 /*=============================================
 	=    		Magnific Popup		      =
 =============================================*/
-$('.popup-image').magnificPopup({
-	type: 'image',
-	gallery: {
-		enabled: true
-	},
-    zoom: {
-        enabled: false,
-        duration: 300, // don't foget to change the duration also in CSS
-        opener: function(element) {
-            return element.find('img');
-        }
-    }
-});
-
-/* magnificPopup video view */
-$('.popup-video').magnificPopup({
-	type: 'iframe'
-});
+// $('.popup-image').magnificPopup({
+// 	type: 'image',
+// 	gallery: {
+// 		enabled: true
+// 	},
+//     zoom: {
+//         enabled: false,
+//         duration: 300, // don't foget to change the duration also in CSS
+//         opener: function(element) {
+//             return element.find('img');
+//         }
+//     }
+// });
+//
+// /* magnificPopup video view */
+// $('.popup-video').magnificPopup({
+// 	type: 'iframe'
+// });
 
 
 /*=============================================

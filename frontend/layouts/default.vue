@@ -13,11 +13,12 @@ watch(router.currentRoute, () => {
 
 // const { getSelectedGame } = usePagesStore();
 
-// import('public/assets/js/vendor/jquery-3.6.0.min.js');
-// import('public/assets/js/jquery.magnific-popup.min.js');
-// import('public/assets/js/jquery.countdown.min.js');
-// import('public/assets/js/jquery.waypoints.min.js');
-// import('public/assets/js/jquery.odometer.min.js');
+// import('~/assets/js/swiper-bundle.js');
+// import('~/assets/js/jquery.magnific-popup.min.js');
+import('~/assets/js/vendor/jquery-3.6.0.min.js');
+// import('~/assets/js/jquery.countdown.min.js');
+// import('~/assets/js/jquery.waypoints.min.js');
+import('~/assets/js/jquery.odometer.min.js');
 import('~/assets/js/simpleParallax.min.js');
 // import('~/assets/js/jquery-ui.min.js');
 // import('~/assets/js/gsap.min.js');
@@ -25,7 +26,6 @@ import('~/assets/js/simpleParallax.min.js');
 // import('~/assets/js/splitText.min.js');
 // import('~/assets/js/jquery.appear.js');
 import('~/assets/js/tg-cursor.min.js');
-import('~/assets/js/swiper-bundle.js');
 import('~/assets/js/jarallax.min.js');
 import('~/assets/js/parallax.min.js');
 // import('~/assets/js/slick.min.js');
@@ -33,7 +33,7 @@ import('~/assets/js/parallax.min.js');
 import('~/assets/js/vivus.min.js');
 // import('~/assets/js/wow.min.js');
 import('~/assets/js/flowbite.min.js');
-// import('~/assets/js/main.js');
+import('~/assets/js/main.js');
 </script>
 
 <template>

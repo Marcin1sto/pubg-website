@@ -1,5 +1,6 @@
 <script setup lang="ts">
-
+const route = useRoute();
+// const newsLink = route.meta.find((meta) => meta.newsLink)?.newsLink;
 </script>
 
 <template>
@@ -28,13 +29,14 @@
                         sm:m-[35px_25px_40px_auto]
                         xsm:m-[35px_25px_40px_auto]
                         ">
-            <div
-                class="icon relative z-[1] ml-[22px] after:content-[''] after:absolute after:-translate-x-2/4 after:-translate-y-2/4 after:bg-[url(./assets/img/icons/trophy\_color.png)] after:w-[95px] after:h-24 after:bg-center after:bg-contain after:bg-no-repeat after:z-[-1] after:left-2/4 after:top-2/4">
-              <img class=" max-h-10" src="/assets/img/icons/trophy.png" alt="trophy"></div>
-            <div class="content text-right">
-              <h5 class=" text-[22px] mt-0 mb-0.5 mx-0">Tournament</h5>
-              <span class=" block uppercase text-[14px] font-medium">Development</span>
-            </div>
+<!--            <div-->
+<!--                class="icon relative z-[1] ml-[22px] after:content-[''] after:absolute after:-translate-x-2/4 after:-translate-y-2/4 after:bg-[url(./assets/img/icons/trophy\_color.png)] after:w-[95px] after:h-24 after:bg-center after:bg-contain after:bg-no-repeat after:z-[-1] after:left-2/4 after:top-2/4">-->
+<!--              <img class=" max-h-10" src="/assets/img/icons/trophy.png" alt="trophy">-->
+<!--            </div>-->
+<!--            <div class="content text-right">-->
+<!--              <h5 class=" text-[22px] mt-0 mb-0.5 mx-0">Tournament</h5>-->
+<!--              <span class=" block uppercase text-[14px] font-medium">Development</span>-->
+<!--            </div>-->
           </div>
         </div>
         <div
@@ -44,45 +46,18 @@
             <h3 class="title  text-[45px] font-extrabold tracking-[1px] m-0 leading-[1.15] sm:text-[35px] xsm:text-[35px]">
               Update alert</h3>
           </div>
-          <div class="about__content-two">
-            <p>Gorem npsum dolor sit amet consectetur adipiscing elit. Duis elementum sollici tudin augue euismod. Nulla
-              ullamcorper nunc. Morbi pharetra mi tellus mollis tincidunt massa venenatis. Etiam lacinia
-              ipsumultrices.</p>
+          <div class="about__content-two" v-html="route.meta?.newsDesc">
           </div>
           <div class="about__content-bottom flex flex-row-reverse justify-end items-center relative mt-[50px] mb-0 mx-0 lg:m-[40px_0_0] lg:items-start
                             sm:items-start sm:flex-col-reverse sm:gap-y-[30px] sm:m-[40px_0_0]
                             xsm:items-start xsm:flex-col-reverse xsm:gap-y-[30px] xsm:m-[40px_0_0]">
             <div class="about__funFact-wrap grow">
-              <div class="about__funFact-lists flex items-center flex-wrap gap-[30px_50px]">
-                <div class="about__funFact-item">
-                  <h2 class="count flex items-center text-3xl font-semibold leading-none mt-0 mb-2 mx-0">
-                    <span class="odometer" data-count="40"></span>
-                    <span class="formatting-mark block leading-none ml-[3px]">K</span>
-                  </h2>
-                  <p class=" leading-none text-center text-[14px] font-medium m-0">Member</p>
-                </div>
-                <div class="about__funFact-item">
-                  <h2 class="count flex items-center text-3xl font-semibold leading-none mt-0 mb-2 mx-0">
-                    <span class="odometer" data-count="12"></span>
-                    <span class="formatting-mark block leading-none ml-[3px]">K</span>
-                  </h2>
-                  <p class=" leading-none text-center text-[14px] font-medium m-0">NFT</p>
-                </div>
-                <div class="about__funFact-item">
-                  <h2 class="count flex items-center text-3xl font-semibold leading-none mt-0 mb-2 mx-0">
-                    <span class="odometer" data-count="30"></span>
-                    <span class="formatting-mark block leading-none ml-[3px]">K</span>
-                  </h2>
-                  <p class=" leading-none text-center text-[14px] font-medium m-0">Artist</p>
-                </div>
-              </div>
-              <div class="about__content-btns flex items-center gap-[20px_30px] mt-10 mb-0 mx-0">
-                <!--                <a :href="joinDiscordUrl" target="_blank" class="video__btn tg-btn-1"><span>Dołącz do Discorda</span></a>-->
-                <a href="contact.html"
-                   class="tg-btn-3 tg-svg text-[14px] !text-[#fff] tracking-[0.5px] font-bold w-[158px] h-[55px]">
-                  <div class="svg-icon !fill-transparent !stroke-[#45f882]" id="svg-6"
-                       data-svg-icon="/assets/img/icons/shape.svg"></div>
-                  <span>read more</span>
+              <div v-if="route.meta?.newsLink" class="about__content-btns flex items-center gap-[20px_30px] mt-10 mb-0 mx-0">
+                <a :href="route.meta?.newsLink" target="_blank" class="tg-btn-3 tg-svg hover:opacity-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.29 47" class="svg-icon" id="svg-2">
+                    <path id="shape02" class="cls-1" d="M1.13,24l12-23h125l13,22-13,23h-125Z"/>
+                  </svg>
+                  <span>Czytaj więcej</span>
                 </a>
               </div>
             </div>

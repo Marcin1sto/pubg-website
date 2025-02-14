@@ -18,8 +18,8 @@
                             sm:text-[48px] sm:tracking-[1px] sm:leading-[1.1]
                             xsm:text-[48px] xsm:tracking-[1px] xsm:leading-[1.1]
                             ">WSTĄP DO <span class=" text-[#45f882]">EKIPY</span></h2>
-            <p class=" text-[16px] font-medium text-[#fefefe] tracking-[0.9px] mt-0 mb-[30px] mx-0">I graj z nami w ulubione gry.</p>
-            <a :href="joinDiscordUrl" target="_blank" class="video__btn tg-btn-1"><span>Dołącz do Discorda</span></a>
+<!--            <p class=" text-[16px] font-medium text-[#fefefe] tracking-[0.9px] mt-0 mb-[30px] mx-0">I graj z nami w ulubione gry.</p>-->
+            <a :href="joinDiscordUrl" target="_blank" class="video__btn tg-btn-1 mt-5"><span>Dołącz do Discorda</span></a>
           </div>
         </div>
       </div>
