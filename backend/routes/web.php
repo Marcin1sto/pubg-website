@@ -16,23 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $actualSeason = Season::where('isCurrentSeason', true)->first();
-    $matches = \App\Models\AllPubgPlayersStatistic::all()->first();
-    $data = [
-        'players' => $matches->count_players,
-        'season_number' => $actualSeason->number,
-        'allMatches' => $matches->count_matches,
-        'allKills' => $matches->count_kills,
-        'allWins' => $matches->count_wins,
-//        'events' => \App\Models\Tournament\Tournament::all()
-    ];
-
-    return view('index', $data);
-});
-
-Route::get('/ranking', [RankingController::class, 'index']);
-Route::get('/ranking/{modeType}', [ RankingController::class, 'show'])->name('ranking.type');
-Route::get('/tournament', [RankingController::class, 'index']);
-Route::get('/stats', [StatisticController::class, 'index']);
-Route::get('/stats/{playerName}', [StatisticController::class, 'show']);
+//Route::get('/', function () {
+//    $actualSeason = Season::where('isCurrentSeason', true)->first();
+//    $matches = \App\Models\AllPubgPlayersStatistic::all()->first();
+//    $data = [
+//        'players' => $matches->count_players,
+//        'season_number' => $actualSeason->number,
+//        'allMatches' => $matches->count_matches,
+//        'allKills' => $matches->count_kills,
+//        'allWins' => $matches->count_wins,
+////        'events' => \App\Models\Tournament\Tournament::all()
+//    ];
+//
+//    return view('index', $data);
+//});
+//
+//Route::get('/ranking', [RankingController::class, 'index']);
+//Route::get('/ranking/{modeType}', [ RankingController::class, 'show'])->name('ranking.type');
+//Route::get('/tournament', [RankingController::class, 'index']);
+//Route::get('/stats', [StatisticController::class, 'index']);
+//Route::get('/stats/{playerName}', [StatisticController::class, 'show']);

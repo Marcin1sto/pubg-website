@@ -18,6 +18,7 @@ definePageMeta({
 
 <template>
   <SectionsGameNews />
+  <SectionsPlayers />
 </template>
 
 <style lang="css">

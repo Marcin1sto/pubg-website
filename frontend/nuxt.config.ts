@@ -1,66 +1,65 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-    ssr: false,
-    devtools: {enabled: true},
+  ssr: false,
+  devtools: {enabled: true},
+  compatibilityDate: '2025-02-13',
 
-    app: {
-        head: {
-            charset: 'utf-8',
-            viewport: 'width=device-width, initial-scale=1',
-        },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.API_ENDPOINT || 'http://localhost:3000/'
     },
-
-    css: ['@@/assets/css/tailwind.css'],
-
-    // options: {
-    //   postcss: {
-    //     plugins: {
-    //       tailwindcss: {},
-    //       autoprefixer: {},
-    //     },
-    //   },
-    // },
-
-    tailwindcss: {
-        configPath: "./tailwind.config.js",
-        exposeConfig: true,
-        viewer: true,
+  },
+  nitro: {
+    devProxy: {
+      "/api/": {
+        target: "http://pubg.ddev.site",
+        changeOrigin: true,
+        prependPath: true,
+      },
     },
+  },
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1',
+    },
+  },
 
-    i18n: {
-        locales: ['en', 'pl'],
-        defaultLocale: 'pl',
-        vueI18n: './i18n.config.ts' // Lub `i18n.config.ts`
-    },
+  css: ['@@/assets/css/tailwind.css'],
 
-    modules: [
-        '@pinia/nuxt',
-        '@pinia-plugin-persistedstate/nuxt',
-        '@nuxtjs/tailwindcss',
-        '@nuxtjs/i18n'
-    ],
-    vite: {
-        server: {
-            watch: {
-                usePolling: false
-            },
-            hmr: false
-        }
-    },
-    $development: {
-        vite: {
-            server: {
-                watch: {
-                    usePolling: true,
-                },
-                hmr: {
-                    protocol: "ws",
-                    host: "0.0.0.0",
-                    port: 24678,
-                },
-            },
-        },
-    },
-    compatibilityDate: '2025-02-13',
+  tailwindcss: {
+    configPath: "./tailwind.config.js",
+    exposeConfig: true,
+    viewer: true,
+  },
+
+  i18n: {
+    locales: ['en', 'pl'],
+    defaultLocale: 'pl',
+    vueI18n: './i18n.config.ts' // Lub `i18n.config.ts`
+  },
+
+  modules: [
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n'
+  ],
+
+  proxy: {
+    '/api': {
+      target: 'https://backend.com',
+      changeOrigin: true
+    }
+  },
+
+  vite: {
+    server: {
+      watch: {
+        usePolling: false
+      },
+      hmr: false
+    }
+  }
 })

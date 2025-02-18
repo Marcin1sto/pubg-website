@@ -213,114 +213,114 @@ $('.offCanvas__overlay, .offCanvas__toggle').on('click', function () {
 /*==========================================
 	=        Gallery Active		      =
 =============================================*/
-var $swiperSelector = $('.gallery-active');
-
-$swiperSelector.each(function(index) {
-    var $this = $(this);
-    $this.addClass('swiper-slider-' + index);
-
-    var dragSize = $this.data('drag-size') ? $this.data('drag-size') : 200;
-    var freeMode = $this.data('free-mode') ? $this.data('free-mode') : false;
-    var loop = $this.data('loop') ? $this.data('loop') : true;
-    var slidesDesktop = $this.data('slides-desktop') ? $this.data('slides-desktop') : 1;
-    var slidesTablet = $this.data('slides-tablet') ? $this.data('slides-tablet') : 1;
-    var slidesMobile = $this.data('slides-mobile') ? $this.data('slides-mobile') : 1;
-    var spaceBetween = $this.data('space-between') ? $this.data('space-between'): 1;
-
-    var swiper = new Swiper('.swiper-slider-' + index, {
-      direction: 'horizontal',
-      loop: loop,
-      freeMode: freeMode,
-      centeredSlides: true,
-      spaceBetween: spaceBetween,
-      observer: true,
-        observeParents: true,
-      breakpoints: {
-        1920: {
-          slidesPerView: slidesDesktop
-        },
-        992: {
-          slidesPerView: slidesTablet
-        },
-        320: {
-           slidesPerView: slidesMobile
-        }
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      scrollbar: {
-        el: '.swiper-scrollbar',
-        draggable: true,
-        dragSize: dragSize
-      }
-   });
-});
+// var $swiperSelector = $('.gallery-active');
+//
+// $swiperSelector.each(function(index) {
+//     var $this = $(this);
+//     $this.addClass('swiper-slider-' + index);
+//
+//     var dragSize = $this.data('drag-size') ? $this.data('drag-size') : 200;
+//     var freeMode = $this.data('free-mode') ? $this.data('free-mode') : false;
+//     var loop = $this.data('loop') ? $this.data('loop') : true;
+//     var slidesDesktop = $this.data('slides-desktop') ? $this.data('slides-desktop') : 1;
+//     var slidesTablet = $this.data('slides-tablet') ? $this.data('slides-tablet') : 1;
+//     var slidesMobile = $this.data('slides-mobile') ? $this.data('slides-mobile') : 1;
+//     var spaceBetween = $this.data('space-between') ? $this.data('space-between'): 1;
+//
+//     var swiper = new Swiper('.swiper-slider-' + index, {
+//       direction: 'horizontal',
+//       loop: loop,
+//       freeMode: freeMode,
+//       centeredSlides: true,
+//       spaceBetween: spaceBetween,
+//       observer: true,
+//         observeParents: true,
+//       breakpoints: {
+//         1920: {
+//           slidesPerView: slidesDesktop
+//         },
+//         992: {
+//           slidesPerView: slidesTablet
+//         },
+//         320: {
+//            slidesPerView: slidesMobile
+//         }
+//       },
+//       navigation: {
+//         nextEl: '.swiper-button-next',
+//         prevEl: '.swiper-button-prev'
+//       },
+//       scrollbar: {
+//         el: '.swiper-scrollbar',
+//         draggable: true,
+//         dragSize: dragSize
+//       }
+//    });
+// });
 
 
 /*==========================================
 	=        Project Active		      =
 =============================================*/
-var $swiperSelector = $('.project-active');
-
-$swiperSelector.each(function(index) {
-    var $this = $(this);
-    $this.addClass('swiper-slider-' + index);
-
-    var dragSize = $this.data('drag-size') ? $this.data('drag-size') : 24;
-    var freeMode = $this.data('free-mode') ? $this.data('free-mode') : false;
-    var loop = $this.data('loop') ? $this.data('loop') : true;
-    var slidesDesktop = $this.data('slides-desktop') ? $this.data('slides-desktop') : 4;
-    var slidesLaptop = $this.data('slides-laptop') ? $this.data('slides-laptop') : 4;
-    var slidesTablet = $this.data('slides-tablet') ? $this.data('slides-tablet') : 3;
-    var slidesSmall = $this.data('slides-small') ? $this.data('slides-small') : 3;
-    var slidesMobile = $this.data('slides-mobile') ? $this.data('slides-mobile') : 2;
-    var slidesXs = $this.data('slides-xs') ? $this.data('slides-xs') : 1.5;
-    var spaceBetween = $this.data('space-between') ? $this.data('space-between'): 15;
-
-    var swiper = new Swiper('.swiper-slider-' + index, {
-      direction: 'horizontal',
-      loop: loop,
-      freeMode: freeMode,
-      spaceBetween: spaceBetween,
-        observer: true,
-        observeParents: true,
-      breakpoints: {
-        1920: {
-          slidesPerView: slidesDesktop
-        },
-        1200: {
-          slidesPerView: slidesLaptop
-        },
-        992: {
-          slidesPerView: slidesTablet
-        },
-        768: {
-          slidesPerView: slidesSmall
-        },
-        576: {
-           slidesPerView: slidesMobile,
-           centeredSlides: true,
-           centeredSlidesBounds: true,
-        },
-        0: {
-           slidesPerView: slidesXs,
-           centeredSlides: true,
-           centeredSlidesBounds: true,
-        }
-      },
-      navigation: {
-        nextEl: '.slider-button-next',
-        prevEl: '.slider-button-prev'
-      },
-      scrollbar: {
-        el: '.swiper-scrollbar',
-        draggable: true,
-        dragSize: dragSize
-      }
-   });
-});
+// var $swiperSelector = $('.project-active');
+//
+// $swiperSelector.each(function(index) {
+//     var $this = $(this);
+//     $this.addClass('swiper-slider-' + index);
+//
+//     var dragSize = $this.data('drag-size') ? $this.data('drag-size') : 24;
+//     var freeMode = $this.data('free-mode') ? $this.data('free-mode') : false;
+//     var loop = $this.data('loop') ? $this.data('loop') : true;
+//     var slidesDesktop = $this.data('slides-desktop') ? $this.data('slides-desktop') : 4;
+//     var slidesLaptop = $this.data('slides-laptop') ? $this.data('slides-laptop') : 4;
+//     var slidesTablet = $this.data('slides-tablet') ? $this.data('slides-tablet') : 3;
+//     var slidesSmall = $this.data('slides-small') ? $this.data('slides-small') : 3;
+//     var slidesMobile = $this.data('slides-mobile') ? $this.data('slides-mobile') : 2;
+//     var slidesXs = $this.data('slides-xs') ? $this.data('slides-xs') : 1.5;
+//     var spaceBetween = $this.data('space-between') ? $this.data('space-between'): 15;
+//
+//     var swiper = new Swiper('.swiper-slider-' + index, {
+//       direction: 'horizontal',
+//       loop: loop,
+//       freeMode: freeMode,
+//       spaceBetween: spaceBetween,
+//         observer: true,
+//         observeParents: true,
+//       breakpoints: {
+//         1920: {
+//           slidesPerView: slidesDesktop
+//         },
+//         1200: {
+//           slidesPerView: slidesLaptop
+//         },
+//         992: {
+//           slidesPerView: slidesTablet
+//         },
+//         768: {
+//           slidesPerView: slidesSmall
+//         },
+//         576: {
+//            slidesPerView: slidesMobile,
+//            centeredSlides: true,
+//            centeredSlidesBounds: true,
+//         },
+//         0: {
+//            slidesPerView: slidesXs,
+//            centeredSlides: true,
+//            centeredSlidesBounds: true,
+//         }
+//       },
+//       navigation: {
+//         nextEl: '.slider-button-next',
+//         prevEl: '.slider-button-prev'
+//       },
+//       scrollbar: {
+//         el: '.swiper-scrollbar',
+//         draggable: true,
+//         dragSize: dragSize
+//       }
+//    });
+// });
 
 
 /*=============================================
@@ -350,84 +350,84 @@ function mainSlider() {
 /*=============================================
 	=        Trending Active		      =
 =============================================*/
-var trendSwiper = new Swiper('.trendingNft-active', {
-    // Optional parameters
-          observer: true,
-        observeParents: true,
-    loop: true,
-    slidesPerView: 3,
-    spaceBetween: 30,
-    breakpoints: {
-        '1500': {
-            slidesPerView: 3,
-        },
-        '1200': {
-            slidesPerView: 3,
-        },
-        '992': {
-            slidesPerView: 2,
-        },
-        '768': {
-            slidesPerView: 2,
-        },
-        '576': {
-            slidesPerView: 1,
-        },
-        '0': {
-            slidesPerView: 1,
-        },
-    },
-    // Navigation arrows
-    navigation: {
-        nextEl: ".slider-button-next",
-        prevEl: ".slider-button-prev",
-    },
-});
+// var trendSwiper = new Swiper('.trendingNft-active', {
+//     // Optional parameters
+//           observer: true,
+//         observeParents: true,
+//     loop: true,
+//     slidesPerView: 3,
+//     spaceBetween: 30,
+//     breakpoints: {
+//         '1500': {
+//             slidesPerView: 3,
+//         },
+//         '1200': {
+//             slidesPerView: 3,
+//         },
+//         '992': {
+//             slidesPerView: 2,
+//         },
+//         '768': {
+//             slidesPerView: 2,
+//         },
+//         '576': {
+//             slidesPerView: 1,
+//         },
+//         '0': {
+//             slidesPerView: 1,
+//         },
+//     },
+//     // Navigation arrows
+//     navigation: {
+//         nextEl: ".slider-button-next",
+//         prevEl: ".slider-button-prev",
+//     },
+// });
 
 
 /*=============================================
 	=        Streamers Active		      =
 =============================================*/
-var streamersSwiper = new Swiper('.streamers-active', {
-    // Optional parameters
-          observer: true,
-        observeParents: true,
-    loop: true,
-    slidesPerView: 5,
-    spaceBetween: 20,
-    breakpoints: {
-        '1500': {
-            slidesPerView: 5,
-        },
-        '1200': {
-            slidesPerView: 4,
-        },
-        '992': {
-            slidesPerView: 4,
-        },
-        '768': {
-            slidesPerView: 3,
-        },
-        '576': {
-            slidesPerView: 2,
-        },
-        '0': {
-            slidesPerView: 1.5,
-            centeredSlides: true,
-            centeredSlidesBounds: true,
-        },
-    },
-    // If we need pagination
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    // Navigation arrows
-    navigation: {
-        nextEl: ".slider-button-next",
-        prevEl: ".slider-button-prev",
-    },
-});
+// var streamersSwiper = new Swiper('.streamers-active', {
+//     // Optional parameters
+//           observer: true,
+//         observeParents: true,
+//     loop: true,
+//     slidesPerView: 5,
+//     spaceBetween: 20,
+//     breakpoints: {
+//         '1500': {
+//             slidesPerView: 5,
+//         },
+//         '1200': {
+//             slidesPerView: 4,
+//         },
+//         '992': {
+//             slidesPerView: 4,
+//         },
+//         '768': {
+//             slidesPerView: 3,
+//         },
+//         '576': {
+//             slidesPerView: 2,
+//         },
+//         '0': {
+//             slidesPerView: 1.5,
+//             centeredSlides: true,
+//             centeredSlidesBounds: true,
+//         },
+//     },
+//     // If we need pagination
+//     pagination: {
+//         el: '.swiper-pagination',
+//         clickable: true,
+//     },
+//     // Navigation arrows
+//     navigation: {
+//         nextEl: ".slider-button-next",
+//         prevEl: ".slider-button-prev",
+//     },
+// });
 
 
 /*=============================================

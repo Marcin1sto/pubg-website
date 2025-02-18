@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\GamesEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Player;
 use App\Services\PlayerService;
@@ -38,4 +39,20 @@ class ApiPlayerController extends Controller
         ]);
     }
 
+    public function getPlayersByGame(?string $game = null)
+    {
+        if ($game && !in_array($game, GamesEnum::values())) {
+            return response()->json([
+                'correct' => false,
+                'msg' => 'Niepoprawna nazwa gry!'
+            ]);
+        }
+
+        $players = Player::all();
+
+        return response()->json([
+            'correct' => !!$players,
+            'data' => $players?->toArray(),
+        ]);
+    }
 }
