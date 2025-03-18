@@ -1,0 +1,5 @@
+
+‘php:S103&"KSplit this 133 characters long line (which is greater than 120 authorized).(ðð¨ˆúÿÿÿÿ8®¿É½ë1J$b6e7bcd2-d91e-4072-a6ee-7eda8778aead
+Œphp:S103*"KSplit this 134 characters long line (which is greater than 120 authorized).(µŠ¾Ô8¯¿É½ë1J$b9bdf1e1-b8c6-4367-9631-aa12ce2cb734
+•	php:S1301Ž"MReplace this "switch" statement with "if" statements to increase readability.(ðý’¶ùÿÿÿÿ8¯¿É½ë1J$d168ccfa-5d3f-41c7-a7cd-7d31baeb8720
+›	php:S3776"TRefactor this function to reduce its Cognitive Complexity from 34 to the 15 allowed.(íÕ‡·úÿÿÿÿ8°¿É½ë1J$d5b6661a-9c38-4fea-bd62-006c4d02e66e

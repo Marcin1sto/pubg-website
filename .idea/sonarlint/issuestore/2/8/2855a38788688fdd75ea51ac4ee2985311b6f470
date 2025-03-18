@@ -1,0 +1,6 @@
+
+K	php:S1185"6Remove this method "__construct" to simply inherit it.(ƒöÙƒ
+X	php:S18541">Remove this useless assignment to local variable '$timeDelay'.(æ­²­ûÿÿÿÿ
+X	php:S1854/">Remove this useless assignment to local variable '$timeDelay'.(ÿ¶°…þÿÿÿÿ
+jphp:S128."VEnd this switch case with an unconditional break, continue, return or throw statement.(ÅÝ¨‘
+ophp:S1280"VEnd this switch case with an unconditional break, continue, return or throw statement.(Ö‰öàúÿÿÿÿ

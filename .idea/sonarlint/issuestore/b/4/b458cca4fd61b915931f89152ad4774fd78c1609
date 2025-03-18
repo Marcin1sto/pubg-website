@@ -1,0 +1,4 @@
+
+_php:S103/"KSplit this 127 characters long line (which is greater than 120 authorized).(Ð§¨±
+ephp:S103‘"KSplit this 147 characters long line (which is greater than 120 authorized).(¹Ã¬«ûÿÿÿÿ
+Šphp:S138A"vThis function "layout" has 170 lines, which is greater than the 150 lines authorized. Split it into smaller functions.(„ß²¾
