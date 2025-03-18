@@ -437,11 +437,13 @@ video {
 @font-face {
   font-family: "berlin_sans_fb_demibold";
 
-  src: url("./assets/fonts/berlin_sans_fb_demi_bold-webfont.woff2") format("woff2"), url("./assets/fonts/berlin_sans_fb_demi_bold-webfont.woff") format("woff");
+  src: url("../fonts/berlin_sans_fb_demi_bold-webfont.woff2") format("woff2"), url("../fonts/berlin_sans_fb_demi_bold-webfont.woff") format("woff");
 
   font-weight: normal;
 
   font-style: normal;
+
+  font-display: swap;
 }
 
 body {
@@ -2397,10 +2399,6 @@ input[type="color"] {
 
 .w-\[60px\] {
   width: 60px;
-}
-
-.w-\[63px\] {
-  width: 63px;
 }
 
 .w-\[69\%\] {
@@ -4789,11 +4787,6 @@ input[type="color"] {
 .clip-path-polygon-\[100\%_0\2c _100\%_calc\(100\%_-_13px\)\2c _calc\(100\%_-_13px\)_100\%\2c _0_100\%\2c _0_0\] {
   -webkit-clip-path: polygon(100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 0);
           clip-path: polygon(100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 0);
-}
-
-.clip-path-polygon-\[100\%_0\2c _100\%_calc\(100\%_-_20px\)\2c _calc\(100\%_-_20px\)_100\%\2c _0_100\%\2c _0_0\] {
-  -webkit-clip-path: polygon(100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 0);
-          clip-path: polygon(100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 0);
 }
 
 .clip-path-polygon-\[100\%_0\2c _100\%_calc\(100\%_-_25px\)\2c _calc\(100\%_-_25px\)_100\%\2c _0_100\%\2c _0_0\] {
