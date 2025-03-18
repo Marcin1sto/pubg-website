@@ -1,35 +1,20 @@
 <script setup lang="ts">
 const streamers = [
   {
-    link: '',
+    link: 'https://www.twitch.tv/zmanianttv',
     img: '/assets/img/team/streamers01.png',
     name: 'zManian'
   },
   {
-    link: '',
+    link: 'https://www.twitch.tv/marcin1sto',
     img: '/assets/img/team/streamers01.png',
     name: 'Marcinisto'
   },
   {
-    link: '',
+    link: 'https://www.twitch.tv/marcelek',
     img: '/assets/img/team/streamers01.png',
-    name: 'Marcinisto'
-  },
-  {
-    link: '',
-    img: '/assets/img/team/streamers01.png',
-    name: 'Marcinisto'
-  },
-  {
-    link: '',
-    img: '/assets/img/team/streamers01.png',
-    name: 'Marcinisto'
-  },
-  {
-    link: '',
-    img: '/assets/img/team/streamers01.png',
-    name: 'Marcinisto'
-  },
+    name: 'Marcelek'
+  }
 ]
 </script>
 
@@ -52,7 +37,7 @@ const streamers = [
       <!--  -->
       <div class="swiper-container streamers-active mr-[-15px] ml-[-15px] my-0">
 
-        <div class=" gap-4 grid justify-items-center sm:grid-cols-1 md:grid-cols-4 xl:grid-cols-6">
+        <div class=" gap-4 flex justify-center items-center justify-items-center sm:grid-cols-1 md:grid-cols-4 xl:grid-cols-6">
           <div
               class="max-w-[288px] streamers__item text-center relative transition-all duration-[0.3s] ease-[ease-out] delay-[0s] mt-0 mb-[30px] mx-0 p-[3px] rounded-[10px] border-[3px] border-solid border-[#383c4e] group hover:border-[#45f882]"
               v-for="(streamer, index) in streamers" :key="index"

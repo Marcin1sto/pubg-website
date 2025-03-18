@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   nitro: {
     devProxy: {
       "/api/": {
-        target: "http://pubg.ddev.site",
+        target: "http://localhost:3000",
         changeOrigin: true,
         prependPath: true,
       },

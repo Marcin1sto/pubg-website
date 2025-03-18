@@ -73,31 +73,31 @@ $(window).on('load', function () {
 	=           Mobile Menu          =
 =============================================*/
 //SubMenu Dropdown Toggle
-if ($('.tgmenu__wrap li.menu-item-has-children ul').length) {
-	$('.tgmenu__wrap .navigation li.menu-item-has-children').append('<div class="dropdown-btn"><span class="plus-line"></span></div>');
-}
-
-//Mobile Nav Hide Show
-if ($('.tgmobile__menu').length) {
-
-	var mobileMenuContent = $('.tgmenu__wrap .tgmenu__main-menu').html();
-	$('.tgmobile__menu .tgmobile__menu-box .tgmobile__menu-outer').append(mobileMenuContent);
-
-	//Dropdown Button
-	$('.tgmobile__menu li.menu-item-has-children .dropdown-btn').on('click', function () {
-		$(this).toggleClass('open');
-		$(this).prev('ul').slideToggle(300);
-	});
-	//Menu Toggle Btn
-	$('.mobile-nav-toggler').on('click', function () {
-		$('body').addClass('mobile-menu-visible');
-	});
-
-	//Menu Toggle Btn
-	$('.tgmobile__menu-backdrop, .tgmobile__menu .close-btn').on('click', function () {
-		$('body').removeClass('mobile-menu-visible');
-	});
-}
+// if ($('.tgmenu__wrap li.menu-item-has-children ul').length) {
+// 	$('.tgmenu__wrap .navigation li.menu-item-has-children').append('<div class="dropdown-btn"><span class="plus-line"></span></div>');
+// }
+//
+// //Mobile Nav Hide Show
+// if ($('.tgmobile__menu').length) {
+//
+// 	var mobileMenuContent = $('.tgmenu__wrap .tgmenu__main-menu').html();
+// 	$('.tgmobile__menu .tgmobile__menu-box .tgmobile__menu-outer').append(mobileMenuContent);
+//
+// 	//Dropdown Button
+// 	$('.tgmobile__menu li.menu-item-has-children .dropdown-btn').on('click', function () {
+// 		$(this).toggleClass('open');
+// 		$(this).prev('ul').slideToggle(300);
+// 	});
+// 	//Menu Toggle Btn
+// 	$('.mobile-nav-toggler').on('click', function () {
+// 		$('body').addClass('mobile-menu-visible');
+// 	});
+//
+// 	//Menu Toggle Btn
+// 	$('.tgmobile__menu-backdrop, .tgmobile__menu .close-btn').on('click', function () {
+// 		$('body').removeClass('mobile-menu-visible');
+// 	});
+// }
 
 
 /*===========================================
@@ -588,9 +588,9 @@ parallaxMouse();
 /*=============================================
 	=          Jarallax Active         =
 =============================================*/
-$('.tg-jarallax').jarallax({
-    speed: 0.2,
-});
+// $('.tg-jarallax').jarallax({
+//     speed: 0.2,
+// });
 
 
 /*=============================================
@@ -631,16 +631,16 @@ $('[data-countdown]').each(function () {
 /*=============================================
 	=    	 Slider Range Active  	         =
 =============================================*/
-$("#slider-range").slider({
-	range: true,
-	min: 10,
-	max: 500,
-	values: [80, 380],
-	slide: function (event, ui) {
-		$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-	}
-});
-$("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+// $("#slider-range").slider({
+// 	range: true,
+// 	min: 10,
+// 	max: 500,
+// 	values: [80, 380],
+// 	slide: function (event, ui) {
+// 		$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+// 	}
+// });
+// $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
 
 
 /*===========================================
@@ -775,72 +775,72 @@ if($(window).width()<768){
 /*=============================================
 	=          GSAP Active         =
 =============================================*/
-gsap.registerPlugin(ScrollTrigger, SplitText);
-gsap.config({
-    nullTargetWarn: false,
-    trialWarn: false
-});
-
-function tg_title_animation() {
-
-    var tg_var = jQuery('.tg__heading-wrapper');
-    if (!tg_var.length) {
-        return;
-    }
-    const quotes = document.querySelectorAll(".tg__heading-wrapper .tg-element-title");
-
-    quotes.forEach(quote => {
-
-        //Reset if needed
-        if (quote.animation) {
-            quote.animation.progress(1).kill();
-            quote.split.revert();
-        }
-
-        var getclass = quote.closest('.tg__heading-wrapper').className;
-        var animation = getclass.split('animation-');
-        if (animation[1] == "style4") return
-
-        quote.split = new SplitText(quote, {
-            type: "lines,words,chars",
-            linesClass: "split-line"
-        });
-        gsap.set(quote, { perspective: 400 });
-
-        if (animation[1] == "style1") {
-            gsap.set(quote.split.chars, {
-                opacity: 0,
-                y: "90%",
-                rotateX: "-40deg"
-            });
-        }
-        if (animation[1] == "style2") {
-            gsap.set(quote.split.chars, {
-                opacity: 0,
-                x: "50"
-            });
-        }
-        if (animation[1] == "style3") {
-            gsap.set(quote.split.chars, {
-                opacity: 0,
-            });
-        }
-        quote.animation = gsap.to(quote.split.chars, {
-            scrollTrigger: {
-                trigger: quote,
-                start: "top 90%",
-            },
-            x: "0",
-            y: "0",
-            rotateX: "0",
-            opacity: 1,
-            duration: 1,
-            ease: Back.easeOut,
-            stagger: .02
-        });
-    });
-}
-ScrollTrigger.addEventListener("refresh", tg_title_animation);
+// gsap.registerPlugin(ScrollTrigger, SplitText);
+// gsap.config({
+//     nullTargetWarn: false,
+//     trialWarn: false
+// });
+//
+// function tg_title_animation() {
+//
+//     var tg_var = jQuery('.tg__heading-wrapper');
+//     if (!tg_var.length) {
+//         return;
+//     }
+//     const quotes = document.querySelectorAll(".tg__heading-wrapper .tg-element-title");
+//
+//     quotes.forEach(quote => {
+//
+//         //Reset if needed
+//         if (quote.animation) {
+//             quote.animation.progress(1).kill();
+//             quote.split.revert();
+//         }
+//
+//         var getclass = quote.closest('.tg__heading-wrapper').className;
+//         var animation = getclass.split('animation-');
+//         if (animation[1] == "style4") return
+//
+//         quote.split = new SplitText(quote, {
+//             type: "lines,words,chars",
+//             linesClass: "split-line"
+//         });
+//         gsap.set(quote, { perspective: 400 });
+//
+//         if (animation[1] == "style1") {
+//             gsap.set(quote.split.chars, {
+//                 opacity: 0,
+//                 y: "90%",
+//                 rotateX: "-40deg"
+//             });
+//         }
+//         if (animation[1] == "style2") {
+//             gsap.set(quote.split.chars, {
+//                 opacity: 0,
+//                 x: "50"
+//             });
+//         }
+//         if (animation[1] == "style3") {
+//             gsap.set(quote.split.chars, {
+//                 opacity: 0,
+//             });
+//         }
+//         quote.animation = gsap.to(quote.split.chars, {
+//             scrollTrigger: {
+//                 trigger: quote,
+//                 start: "top 90%",
+//             },
+//             x: "0",
+//             y: "0",
+//             rotateX: "0",
+//             opacity: 1,
+//             duration: 1,
+//             ease: Back.easeOut,
+//             stagger: .02
+//         });
+//     });
+// }
+// ScrollTrigger.addEventListener("refresh", tg_title_animation);
 
 
 /*=============================================

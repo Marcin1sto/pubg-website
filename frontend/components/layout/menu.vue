@@ -2,6 +2,22 @@
 import usePagesStore from "~/stores/usePagesStore";
 
 const {menuItems} = storeToRefs(usePagesStore());
+
+const isMobileMenuOpen = ref(false);
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+  if (isMobileMenuOpen.value) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = '';
+  }
+};
+
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false;
+  document.body.style.overflow = '';
+};
 </script>
 
 <template>
@@ -24,7 +40,7 @@ const {menuItems} = storeToRefs(usePagesStore());
         <div class="flex flex-wrap mx-[-15px]">
           <div class="w-full basis-full relative px-[15px]">
             <div
-                class="mobile-nav-toggler relative float-right text-[26px] cursor-pointer leading-none text-[#45f882] hidden lg:block md:block sm:block xsm:block border-[#45f882] mt-[3px] px-2.5 py-[5px] border-2 border-solid">
+                class="mobile-nav-toggler relative float-right text-[26px] cursor-pointer leading-none text-[#45f882] hidden lg:block md:block sm:block xsm:block border-[#45f882] mt-[3px] px-2.5 py-[5px] border-2 border-solid" @click="toggleMobileMenu">
               <i class="fas fa-bars"></i></div>
             <div class="tgmenu__wrap">
               <nav class="tgmenu__nav  flex items-center flex-wrap justify-start lg:justify-between md:justify-between">
@@ -43,6 +59,7 @@ const {menuItems} = storeToRefs(usePagesStore());
                 </div>
                 <div class="tgmenu__navbar-wrap tgmenu__main-menu flex grow lg:hidden md:hidden sm:hidden xsm:hidden">
                   <ul class="navigation flex flex-row flex-wrap ml-[122px] mr-auto my-0 p-0 xl:flex xl:ml-[65px]  xl:mr-auto  xl:my-0">
+
                     <li v-for="(item, key) in menuItems" :key="key"
                         :class="item.isDropdown ?
                          'menu-item-has-children block relative list-none group lg:group-disabled  md:group-disabled  sm:group-disabled xsm:group-disabled' :
@@ -51,132 +68,62 @@ const {menuItems} = storeToRefs(usePagesStore());
                       <LayoutMenuElementLink :text="item.title" :href="item.route" v-if="!item.isDropdown"/>
                       <LayoutMenuElementDropdown :text="item.title" :items="item.items" v-if="item.isDropdown"/>
                     </li>
-                    <!--                    <li class="active menu-item-has-children block relative list-none group lg:group-disabled  md:group-disabled  sm:group-disabled xsm:group-disabled">-->
-                    <!--                      <a class=" text-[15px] font-bold uppercase block leading-none relative tracking-[0.8px] z-[1] px-[23px] py-[38px] font-Barlow before:content-[''] before:absolute before:w-[42px] before:h-px before:transition-all before:duration-[0.3s] before:ease-[ease-out] before:delay-[0s] before:mx-auto before:my-0 before:top-2/4 before:inset-x-0 before:bg-[#45f882] text-[#45f882] before:opacity-100 before:-translate-y-2/4 before:rotate-[-40deg]" href="#">Home</a>-->
-                    <!--                      <ul class="sub-menu absolute min-w-[230px] border border-[#22292f] origin-[0_0] transition-all duration-[0.3s] ease-[ease-out] delay-[0s] shadow-[0px_30px_70px_0px_rgba(0,0,0,0.15)] block invisible opacity-0 z-[9] m-0 px-0 py-[18px] rounded-none border-solid scale-x-100 scale-y-0 left-0 top-full bg-[#182029] group-hover:opacity-100 group-hover:visible group-hover:scale-100-->
-                    <!--                    lg:opacity-100 lg:visible lg:scale-100 lg:w-full lg:static lg:bg-[#0f161b] lg:border-none-->
-                    <!--                    md:opacity-100 md:visible md:scale-100 md:w-full md:static md:bg-[#0f161b] md:border-none-->
-                    <!--                    sm:opacity-100 sm:visible sm:scale-100 sm:w-full sm:static sm:bg-[#0f161b] sm:border-none-->
-                    <!--                    xsm:opacity-100 xsm:visible xsm:scale-100 xsm:w-full xsm:static xsm:bg-[#0f161b] xsm:border-none-->
-                    <!--                    ">-->
-                    <!--                        <li class="active text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-[7px]" href="index.html">Home One</a></li>-->
-                    <!--                        <li class=" text-left block ml-0  group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="index-2.html">Home Two</a></li>-->
-                    <!--                      </ul>-->
-                    <!--                    </li>-->
 
-                    <!--                    <li class="menu-item-has-children  block relative list-none group lg:group-disabled  md:group-disabled  sm:group-disabled xsm:group-disabled"><a class=" text-[15px] font-bold uppercase text-[#fff] block leading-none relative tracking-[0.8px] z-[1] px-[23px] py-[38px] font-Barlow before:content-[''] before:absolute before:w-[42px] before:h-px before:-translate-y-2/4 before:rotate-0 before:opacity-0 before:transition-all before:duration-[0.3s] before:ease-[ease-out] before:delay-[0s] before:mx-auto before:my-0 before:top-2/4 before:inset-x-0 before:bg-[#45f882] group-hover:text-[#45f882]  group-hover:before:opacity-100 group-hover:before:-translate-y-2/4 group-hover:before:rotate-[-40deg]" href="#">TOURNAMENT</a>-->
-                    <!--                      <ul class="sub-menu absolute min-w-[230px] border border-[#22292f] origin-[0_0] transition-all duration-[0.3s] ease-[ease-out] delay-[0s] shadow-[0px_30px_70px_0px_rgba(0,0,0,0.15)] block invisible opacity-0 z-[9] m-0 px-0 py-[18px] rounded-none border-solid scale-x-100 scale-y-0 left-0 top-full bg-[#182029] group-hover:opacity-100 group-hover:visible group-hover:scale-100-->
-                    <!--                    lg:opacity-100 lg:visible lg:scale-100 lg:w-full lg:static lg:bg-[#0f161b] lg:border-none-->
-                    <!--                    md:opacity-100 md:visible md:scale-100 md:w-full md:static md:bg-[#0f161b] md:border-none-->
-                    <!--                    sm:opacity-100 sm:visible sm:scale-100 sm:w-full sm:static sm:bg-[#0f161b] sm:border-none-->
-                    <!--                    xsm:opacity-100 xsm:visible xsm:scale-100 xsm:w-full xsm:static xsm:bg-[#0f161b] xsm:border-none ">-->
-                    <!--                        <li class=" text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="tournament.html">TOURNAMENT</a></li>-->
-                    <!--                        <li class="active text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="tournament-details.html">TOURNAMENT Single</a></li>-->
-                    <!--                      </ul>-->
-                    <!--                    </li>-->
-                    <!--                    <li class="menu-item-has-children  block relative list-none group lg:group-disabled  md:group-disabled  sm:group-disabled xsm:group-disabled"><a class=" text-[15px] font-bold uppercase text-[#fff] block leading-none relative tracking-[0.8px] z-[1] px-[23px] py-[38px] font-Barlow before:content-[''] before:absolute before:w-[42px] before:h-px before:-translate-y-2/4 before:rotate-0 before:opacity-0 before:transition-all before:duration-[0.3s] before:ease-[ease-out] before:delay-[0s] before:mx-auto before:my-0 before:top-2/4 before:inset-x-0 before:bg-[#45f882] group-hover:text-[#45f882]  group-hover:before:opacity-100 group-hover:before:-translate-y-2/4 group-hover:before:rotate-[-40deg]" href="#">PAGES</a>-->
-                    <!--                      <ul class="sub-menu absolute min-w-[230px] border border-[#22292f] origin-[0_0] transition-all duration-[0.3s] ease-[ease-out] delay-[0s] shadow-[0px_30px_70px_0px_rgba(0,0,0,0.15)] block invisible opacity-0 z-[9] m-0 px-0 py-[18px] rounded-none border-solid scale-x-100 scale-y-0 left-0 top-full bg-[#182029] group-hover:opacity-100 group-hover:visible group-hover:scale-100-->
-                    <!--                    lg:opacity-100 lg:visible lg:scale-100 lg:w-full lg:static lg:bg-[#0f161b] lg:border-none-->
-                    <!--                    md:opacity-100 md:visible md:scale-100 md:w-full md:static md:bg-[#0f161b] md:border-none-->
-                    <!--                    sm:opacity-100 sm:visible sm:scale-100 sm:w-full sm:static sm:bg-[#0f161b] sm:border-none-->
-                    <!--                    xsm:opacity-100 xsm:visible xsm:scale-100 xsm:w-full xsm:static xsm:bg-[#0f161b] xsm:border-none ">-->
-                    <!--                        <li class=" text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="shop.html">Gaming Shop</a></li>-->
-                    <!--                        <li class=" text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="shop-details.html">Shop Details</a></li>-->
-                    <!--                        <li class=" text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="services.html">Our Services</a></li>-->
-                    <!--                        <li class=" text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="services-details.html">Services Details</a></li>-->
-                    <!--                        <li class=" text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="team-details.html">Player Details</a></li>-->
-                    <!--                      </ul>-->
-                    <!--                    </li>-->
-                    <!--                    <li class="menu-item-has-children  block relative list-none group lg:group-disabled  md:group-disabled  sm:group-disabled xsm:group-disabled"><a class=" text-[15px] font-bold uppercase text-[#fff] block leading-none relative tracking-[0.8px] z-[1] px-[23px] py-[38px] font-Barlow before:content-[''] before:absolute before:w-[42px] before:h-px before:-translate-y-2/4 before:rotate-0 before:opacity-0 before:transition-all before:duration-[0.3s] before:ease-[ease-out] before:delay-[0s] before:mx-auto before:my-0 before:top-2/4 before:inset-x-0 before:bg-[#45f882] group-hover:text-[#45f882]  group-hover:before:opacity-100 group-hover:before:-translate-y-2/4 group-hover:before:rotate-[-40deg]" href="#">News</a>-->
-                    <!--                      <ul class="sub-menu absolute min-w-[230px] border border-[#22292f] origin-[0_0] transition-all duration-[0.3s] ease-[ease-out] delay-[0s] shadow-[0px_30px_70px_0px_rgba(0,0,0,0.15)] block invisible opacity-0 z-[9] m-0 px-0 py-[18px] rounded-none border-solid scale-x-100 scale-y-0 left-0 top-full bg-[#182029] group-hover:opacity-100 group-hover:visible group-hover:scale-100                    lg:opacity-100 lg:visible lg:scale-100 lg:w-full lg:static lg:bg-[#0f161b] lg:border-none-->
-                    <!--                    md:opacity-100 md:visible md:scale-100 md:w-full md:static md:bg-[#0f161b] md:border-none-->
-                    <!--                    sm:opacity-100 sm:visible sm:scale-100 sm:w-full sm:static sm:bg-[#0f161b] sm:border-none-->
-                    <!--                    xsm:opacity-100 xsm:visible xsm:scale-100 xsm:w-full xsm:static xsm:bg-[#0f161b] xsm:border-none ">-->
-                    <!--                        <li class=" text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="blog.html">Our Blog</a></li>-->
-                    <!--                        <li class=" text-left block ml-0 group/second"><a class="font-Barlow text-[15px] leading-[1.4] font-bold text-[#fff] uppercase tracking-[0.8px] relative flex pl-[25px] pr-[15px] py-[9px] before:content-[''] before:block before:h-[7px] before:bg-[#45f882] before:transition-[width] before:duration-[0.2s] before:ease-linear before:ml-0 before:mr-[9px] before:mt-[7px] before:mb-0 before:rounded-[0_5px_0_0] before:w-0 group-hover/second:before:w-[7px]" href="blog-details.html">Blog Details</a></li>-->
-                    <!--                      </ul>-->
-                    <!--                    </li>-->
-                    <!--                    <li class=" block relative list-none group"><a class=" text-[15px] font-bold uppercase text-[#fff] block leading-none relative tracking-[0.8px] z-[1] px-[23px] py-[38px] font-Barlow before:content-[''] before:absolute before:w-[42px] before:h-px before:-translate-y-2/4 before:rotate-0 before:opacity-0 before:transition-all before:duration-[0.3s] before:ease-[ease-out] before:delay-[0s] before:mx-auto before:my-0 before:top-2/4 before:inset-x-0 before:bg-[#45f882] group-hover:text-[#45f882]  group-hover:before:opacity-100 group-hover:before:-translate-y-2/4 group-hover:before:rotate-[-40deg]" href="contact.html">contact</a></li>-->
                   </ul>
                 </div>
                 <div class="tgmenu__action block lg:mr-10 md:mr-10 sm:hidden xsm:hidden">
-<!--                  <ul class="list-wrap m-0 p-0  flex items-center ml-2.5">-->
-<!--                    &lt;!&ndash;                    <li class="search relative ml-0"><a class=" block text-[20px] hover:text-[#45f882] text-[#fff]" href="#"><i class="flaticon-search-1"></i></a></li>&ndash;&gt;-->
-<!--                    <li class="header-btn relative ml-[25px] pl-[25px] before:content-[''] before:absolute before:-translate-y-2/4 before:w-1.5 before:h-7 before:bg-[#131b22] before:shadow-[inset_0px_3px_7px_0px_rgba(0,0,0,0.61)] before:left-0 before:top-2/4-->
-
-<!--            lg:before:shadow-[inset_0px_3px_7px_0px_#45f882] lg:before:opacity-10-->
-<!--            md:before:shadow-[inset_0px_3px_7px_0px_#45f882] md:before:opacity-10-->
-<!--            sm:before:shadow-[inset_0px_3px_7px_0px_#45f882] sm:before:opacity-10-->
-<!--            xsm:before:shadow-[inset_0px_3px_7px_0px_#45f882] xsm:before:opacity-10-->
-<!--            "><a href="contact.html" class="tg-border-btn text-[#fff]"><i class="flaticon-edit"></i> ~sing in</a></li>-->
-<!--                    <li class="side-toggle-icon group relative ml-[25px] flex flex-col min-w-[45px] gap-2.5 cursor-pointer md:hidden">-->
-<!--                      <span-->
-<!--                          class=" block h-[3px] bg-[#fff] transition-all duration-[0.3s] ease-[ease-out] delay-[0s] w-[26px]  group-hover:w-[45px]"></span>-->
-<!--                      <span-->
-<!--                          class=" block h-[3px] bg-[#fff] transition-all duration-[0.3s] ease-[ease-out] delay-[0s] w-[45px]  group-hover:w-[45px]"></span>-->
-<!--                      <span-->
-<!--                          class=" block h-[3px] bg-[#fff] transition-all duration-[0.3s] ease-[ease-out] delay-[0s] w-[26px] self-end  group-hover:w-[45px]"></span>-->
-<!--                    </li>-->
-<!--                  </ul>-->
                 </div>
               </nav>
             </div>
             <!-- Mobile Menu  -->
             <div
-                class="tgmobile__menu fixed w-[300px] max-w-full h-full z-[99] transition-all duration-[0.3s] ease-[cubic-bezier(0.785,0.135,0.15,0.86)] translate-x-[101%] pr-[30px] rounded-none right-0 top-0">
+                class="tgmobile__menu fixed w-[300px] max-w-full h-full z-[99] transition-all duration-[0.3s] ease-[cubic-bezier(0.785,0.135,0.15,0.86)] pr-[30px] rounded-none right-0 top-0" :class="isMobileMenuOpen ? 'translate-x-0' : 'translate-x-[101%]'">
               <nav
                   class="tgmobile__menu-box absolute w-full h-full max-h-full overflow-y-auto overflow-x-hidden z-[5] shadow-[-9px_0_14px_0px_rgba(0,0,0,0.06)] p-0 left-0 top-0 bg-[#0f161b]">
                 <div
-                    class="close-btn absolute leading-[30px] w-[35px] text-center text-[20px] text-[#45f882] cursor-pointer z-10 transition-all duration-[0.5s] ease-[ease] right-[15px] top-7">
+                    class="close-btn absolute leading-[30px] w-[35px] text-center text-[20px] text-[#45f882] cursor-pointer z-10 transition-all duration-[0.5s] ease-[ease] right-[15px] top-7" @click="closeMobileMenu">
                   <i class="flaticon-swords-in-cross-arrangement"></i></div>
-                <div class="nav-logo relative text-left px-[25px] py-[30px]">
-                  <a href="index.html">
-                    <h2 class="title text-[150px] leading-[0.8] mt-0 mb-[21px] mx-0 font-berlin
+                <div class="nav-logo relative text-left px-[25px] py-[30px] mt-[30px]">
+                  <a href="/">
+                    <h2 class="title text-[40px] leading-[0.8] mt-0 mb-[21px] mx-0 font-berlin
                                     drop-shadow-[-1px_5px_0px_rgba(69,248,130,0.66)] wow fadeInUp
-                                    md:text-[120px]
-                                    lg:text-[94px]
-                                    xl:text-[118px]
-                        sm:text-[14vw] sm:drop-shadow-[-1px_5px_0px_rgba(69,248,130,0.66)] sm:mt-0 sm:mb-[21px] sm:mx-0
-                        xsm:text-[14vw] xsm:drop-shadow-[-1px_5px_0px_rgba(69,248,130,0.66)] xsm:mt-0 xsm:mb-[21px] xsm:mx-0
+                                    md:text-[40px]
+                                    lg:text-[35px]
+                                    xl:text-[40px]
+                        sm:text-[30px] sm:drop-shadow-[-1px_5px_0px_rgba(69,248,130,0.66)] sm:mt-0 sm:mb-[21px] sm:mx-0
+                        xsm:text-[25px] xsm:drop-shadow-[-1px_5px_0px_rgba(69,248,130,0.66)] xsm:mt-0 xsm:mb-[21px] xsm:mx-0
                                     " data-wow-delay=".5s">Grywalnia</h2>
                   </a>
                 </div>
-                <div class="tgmobile__search pl-[25px] pr-5 pt-0 pb-[25px]">
-                  <form action="#" class="relative">
-                    <input type="text" placeholder="Search here..." class=" block w-full text-[14px] h-[45px] text-[#fff] pl-5 pr-[45px] py-2.5 border-none bg-[#182029] placeholder:text-[14px] placeholder:text-[#c7c7c7]
-                                        focus:!ring-[none] focus:!border-none
-                                        ">
-                    <button
-                        class=" absolute -translate-y-2/4 leading-none text-[#fff] p-0 border-[none] right-5 top-2/4 bg-transparent">
-                      <i class="flaticon-loupe"></i></button>
-                  </form>
-                </div>
                 <div class="tgmobile__menu-outer">
-                  <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                  <ul class="flex flex-col flex-wrap px-[25px] py-[30px]">
+                    <li v-for="(item, key) in menuItems" :key="key" class="mb-4">
+                      <LayoutMobileMenuElement
+                        :text="item.title"
+                        :href="item.route"
+                        :items="item.items"
+                      />
+                    </li>
+                  </ul>
                 </div>
                 <div class="social-links">
                   <ul class="list-wrap flex relative text-center items-center justify-center flex-wrap gap-3 pt-[30px] pb-5 px-5 m-0">
-                    <li class=" relative block"><a
-                        class=" flex items-center justify-center w-10 h-10 relative text-[16px] text-[#fff] transition-all duration-500 ease-[ease] border border-[#22292f] rounded-[3px] border-solid hover:border-[#45f882] hover:text-[#0f161b] hover:bg-[#45f882] "
-                        href="#"><i class="fab fa-facebook-f"></i></a></li>
-                    <li class=" relative block"><a
-                        class=" flex items-center justify-center w-10 h-10 relative text-[16px] text-[#fff] transition-all duration-500 ease-[ease] border border-[#22292f] rounded-[3px] border-solid hover:border-[#45f882] hover:text-[#0f161b] hover:bg-[#45f882] "
-                        href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li class=" relative block"><a
-                        class=" flex items-center justify-center w-10 h-10 relative text-[16px] text-[#fff] transition-all duration-500 ease-[ease] border border-[#22292f] rounded-[3px] border-solid hover:border-[#45f882] hover:text-[#0f161b] hover:bg-[#45f882] "
-                        href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li class=" relative block"><a
-                        class=" flex items-center justify-center w-10 h-10 relative text-[16px] text-[#fff] transition-all duration-500 ease-[ease] border border-[#22292f] rounded-[3px] border-solid hover:border-[#45f882] hover:text-[#0f161b] hover:bg-[#45f882] "
-                        href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                    <li class=" relative block"><a
-                        class=" flex items-center justify-center w-10 h-10 relative text-[16px] text-[#fff] transition-all duration-500 ease-[ease] border border-[#22292f] rounded-[3px] border-solid hover:border-[#45f882] hover:text-[#0f161b] hover:bg-[#45f882] "
-                        href="#"><i class="fab fa-youtube"></i></a></li>
+                    <li class=" relative block">
+                      <a
+                        class=" flex items-center justify-center w-10 h-10 relative text-[16px] text-[#fff] transition-all duration-500 ease-[ease] border border-[#22292f] rounded-[3px] border-solid hover:border-[#45f882]  "
+                        href="https://discord.com/invite/grywalnia" target="_blank">
+                        <i class=" text-[44px] text-[#d8d8d8] transition-all duration-[0.3s] ease-[ease-out] delay-[0s]  group-hover:text-[#68fb9a] flaticon-discord lg:text-[30px] md:text-[30px] sm:text-[30px] xsm:text-[30px]"></i>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </nav>
             </div>
             <div
-                class="tgmobile__menu-backdrop fixed w-full h-full z-[2] transition-all duration-700 ease-[ease] opacity-0 invisible right-0 top-0 bg-[rgba(0,0,0,0.5)]"></div>
+                class="tgmobile__menu-backdrop fixed w-full h-full z-[2] transition-all duration-700 ease-[ease] right-0 top-0 bg-[rgba(0,0,0,0.5)]" 
+                :class="isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'"
+                @click="closeMobileMenu">
+            </div>
             <!-- End Mobile Menu -->
           </div>
         </div>
@@ -280,8 +227,7 @@ const {menuItems} = storeToRefs(usePagesStore());
           </ul>
         </div>
         <div class="offCanvas__copyright mt-auto mb-0 mx-0 px-10 py-[30px] bg-[#090f16]">
-          <p class=" text-[14px] uppercase font-semibold tracking-[1px] m-0 font-Barlow">Copyright © 2023 - By <span
-              class=" text-[#45f882]">MYKD</span></p>
+          <p class=" text-[14px] uppercase font-semibold tracking-[1px] m-0 font-Barlow">Copyright © 2025 - by Grywalnia</p>
         </div>
       </div>
     </div>
