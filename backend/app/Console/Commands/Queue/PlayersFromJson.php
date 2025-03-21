@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Queue;
 
 use App\Jobs\ProcessPlayer;
+use App\Services\PlayerService;
 use Illuminate\Console\Command;
 
 class PlayersFromJson extends Command
@@ -41,17 +42,7 @@ class PlayersFromJson extends Command
         $json = json_decode(file_get_contents(storage_path() . "/players.json"));
 
         foreach ($json->players as $key => $player) {
-            if (isset($player->name)) {
-                switch ($key) {
-                    case $key >= 20:
-                        $timeDelay = (int)($key * 30 /  2);
-                    case $key >= 40:
-                        $timeDelay = (int)($key * 30 /  3);
-                    default: $timeDelay = (int)($key * 30 /  2);
-                }
-
-                ProcessPlayer::dispatch($player->name)->delay(now()->addSeconds($timeDelay));
-            }
+            PlayerService::createPlayer($player->name, 'steam');
         }
 
         $this->info('Gracze zostali dodani do kolejki.');

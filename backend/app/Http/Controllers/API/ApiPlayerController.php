@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Player;
 use App\Services\PlayerService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ApiPlayerController extends Controller
 {
@@ -26,16 +27,26 @@ class ApiPlayerController extends Controller
     }
 
     /**
-     * @param string $nickName
+     * @param int $id
      * @return JsonResponse
      */
-    public function show(string $discordId): JsonResponse
+    public function show(int $id): JsonResponse
     {
-        $player = Player::where('discord_id', $discordId)->first();
+        $player = Player::with(['games' => function($query) {
+            $query->select('games.*')
+                  ->withPivot(['platform', 'is_active']);
+        }])->find($id);
+
+        if (!$player) {
+            return response()->json([
+                'correct' => false,
+                'message' => 'Nie znaleziono gracza'
+            ], 404);
+        }
 
         return response()->json([
-            'correct' => !!$player,
-            'data' => $player?->toArray(),
+            'correct' => true,
+            'data' => $player
         ]);
     }
 
@@ -53,6 +64,37 @@ class ApiPlayerController extends Controller
         return response()->json([
             'correct' => !!$players,
             'data' => $players?->toArray(),
+        ]);
+    }
+
+    public function index(Request $request): JsonResponse
+    {
+        $perPage = $request->input('per_page', 10);
+        $page = $request->input('page', 1);
+
+        $players = Player::with(['games' => function($query) {
+            $query->select('games.*')
+                  ->withPivot(['platform', 'is_active']);
+        }])
+        ->paginate($perPage);
+
+        return response()->json([
+            'correct' => true,
+            'data' => $players->items(),
+            'meta' => [
+                'current_page' => $players->currentPage(),
+                'from' => $players->firstItem(),
+                'last_page' => $players->lastPage(),
+                'per_page' => $players->perPage(),
+                'to' => $players->lastItem(),
+                'total' => $players->total(),
+            ],
+            'links' => [
+                'first' => $players->url(1),
+                'last' => $players->url($players->lastPage()),
+                'prev' => $players->previousPageUrl(),
+                'next' => $players->nextPageUrl(),
+            ]
         ]);
     }
 }

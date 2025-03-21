@@ -22,10 +22,12 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+Route::get('/players', [ApiPlayerController::class, 'index']);
+Route::get('/players/{id?}', [ApiPlayerController::class, 'show']);
+
 Route::get('/{platform}/matches/{nickName}', [ApiMatchesController::class, 'updatePlayerMatches']);
 Route::get('/{platform}/season/{nickName}', [ApiSeasonController::class, 'updatePlayerSeason']);
 
-Route::get('/players/{game?}', [ApiPlayerController::class, 'getPlayersByGame']);
 
 Route::prefix('bot')->group(function () {
     Route::get('/{platform}/clan/{clan_id}', [ApiClanController::class, 'show']);

@@ -7,16 +7,15 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_ENDPOINT || 'http://localhost:3000/'
+      apiBaseUrl: process.env.API_ENDPOINT || 'https://pubg.ddev.site'
     },
   },
   nitro: {
     devProxy: {
-      "/api/": {
-        target: "http://localhost:3000",
+      '/api': {
+        target: process.env.API_ENDPOINT || 'https://pubg.ddev.site',
         changeOrigin: true,
-        prependPath: true,
-      },
+      }
     },
   },
   app: {

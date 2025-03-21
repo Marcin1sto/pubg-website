@@ -45,7 +45,7 @@ const closeMobileMenu = () => {
             <div class="tgmenu__wrap">
               <nav class="tgmenu__nav  flex items-center flex-wrap justify-start lg:justify-between md:justify-between">
                 <div class="logo flex items-center">
-                  <a class="inline-block" href="index.html">
+                  <a class="inline-block" href="/">
                     <!--              <img class="max-w-[177px]" src="/public/assets/img/logo/logo.png" alt="Logo">-->
                     <h2 style="font-size: 25px" class="title text-[20px] leading-[0.8] mt-0 mb-[21px] mx-0 font-berlin
                                     drop-shadow-[-1px_5px_0px_rgba(69,248,130,0.66)] wow fadeInUp
@@ -170,7 +170,7 @@ const closeMobileMenu = () => {
         <div
             class="offCanvas__top flex items-center pt-[35px] pb-[25px] px-10 border-b-[#18202a] border-b border-solid">
           <div class="offCanvas__logo logo">
-            <a class="inline-block" href="index.html">
+            <a class="inline-block" href="/">
               <!--              <img class="max-w-[177px]" src="/public/assets/img/logo/logo.png" alt="Logo">-->
               <h2 class="title text-[150px] leading-[0.8] mt-0 mb-[21px] mx-0 font-berlin
                                     drop-shadow-[-1px_5px_0px_rgba(69,248,130,0.66)] wow fadeInUp

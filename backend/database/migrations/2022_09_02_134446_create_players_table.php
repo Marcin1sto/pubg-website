@@ -16,12 +16,9 @@ class CreatePlayersTable extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('display_name');
+            $table->string('discord_id')->nullable();
             $table->softDeletes();
-            $table->string('playerId');
-            $table->string('playerName');
-            $table->dateTime('matchesUpdate')->nullable();
-            $table->dateTime('seasonUpdate')->nullable();
-            $table->dateTime('rankingUpdate')->nullable();
         });
     }
 
