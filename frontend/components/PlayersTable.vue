@@ -98,6 +98,7 @@ const router = useRouter();
 const { players, loading, error, pagination, links, fetchPlayers } = usePlayersApi();
 
 const navigateToPlayer = (playerId: number) => {
+  console.log(`Nawigacja do gracza o ID: ${playerId}`);
   router.push(`/players/${playerId}`);
 };
 

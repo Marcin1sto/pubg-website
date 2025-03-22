@@ -43,14 +43,14 @@
               >
                 <span class="text-gray-200">{{ game.name }}</span>
                 <span class="text-gray-400 text-sm">({{ game.pivot.platform }})</span>
-                <span 
-                  :class="[
-                    'px-2 py-1 rounded-full text-xs',
-                    game.pivot.is_active ? 'bg-green-500/20 text-green-400' : 'bg-gray-500/20 text-gray-400'
-                  ]"
-                >
-                  {{ game.pivot.is_active ? 'Aktywny' : 'Nieaktywny' }}
-                </span>
+<!--                <span -->
+<!--                  :class="[-->
+<!--                    'px-2 py-1 rounded-full text-xs',-->
+<!--                    game.pivot.is_active ? 'bg-green-500/20 text-green-400' : 'bg-gray-500/20 text-gray-400'-->
+<!--                  ]"-->
+<!--                >-->
+<!--                  {{ game.pivot.is_active ? 'Aktywny' : 'Nieaktywny' }}-->
+<!--                </span>-->
               </div>
             </div>
           </div>

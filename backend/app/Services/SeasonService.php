@@ -15,11 +15,13 @@ class SeasonService
      */
     public function downloadSeasons(): void
     {
-        if (env('APP_ENV') === 'local') {
-            $this->importFakeSeason();
-        } else {
-            $this->downloadSeasonsFromApi();
-        }
+        $this->downloadSeasonsFromApi();
+
+//        if (env('APP_ENV') === 'local') {
+//            $this->importFakeSeason();
+//        } else {
+//            $this->downloadSeasonsFromApi();
+//        }
     }
 
     public function importFakeSeason()
@@ -44,6 +46,8 @@ class SeasonService
 
     public function downloadSeasonsFromApi()
     {
+        // TODO: Add logic for multi games
+
         $pubgConnector = new PubgConnector();
         $data = $pubgConnector->connect(self::PREFIX)->getData();
         foreach ($data->data as $seasonApi) {
