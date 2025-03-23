@@ -19,7 +19,7 @@ class PlayerMatchSeasonStatisticService
         Player $player,
         ?string $seasonNumber = null,
         bool $saveMatches = false,
-        bool $force = false
+        bool $force = true
     ): array|Collection
     {
         if ($player->canUpdateMatches($force)) {
@@ -33,16 +33,16 @@ class PlayerMatchSeasonStatisticService
 
             $beforeSeason = Season::where('number', $actualSeason->number - 1)->first();
 
-            $playerId = $player->playerId;
+            $playerId = $player->games()->where('player_id', $player->id)->value('api_player_id');
 
             $connector = new PubgConnector();
             $last7daysMatches = $connector->connect('players?filter[playerIds]='.$playerId);
             if (!$connector->connectFalse()) {
-                if (!empty($last7daysMatches->getData()->data[0]->attributes->clanId)) {
-                    $player->update([
-                        'clanId' => $last7daysMatches->getData()->data[0]->attributes->clanId
-                    ]);
-                }
+//                if (!empty($last7daysMatches->getData()->data[0]->attributes->clanId)) {
+//                    $player->update([
+//                        'clanId' => $last7daysMatches->getData()->data[0]->attributes->clanId
+//                    ]);
+//                }
 
                 $last7daysMatches = $last7daysMatches->getData()
                     ->data[0]->relationships->matches->data;
@@ -52,15 +52,15 @@ class PlayerMatchSeasonStatisticService
 
                 foreach ($last7daysMatches as $key => $match) {
                     $matchDb = PlayerMatchStatistic::where('match_id', $match->id)->where('player_id', $player->id)->first();
-
-
 //                    $matchConnector = new PubgConnector();
 //                    $matchResponse = $matchConnector->connect('matches/'.$match->id);
 
                     if (!$matchDb) {
                         $matchConnector = new PubgConnector();
                         $matchResponse = $matchConnector->connect('matches/'.$match->id);
+
                         if (!$matchResponse->connectFalse()) {
+
                             $matchResponse = $matchResponse->getData();
                             $players = array_filter($matchResponse->included, function ($value) {
                                 return $value->type === 'participant';

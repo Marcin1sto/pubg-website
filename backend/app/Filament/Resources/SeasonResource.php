@@ -36,10 +36,6 @@ class SeasonResource extends Resource
                     ->afterStateUpdated(function (string $state, Forms\Set $set) {
                         $set('slug', Str::slug($state));
                     }),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255)
-                    ->unique(ignoreRecord: true),
                 Forms\Components\TextInput::make('api_id')
                     ->required()
                     ->maxLength(255),

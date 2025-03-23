@@ -13,7 +13,7 @@ class DownloadSeasons extends Command
      *
      * @var string
      */
-    protected $signature = 'pubg:download-seasons';
+    protected $signature = 'download-seasons';
 
     /**
      * The console command description.
@@ -41,7 +41,7 @@ class DownloadSeasons extends Command
     {
         (new \App\Services\SeasonService)->downloadSeasons();
 
-        $this->info('Zaktualizowano dane o sezonach.');
+        $this->info('Zaktualizowano dane o sezonach we wszystkich grach.');
 
         return 'true';
     }

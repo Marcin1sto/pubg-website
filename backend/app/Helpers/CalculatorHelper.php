@@ -130,4 +130,31 @@ class CalculatorHelper
 
         return $this;
     }
+
+    public static function calculateKdFromMatches($matches): float
+    {
+        $playerMatches = $matches;
+        $allKills = $playerMatches->sum('kills');
+        $playerMatchesCount = $playerMatches->count();
+        $winMatchesCount = $playerMatches->filter(function ($match) {
+            return $match->winPlace == 1;
+        })->count();
+        $allDeaths = ($playerMatchesCount - $winMatchesCount);
+
+        return round(($allKills / $allDeaths), 2);
+    }
+
+    /**
+     * @return $this
+     */
+    public static function calculatePercentWinsFromMatches($matches): float
+    {
+        $playerMatches = $matches;
+        $playerMatchesCount = $playerMatches->count();
+        $winMatchesCount = $playerMatches->filter(function ($match) {
+            return $match->winPlace == 1;
+        })->count();
+
+        return (int)(($winMatchesCount / $playerMatchesCount) * 100);
+    }
 }

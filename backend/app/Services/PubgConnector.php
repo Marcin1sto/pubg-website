@@ -22,7 +22,7 @@ class PubgConnector
     public function connect(string $prefix): self
     {
         $request = curl_init();
-        curl_setopt($request, CURLOPT_URL, env('API_PUBG_URL'). $this->platform . '/' . $prefix);
+        curl_setopt($request, CURLOPT_URL, env('API_PUBG_URL') . '/' . $prefix);
         curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($request, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . env('API_PUBG_TOKEN'), 'Accept: application/vnd.api+json'));
 

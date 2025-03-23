@@ -2,6 +2,7 @@
 namespace App\Services;
 
 
+use App\Enums\GamesEnum;
 use App\Models\Player;
 use App\Models\Season;
 
@@ -9,13 +10,26 @@ class SeasonService
 {
     const PREFIX = 'seasons';
 
+    public PubgApiService $pubgApiService;
+
+    public function __construct()
+    {
+        $this->pubgApiService = new PubgApiService(new PubgConnector());
+    }
+
     /**
      * Download Seasons for pc from PUBG API
      * @return void
      */
     public function downloadSeasons(): void
     {
-        $this->downloadSeasonsFromApi();
+//        $this->downloadSeasonsFromApi();
+
+        foreach (GamesEnum::values() as $game) {
+            if ($game === GamesEnum::PUBG->value) {
+                $this->pubgApiService->getSeasons();
+            }
+        }
 
 //        if (env('APP_ENV') === 'local') {
 //            $this->importFakeSeason();

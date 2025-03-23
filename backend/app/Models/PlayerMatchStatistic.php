@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PubgMapEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,6 +17,10 @@ class PlayerMatchStatistic extends Model
     protected $guarded = [];
 
     protected $hidden = ['player_id'];
+
+    protected $casts = [
+        'mapName' => PubgMapEnum::class,
+    ];
 
     public function season(): BelongsTo
     {

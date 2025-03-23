@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Enums\GamesEnum;
 use App\Enums\PlatformEnum;
+use App\Models\Game;
+use App\Models\Season;
 use stdClass;
 
 class PubgApiService
@@ -22,7 +25,7 @@ class PubgApiService
     public function getPlayer(string $nickname): array
     {
         $this->connector->connect("players?filter[playerNames]={$nickname}");
-        
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
@@ -45,7 +48,7 @@ class PubgApiService
     public function getPlayerSeasonStats(string $playerId, string $seasonId): array
     {
         $this->connector->connect("players/{$playerId}/seasons/{$seasonId}");
-        
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
@@ -67,7 +70,7 @@ class PubgApiService
     public function getPlayerLifetimeStats(string $playerId): array
     {
         $this->connector->connect("players/{$playerId}/seasons/lifetime");
-        
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
@@ -89,7 +92,7 @@ class PubgApiService
     public function getClan(string $clanId): array
     {
         $this->connector->connect("clans/{$clanId}");
-        
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
@@ -111,7 +114,7 @@ class PubgApiService
     public function getClans(string $name): array
     {
         $this->connector->connect("clans?filter[clanNames]={$name}");
-        
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
@@ -133,7 +136,7 @@ class PubgApiService
     public function getMatch(string $matchId): array
     {
         $this->connector->connect("matches/{$matchId}");
-        
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
@@ -153,18 +156,54 @@ class PubgApiService
      */
     public function getSeasons(): array
     {
-        $this->connector->connect("seasons");
-        
+        $data = $this->connector->connect('seasons')->getData();
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
-                'message' => 'Nie udało się pobrać listy sezonów'
+                'message' => 'Nie udało się pobrać sezonów'
             ];
         }
 
+        foreach ($data->data as $seasonApi) {
+            $explodedId = explode('.', $seasonApi->id);
+            $explodedSector = explode('-', $explodedId[3]);
+
+            if (!Season::where('api_id', $seasonApi->id)->first()) {
+                $seasonNumber = $explodedSector[array_key_last($explodedSector)];
+
+                if ($seasonApi->attributes->isCurrentSeason) {
+                    $actualSeason = Season::where('isCurrentSeason', true)->first();
+
+                    if ($actualSeason && $actualSeason->number != $seasonNumber) {
+                        $actualSeason->isCurrentSeason = false;
+                        $actualSeason->save();
+                    }
+                }
+
+                $game = Game::where('slug', GamesEnum::PUBG->value)->first();
+
+                // sprawdzamy czy $seasonNumber jest liczbą
+                if (!is_numeric($seasonNumber)) {
+                    $seasonNumber = (int) filter_var($seasonNumber, FILTER_SANITIZE_NUMBER_INT);
+                }
+
+                $season = new Season();
+                $season->number = $seasonNumber;
+                $season->api_id = $seasonApi->id;
+                $season->game_id = $game->id;
+                $season->name = 'Sezon '. $seasonNumber;
+                $season->platform = $explodedSector[0];
+                $season->type = $seasonApi->type;
+                $season->isCurrentSeason = $seasonApi->attributes->isCurrentSeason;
+                $season->isOffseason = $seasonApi->attributes->isOffseason;
+                $season->save();
+            }
+        }
+
         return [
-            'status' => 'success',
-            'data' => $this->connector->getData()
+            'success' => true,
+            'data' => $data
         ];
     }
 
@@ -177,7 +216,7 @@ class PubgApiService
     public function getLeaderboards(string $seasonId, string $gameMode): array
     {
         $this->connector->connect("leaderboards/seasons/{$seasonId}/gameMode/{$gameMode}");
-        
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
@@ -199,7 +238,7 @@ class PubgApiService
     public function getMatchTelemetry(string $matchId): array
     {
         $this->connector->connect("matches/{$matchId}/telemetry");
-        
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
@@ -220,7 +259,7 @@ class PubgApiService
     public function getStatus(): array
     {
         $this->connector->connect("status");
-        
+
         if ($this->connector->connectFalse()) {
             return [
                 'status' => 'error',
@@ -233,4 +272,4 @@ class PubgApiService
             'data' => $this->connector->getData()
         ];
     }
-} 
+}

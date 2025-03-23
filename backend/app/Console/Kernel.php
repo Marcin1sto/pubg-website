@@ -17,9 +17,14 @@ class Kernel extends ConsoleKernel
     {
 //        $schedule->command('pubg:refresh-ranking')->hourly();
         $schedule->command('queue:matches')->daily();
-        $schedule->command('pubg:download-seasons')->daily();
-//         $schedule->command('inspire')->everyMinute();
+
+        /**
+         * Pobiera sezony z API Gier
+         */
+        $schedule->command('download-seasons')->daily();
         $schedule->command('queue:matches')->hourly();
+
+        //         $schedule->command('inspire')->everyMinute();
     }
 
     /**

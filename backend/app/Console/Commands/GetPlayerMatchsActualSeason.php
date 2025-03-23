@@ -44,7 +44,7 @@ class GetPlayerMatchsActualSeason extends Command
     {
         $nickName = $this->argument('nickName');
 
-        $player = Player::where('playerName', $nickName)->first();
+        $player = Player::where('display_name', $nickName)->first();
         if (!$player) {
             $player = PlayerService::createPlayer($nickName);
         }

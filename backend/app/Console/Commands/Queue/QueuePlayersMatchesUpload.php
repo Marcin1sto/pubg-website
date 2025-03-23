@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands\Queue;
 
+use App\Enums\GamesEnum;
 use App\Jobs\PlayerMatchesProcess;
+use App\Models\Game;
 use App\Models\Player;
 use App\Models\Season;
 use Illuminate\Console\Command;
@@ -41,7 +43,8 @@ class QueuePlayersMatchesUpload extends Command
     public function handle()
     {
         $players = Player::all();
-        $seasonNumber = Season::where('isCurrentSeason', true)->first()->number;
+        $game = Game::where('slug', GamesEnum::PUBG->value)->first();
+        $seasonNumber = Season::where('isCurrentSeason', true)->where('game_id', $game->id)->first()->number;
 
         foreach ($players as $key => $player) {
             switch ($key) {
