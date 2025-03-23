@@ -19,7 +19,7 @@ class PlayerMatchStatistic extends Model
     protected $hidden = ['player_id'];
 
     protected $casts = [
-        'mapName' => PubgMapEnum::class,
+//        'mapName' => PubgMapEnum::class,
     ];
 
     public function season(): BelongsTo
